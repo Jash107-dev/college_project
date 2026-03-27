@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,13 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-
     'accounts',
-<<<<<<< HEAD
-    'inventory_master',
-=======
     'employee',
->>>>>>> 7cd3a45b25825b36ab3a99b0e038be447519076e
+    'inventory_master',
 ]
 
 MIDDLEWARE = [
