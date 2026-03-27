@@ -8,11 +8,14 @@ from .forms import ProjectForm
 def project_list(request):
     query = request.GET.get('q', '')
     status_filter = request.GET.get('status', '')
-    
-    if request.user.is_staff:
-        projects = Project.objects.all()
+
+    if request.user.is_authenticated:
+        if request.user.is_staff:
+            projects = Project.objects.all()
+        else:
+            projects = Project.objects.filter(student=request.user)
     else:
-        projects = Project.objects.filter(student=request.user)
+        projects = Project.objects.all()  # anonymous users see all projects
     
     if query:
         projects = projects.filter(Q(title__icontains=query))
