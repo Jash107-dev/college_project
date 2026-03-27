@@ -38,15 +38,7 @@
             padding: 20px;
         }
 
-        footer {
-            background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
+    
     </style>
 </head>
 
@@ -57,14 +49,11 @@
 </header>
 
 <nav>
-    <a href="{% url 'project_list' %}">Projects</a>
     <a href="/employee/">Employee</a>
-    {% if user.is_authenticated %}
-        <span style="color: white; margin: 0 10px;">{{ user.username }}</span>
-        <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-        <a href="{% url 'login' %}">Login</a>
-    {% endif %}
+    <a href="#">Student</a>
+    <a href="#">Library</a>
+    <a href="#">Inventory_master</a>
+    <a href="#">Project_master</a>
 </nav>
 
 <div class="container">
@@ -72,9 +61,6 @@
     {% endblock %}
 </div>
 
-<footer>
-    <p>© 2026 College Project Team</p>
-</footer>
 
 </body>
 </html>
