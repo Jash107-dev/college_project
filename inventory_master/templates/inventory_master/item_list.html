@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>College Inventory List</h2>
+
+<a href="/inventory/add/">Add Item</a>
+
+<br><br>
+
+<table border="1">
+
+<tr>
+    <th>ID</th>
+    <th>Item Name</th>
+    <th>Category</th>
+    <th>Quantity</th>
+    <th>Location</th>
+    <th>Department</th>
+    <th>Condition</th>
+    <th>Actions</th>
+</tr>
+
+{% for item in items %}
+
+<tr>
+
+<td>{{ item.id }}</td>
+<td>{{ item.item_name }}</td>
+<td>{{ item.category }}</td>
+<td>{{ item.quantity }}</td>
+<td>{{ item.location }}</td>
+<td>{{ item.department }}</td>
+<td>{{ item.condition }}</td>
+
+<td>
+
+<a href="/inventory/update/{{ item.id }}">Edit</a>
+
+<a href="/inventory/delete/{{ item.id }}">Delete</a>
+
+</td>
+</tr>
+{% empty %}
+<tr>
+<td colspan="8">
+No inventory items found.
+</td>
+</tr>
+
+{% endfor %}
+
+</table>
+{% endblock %}
