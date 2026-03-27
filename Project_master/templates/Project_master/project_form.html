@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ action }} Project{% endblock %}
+
+{% block content %}
+    <h1>{{ action }} Project</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{{ action }}</button>
+    </form>
+    
+    <a href="{% url 'project_list' %}">Back to List</a>
+{% endblock %}

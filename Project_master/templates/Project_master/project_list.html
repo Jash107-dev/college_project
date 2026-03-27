@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Project List{% endblock %}
+
+{% block content %}
+    <h1>Project List</h1>
+    
+    <a href="{% url 'create_project' %}">Add Project</a>
+    
+    <form method="get">
+        <input type="text" name="q" value="{{ query }}" placeholder="Search by title">
+        <select name="status">
+            <option value="">All Status</option>
+            <option value="Pending" {% if status_filter == 'Pending' %}selected{% endif %}>Pending</option>
+            <option value="Approved" {% if status_filter == 'Approved' %}selected{% endif %}>Approved</option>
+            <option value="Rejected" {% if status_filter == 'Rejected' %}selected{% endif %}>Rejected</option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+    
+    {% for project in page_obj %}
+        <div>
+            <h2>{{ project.title }}</h2>
+            <p>Status: {{ project.status }}</p>
+            <p>Created: {{ project.created_at }}</p>
+            <a href="{% url 'update_project' project.pk %}">Edit</a>
+            <a href="{% url 'delete_project' project.pk %}">Delete</a>
+        </div>
+    {% endfor %}
+    
+    <div>
+        {% if page_obj.has_previous %}
+            <a href="?page=1&q={{ query }}&status={{ status_filter }}">First</a>
+            <a href="?page={{ page_obj.previous_page_number }}&q={{ query }}&status={{ status_filter }}">Previous</a>
+        {% endif %}
+        
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}&q={{ query }}&status={{ status_filter }}">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}&q={{ query }}&status={{ status_filter }}">Last</a>
+        {% endif %}
+    </div>
+{% endblock %}
