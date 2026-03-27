@@ -40,8 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'accounts',
+<<<<<<< HEAD
     'employee',
     'inventory_master',
+=======
+    'inventory_master',
+    'employee',
+    'project_master',
+>>>>>>> f6f2ea249f762b41a8c162e6488498a86ba68b86
 ]
 
 MIDDLEWARE = [
@@ -85,7 +91,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

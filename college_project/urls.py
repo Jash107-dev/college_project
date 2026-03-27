@@ -21,5 +21,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
     path('employee/', include('employee.urls')),
+<<<<<<< HEAD
     path('inventory/', include('inventory_master.urls')),
+=======
+    path('projects/', include('project_master.urls')),
+>>>>>>> f6f2ea249f762b41a8c162e6488498a86ba68b86
 ]
