@@ -3,13 +3,63 @@
 {% block title %}{{ action }} Project{% endblock %}
 
 {% block content %}
-    <h1>{{ action }} Project</h1>
-    
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">{{ action }}</button>
-    </form>
-    
-    <a href="{% url 'project_list' %}">Back to List</a>
+    <style>
+        .project-form h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .project-form form {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .project-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        .project-form input, .project-form textarea, .project-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #bdc3c7;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        .project-form button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .project-form button:hover {
+            background-color: #2980b9;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #3498db;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <div class="project-form">
+        <h1>{{ action }} Project</h1>
+        
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">{{ action }}</button>
+        </form>
+        
+        <a href="{% url 'project_list' %}" class="back-link">Back to List</a>
+    </div>
 {% endblock %}

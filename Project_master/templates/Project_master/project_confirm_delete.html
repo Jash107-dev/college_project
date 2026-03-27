@@ -3,14 +3,54 @@
 {% block title %}Delete Project{% endblock %}
 
 {% block content %}
-    <h1>Delete Project</h1>
-    
-    <p>Are you sure you want to delete "{{ project.title }}"?</p>
-    
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Yes, Delete</button>
-    </form>
-    
-    <a href="{% url 'project_list' %}">Cancel</a>
+    <style>
+        .delete-confirm h1 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        .delete-confirm p {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #f5c6cb;
+            margin-bottom: 20px;
+        }
+        .delete-confirm form {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .delete-confirm button {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .delete-confirm button:hover {
+            background-color: #c0392b;
+        }
+        .cancel-link {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .cancel-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <div class="delete-confirm">
+        <h1>Delete Project</h1>
+        
+        <p>Are you sure you want to delete "{{ project.title }}"?</p>
+        
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Yes, Delete</button>
+        </form>
+        
+        <a href="{% url 'project_list' %}" class="cancel-link">Cancel</a>
+    </div>
 {% endblock %}
