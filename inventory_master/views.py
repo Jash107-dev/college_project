@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 # Create your views here.
 from django.shortcuts import render, redirect
 from .models import Inventory
@@ -70,6 +68,14 @@ def delete_item(request, id):
 
     item = Inventory.objects.get(id=id)
 
-    item.delete()
+    if request.method == 'POST':
 
-    return redirect('item_list')
+        item.delete()
+
+        return redirect('item_list')
+
+    return render(
+        request,
+        'inventory_master/delete_item.html',
+        {'item': item}
+    )
