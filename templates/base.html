@@ -57,22 +57,11 @@
 </header>
 
 <nav>
-<<<<<<< HEAD
-    <a href="{% url 'project_list' %}">Projects</a>
     <a href="/employee/">Employee</a>
-    {% if user.is_authenticated %}
-        <span style="color: white; margin: 0 10px;">{{ user.username }}</span>
-        <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-        <a href="{% url 'login' %}">Login</a>
-    {% endif %}
-=======
-<a href="/employee/">Employee</a>
-<a href="/student/">Student</a>
-<a href="/library/">Library</a>
-<a href="/inventory/">Inventory</a>
-<a href="/projects/">Projects</a>
->>>>>>> origin/main
+    <a href="/student/">Student</a>
+    <a href="/library/">Library</a>
+    <a href="/inventory/">Inventory</a>
+    <a href="/Project_master/">Projects</a>
 </nav>
 
 <div class="container">

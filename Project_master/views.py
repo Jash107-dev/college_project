@@ -1,12 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import Project
 from .forms import ProjectForm
 
-@login_required
 def project_list(request):
     query = request.GET.get('q', '')
     status_filter = request.GET.get('status', '')
@@ -33,7 +31,6 @@ def project_list(request):
     }
     return render(request, 'Project_master/project_list.html', context)
 
-@login_required
 def create_project(request):
     if request.method == 'POST':
         form = ProjectForm(request.POST)
@@ -47,7 +44,6 @@ def create_project(request):
         form = ProjectForm()
     return render(request, 'Project_master/project_form.html', {'form': form, 'action': 'Create'})
 
-@login_required
 def update_project(request, pk):
     project = get_object_or_404(Project, pk=pk)
     if project.student != request.user and not request.user.is_staff:
@@ -64,7 +60,6 @@ def update_project(request, pk):
         form = ProjectForm(instance=project)
     return render(request, 'Project_master/project_form.html', {'form': form, 'action': 'Update'})
 
-@login_required
 def delete_project(request, pk):
     project = get_object_or_404(Project, pk=pk)
     if project.student != request.user and not request.user.is_staff:

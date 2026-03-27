@@ -19,16 +19,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
+
     path('', include('accounts.urls')),
-<<<<<<< HEAD
-    path('Project_master/', include('Project_master.urls')),
-=======
-    path('employee/', include('employee.urls')),
-<<<<<<< HEAD
-    path('inventory/', include('inventory_master.urls')),
-=======
-    path('projects/', include('project_master.urls')),
->>>>>>> f6f2ea249f762b41a8c162e6488498a86ba68b86
->>>>>>> origin/main
+path('employee/', include('employee.urls')),
+path('inventory/', include('inventory_master.urls')),
+path('projects/', include('Project_master.urls')),
 ]
