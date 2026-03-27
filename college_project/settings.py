@@ -40,7 +40,11 @@ INSTALLED_APPS = [
 
 
     'accounts',
+<<<<<<< HEAD
+    'inventory_master',
+=======
     'employee',
+>>>>>>> 7cd3a45b25825b36ab3a99b0e038be447519076e
 ]
 
 MIDDLEWARE = [
@@ -80,12 +84,8 @@ WSGI_APPLICATION = 'college_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'college_db',
-        'USER': 'postgres',
-        'PASSWORD': 'your_password',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
