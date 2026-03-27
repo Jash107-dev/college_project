@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Add Employee</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    <input type="text" name="name" placeholder="Name"><br>
+    <input type="email" name="email" placeholder="Email"><br>
+    <input type="text" name="department" placeholder="Department"><br>
+    <input type="number" name="salary" placeholder="Salary"><br>
+
+    <button type="submit">Save</button>
+</form>
+
+{% endblock %}

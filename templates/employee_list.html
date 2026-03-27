@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Employee List</h2>
+
+<a href="/employee/add/">Add Employee</a>
+
+{% for emp in employees %}
+    <p>
+        {{ emp.name }} - {{ emp.department }}
+        | <a href="/employee/edit/{{ emp.id }}/">Edit</a>
+        | <a href="/employee/delete/{{ emp.id }}/">Delete</a>
+    </p>
+{% endfor %}
+
+{% endblock %}
