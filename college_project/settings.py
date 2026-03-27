@@ -38,13 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-
     'accounts',
-<<<<<<< HEAD
     'inventory_master',
-=======
     'employee',
->>>>>>> 7cd3a45b25825b36ab3a99b0e038be447519076e
 ]
 
 MIDDLEWARE = [
