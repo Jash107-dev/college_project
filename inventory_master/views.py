@@ -6,15 +6,12 @@ from .forms import InventoryForm
 
 # LIST ITEMS
 def item_list(request):
-
     items = Inventory.objects.all()
-
     return render(
         request,
         'inventory_master/item_list.html',
         {'items': items}
     )
-
 
 # ADD ITEM
 def add_item(request):
@@ -43,7 +40,7 @@ def add_item(request):
 # UPDATE ITEM
 def update_item(request, id):
 
-    item = Inventory.objects.get(id=id)
+    item = get_object_or_404(Inventory, id=id)
 
     form = InventoryForm(
         request.POST or None,
@@ -64,9 +61,9 @@ def update_item(request, id):
 
 
 # DELETE ITEM
-def delete_item(request, id):
+def delete_item(request, pk):
 
-    item = Inventory.objects.get(id=id)
+    item = get_object_or_404(Inventory, pk=pk)
 
     if request.method == 'POST':
 

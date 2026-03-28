@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import Project
@@ -15,18 +16,18 @@ def project_list(request):
         else:
             projects = Project.objects.filter(student=request.user)
     else:
-        projects = Project.objects.all()  # anonymous users see all projects
-    
+        return redirect('/accounts/login/')   # anonymous users → login
+
     if query:
         projects = projects.filter(Q(title__icontains=query))
-    
+
     if status_filter:
         projects = projects.filter(status=status_filter)
-    
+
     paginator = Paginator(projects.order_by('-created_at'), 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    
+
     context = {
         'page_obj': page_obj,
         'query': query,
@@ -34,6 +35,7 @@ def project_list(request):
     }
     return render(request, 'Project_master/project_list.html', context)
 
+@login_required
 def create_project(request):
     if request.method == 'POST':
         form = ProjectForm(request.POST)
@@ -47,12 +49,13 @@ def create_project(request):
         form = ProjectForm()
     return render(request, 'Project_master/project_form.html', {'form': form, 'action': 'Create'})
 
+@login_required
 def update_project(request, pk):
     project = get_object_or_404(Project, pk=pk)
     if project.student != request.user and not request.user.is_staff:
         messages.error(request, 'You do not have permission to edit this project.')
         return redirect('project_list')
-    
+
     if request.method == 'POST':
         form = ProjectForm(request.POST, instance=project)
         if form.is_valid():
@@ -63,12 +66,13 @@ def update_project(request, pk):
         form = ProjectForm(instance=project)
     return render(request, 'Project_master/project_form.html', {'form': form, 'action': 'Update'})
 
+@login_required
 def delete_project(request, pk):
     project = get_object_or_404(Project, pk=pk)
     if project.student != request.user and not request.user.is_staff:
         messages.error(request, 'You do not have permission to delete this project.')
         return redirect('project_list')
-    
+
     if request.method == 'POST':
         project.delete()
         messages.success(request, 'Project deleted successfully!')

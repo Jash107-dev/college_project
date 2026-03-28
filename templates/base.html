@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>College Management System</title>
+    <title>{% block title %}College Management System{% endblock %}</title>
 
     <style>
         body {
@@ -51,9 +51,10 @@
 <nav>
     <a href="/employee/">Employee</a>
     <a href="/Student/">Student</a>
-    <a href="/library/">Library</a>
-    <a href="/inventory/">Inventory</a>
+    
+    <a href="/inventory_master/">Inventory</a>
     <a href="/Project_master/">Projects</a>
+
 </nav>
 
 <div class="container">

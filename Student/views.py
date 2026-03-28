@@ -19,7 +19,6 @@ def student_create(request):
         form = StudentForm()
     return render(request, 'student/student_form.html', {'form': form})
     
-from django.shortcuts import render, get_object_or_404, redirect
 
 def student_update(request, pk):
     student = get_object_or_404(Student, pk=pk)

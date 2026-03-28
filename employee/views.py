@@ -1,4 +1,4 @@
-from django.shortcuts import render
+
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Employee
 
@@ -41,5 +41,7 @@ def edit_employee(request, id):
 
 def delete_employee(request, id):
     emp = get_object_or_404(Employee, id=id)
-    emp.delete()
-    return redirect('employee_list')
+    if request.method == 'POST':
+        emp.delete()
+        return redirect('employee_list')
+    return render(request, 'delete_employee.html', {'emp': emp})
