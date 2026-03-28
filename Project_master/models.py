@@ -10,7 +10,7 @@ class Project(models.Model):
     
     title = models.CharField(max_length=200)
     description = models.TextField()
-    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    student = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
     github_link = models.URLField(blank=True, null=True)
     demo_link = models.URLField(blank=True, null=True)
