@@ -9,13 +9,7 @@ def project_list(request):
     query = request.GET.get('q', '')
     status_filter = request.GET.get('status', '')
 
-    if request.user.is_authenticated:
-        if request.user.is_staff:
-            projects = Project.objects.all()
-        else:
-            projects = Project.objects.filter(student=request.user)
-    else:
-        projects = Project.objects.all()  # anonymous users see all projects
+    projects = Project.objects.all()
     
     if query:
         projects = projects.filter(Q(title__icontains=query))
@@ -38,9 +32,7 @@ def create_project(request):
     if request.method == 'POST':
         form = ProjectForm(request.POST)
         if form.is_valid():
-            project = form.save(commit=False)
-            project.student = request.user
-            project.save()
+            project = form.save()
             messages.success(request, 'Project created successfully!')
             return redirect('project_list')
     else:
@@ -49,9 +41,6 @@ def create_project(request):
 
 def update_project(request, pk):
     project = get_object_or_404(Project, pk=pk)
-    if project.student != request.user and not request.user.is_staff:
-        messages.error(request, 'You do not have permission to edit this project.')
-        return redirect('project_list')
     
     if request.method == 'POST':
         form = ProjectForm(request.POST, instance=project)
@@ -65,9 +54,6 @@ def update_project(request, pk):
 
 def delete_project(request, pk):
     project = get_object_or_404(Project, pk=pk)
-    if project.student != request.user and not request.user.is_staff:
-        messages.error(request, 'You do not have permission to delete this project.')
-        return redirect('project_list')
     
     if request.method == 'POST':
         project.delete()
