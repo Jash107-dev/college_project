@@ -1,5 +1,5 @@
 # Create your views here.
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Inventory
 from .forms import InventoryForm
 
@@ -38,9 +38,9 @@ def add_item(request):
 
 
 # UPDATE ITEM
-def update_item(request, id):
+def update_item(request, pk):
 
-    item = get_object_or_404(Inventory, id=id)
+    item = get_object_or_404(Inventory, pk=pk)
 
     form = InventoryForm(
         request.POST or None,

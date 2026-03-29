@@ -13,13 +13,13 @@ def add_employee(request):
         name = request.POST.get('name')
         email = request.POST.get('email')
         department = request.POST.get('department')
-        salary = request.POST.get('salary')
+        salary_str = (request.POST.get('salary', '0') or '0').strip()
 
         Employee.objects.create(
             name=name,
             email=email,
             department=department,
-            salary=salary
+            salary=int(salary_str or '0')
         )
         return redirect('employee_list')
 
@@ -29,10 +29,11 @@ def edit_employee(request, id):
     emp = get_object_or_404(Employee, id=id)
 
     if request.method == "POST":
+        salary_str = (request.POST.get('salary', '0') or '0').strip()
         emp.name = request.POST['name']
         emp.email = request.POST['email']
         emp.department = request.POST['department']
-        emp.salary = request.POST['salary']
+        emp.salary = int(salary_str or '0')
         emp.save()
         return redirect('employee_list')
 

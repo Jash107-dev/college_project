@@ -11,6 +11,8 @@ class Project(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     student = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    student_name = models.CharField(max_length=150, blank=True, null=True)
+    roll_number = models.CharField(max_length=50, blank=True, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
     github_link = models.URLField(blank=True, null=True)
     demo_link = models.URLField(blank=True, null=True)

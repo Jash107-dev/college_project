@@ -4,7 +4,7 @@ from .models import Project
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ['title', 'description', 'github_link', 'demo_link']
+        fields = ['title', 'description', 'student_name', 'roll_number', 'status', 'github_link', 'demo_link']
     
     def clean_description(self):
         description = self.cleaned_data.get('description')

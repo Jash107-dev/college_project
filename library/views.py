@@ -15,12 +15,13 @@ def add_book(request):
                 'error': 'A book with this ISBN already exists.'
             })
 
+        quantity_str = (request.POST.get('quantity', '0') or '0').strip()
         Book.objects.create(
             title=request.POST.get('title'),
             author=request.POST.get('author'),
             isbn=isbn,
             category=request.POST.get('category'),
-            quantity=int(request.POST.get('quantity'))
+            quantity=int(quantity_str or '0')
         )
         return redirect('book_list')
 
@@ -40,11 +41,12 @@ def update_book(request, id):
                 'error': 'Another book with this ISBN already exists.'
             })
 
+        quantity_str = (request.POST.get('quantity', '0') or '0').strip()
         book.title = request.POST['title']
         book.author = request.POST['author']
         book.isbn = isbn
         book.category = request.POST['category']
-        book.quantity = int(request.POST.get('quantity'))
+        book.quantity = int(quantity_str or '0')
         book.save()
         return redirect('book_list')
 
