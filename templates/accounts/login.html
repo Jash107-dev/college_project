@@ -3,24 +3,26 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div style="max-width:800px;margin:24px auto;padding:16px;border:1px solid #ccc;border-radius:8px;">
-    <h1 style="margin:0 0 16px;text-align:center;">College Project - Login</h1>
+<div style="max-width:400px;margin:40px auto;padding:24px;border:1px solid #ccc;border-radius:8px;">
+    <h2 style="text-align:center;margin-bottom:20px;">College Project - Login</h2>
 
-    {% if form.non_field_errors %}
-        <div style="color:#e74c3c;background-color:#f8d7da;padding:10px;border-radius:4px;margin-bottom:16px;border:1px solid #f5c6cb;">
-            {{ form.non_field_errors.0 }}
+    {% if error %}
+        <div style="color:#e74c3c;background:#f8d7da;padding:10px;border-radius:4px;margin-bottom:16px;border:1px solid #f5c6cb;">
+            {{ error }}
         </div>
     {% endif %}
 
     <form method="post">
         {% csrf_token %}
         <div style="margin-bottom:12px;">
-            <label>Username<br>{{ form.username }}</label>
+            <label>Username</label><br>
+            <input type="text" name="username" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;">
         </div>
-        <div style="margin-bottom:12px;">
-            <label>Password<br>{{ form.password }}</label>
+        <div style="margin-bottom:16px;">
+            <label>Password</label><br>
+            <input type="password" name="password" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;">
         </div>
-        <button type="submit" style="padding:8px 16px;background:#3498db;color:#fff;border:none;border-radius:4px;">Login</button>
+        <button type="submit" style="width:100%;padding:10px;background:#3498db;color:#fff;border:none;border-radius:4px;font-size:16px;cursor:pointer;">Login</button>
     </form>
 </div>
 {% endblock %}

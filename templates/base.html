@@ -2,65 +2,41 @@
 <html>
 <head>
     <title>{% block title %}College Management System{% endblock %}</title>
-
     <style>
-        body {
-            font-family: Arial;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
-
-        nav {
-            background-color: #34495e;
-            padding: 10px;
-            text-align: center;
-        }
-
-        nav a {
-            color: white;
-            margin: 10px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        nav a:hover {
-            color: yellow;
-        }
-
-        .container {
-            padding: 20px;
-        }
-
-    
+        body { font-family: Arial; margin: 0; padding: 0; }
+        header { background-color: #2c3e50; color: white; padding: 15px; text-align: center; }
+        nav { background-color: #34495e; padding: 10px; text-align: center; }
+        nav a { color: white; margin: 10px; text-decoration: none; font-weight: bold; }
+        nav a:hover { color: yellow; }
+        .logout-btn { background: #e74c3c; color: white; border: none; padding: 6px 14px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-left: 20px; }
+        .logout-btn:hover { background: #c0392b; }
+        .container { padding: 20px; }
     </style>
 </head>
-
 <body>
 
 <header>
     <h1>College Management System</h1>
 </header>
 
+{% if user.is_authenticated %}
 <nav>
     <a href="/employee/">Employee</a>
     <a href="/Student/">Student</a>
-    <a href="/library/">library</a>
+    <a href="/library/">Library</a>
     <a href="/inventory_master/">Inventory</a>
     <a href="/Project_master/">Projects</a>
+    <form method="post" action="/logout/" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="logout-btn">Logout</button>
+    </form>
 </nav>
+{% endif %}
 
 <div class="container">
     {% block content %}
     {% endblock %}
 </div>
-
 
 </body>
 </html>

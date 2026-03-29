@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Book{% endblock %}
+
+{% block content %}
+<div style="max-width:800px;margin:24px auto;padding:16px;border:1px solid #ccc;border-radius:8px;">
+  <h2>Delete Book</h2>
+  <p>Are you sure you want to delete <strong>{{ book.title }}</strong> by {{ book.author }}?</p>
+  <form method="POST" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" style="background-color:#dc3545;color:white;padding:8px 16px;border:none;border-radius:4px;cursor:pointer;">Yes, Delete</button>
+  </form>
+  <a href="/library/" style="margin-left:16px;color:#007bff;text-decoration:none;">Cancel</a>
+</div>
+{% endblock %}
