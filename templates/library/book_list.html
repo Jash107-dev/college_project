@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Book List</h2>
+
+<a href="/library/add/">Add Book</a>
+
+<ul>
+{% for book in books %}
+    <li>
+        {{ book.title }} - {{ book.author }} ({{ book.quantity }})
+        <a href="/library/update/{{ book.id }}">Edit</a>
+        <a href="/library/delete/{{ book.id }}">Delete</a>
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

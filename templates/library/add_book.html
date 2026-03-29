@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Add Book</h2>
+
+{% if error %}
+    <p style="color:red;">{{ error }}</p>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <input name="title" placeholder="Title"><br>
+    <input name="author" placeholder="Author"><br>
+    <input name="isbn" placeholder="ISBN"><br>
+    <input name="category" placeholder="Category"><br>
+    <input name="quantity" type="number"><br>
+    <button type="submit">Add</button>
+</form>
+
+{% endblock %}
