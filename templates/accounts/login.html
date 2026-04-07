@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% block title %}Sign In - EMS{% endblock %}
+
+{% block login_content %}
+<div style="width:100%;max-width:400px;padding:16px;">
+    <div style="background:white;border-radius:6px;box-shadow:0 4px 24px rgba(0,0,0,0.3);overflow:hidden;">
+
+        <!-- Top accent bar: blue for admin, green for employee -->
+        <div id="accent-bar" style="height:4px;background:linear-gradient(90deg,#0069c2,#00b3b3);transition:background 0.3s;"></div>
+
+        <div style="padding:40px 36px;">
+
+            <!-- Logo + title -->
+            <div style="text-align:center;margin-bottom:28px;">
+                <div id="logo-icon" style="width:52px;height:52px;background:#0069c2;border-radius:8px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:22px;font-weight:700;color:white;font-family:'Inter',sans-serif;transition:background 0.3s;">E</div>
+                <h1 id="login-title" style="font-size:20px;font-weight:700;color:#1b1b33;margin-bottom:4px;font-family:'Inter',sans-serif;">Sign in</h1>
+                <p id="login-subtitle" style="font-size:13px;color:#696980;font-family:'Inter',sans-serif;">Employee Management System</p>
+            </div>
+
+            <!-- Error message -->
+            {% if error %}
+            <div style="background:#fff0f3;color:#c3002f;border:1px solid #ffc0cb;border-left:3px solid #c3002f;padding:10px 14px;border-radius:4px;font-size:13px;margin-bottom:20px;font-family:'Inter',sans-serif;">
+                {{ error }}
+            </div>
+            {% endif %}
+
+            <!-- ── ADMIN LOGIN FORM (default) ── -->
+            <div id="admin-form">
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="login_type" value="admin">
+
+                    <div style="margin-bottom:16px;">
+                        <label style="display:block;font-size:12px;font-weight:600;color:#1b1b33;margin-bottom:6px;font-family:'Inter',sans-serif;">Username</label>
+                        <input type="text" name="username" placeholder="Enter username" autofocus required
+                            style="width:100%;padding:10px 12px;border:1px solid #d7dde4;border-radius:4px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:#1b1b33;box-sizing:border-box;"
+                            onfocus="this.style.borderColor='#0069c2';this.style.boxShadow='0 0 0 2px rgba(0,105,194,0.15)'"
+                            onblur="this.style.borderColor='#d7dde4';this.style.boxShadow='none'">
+                    </div>
+
+                    <div style="margin-bottom:24px;">
+                        <label style="display:block;font-size:12px;font-weight:600;color:#1b1b33;margin-bottom:6px;font-family:'Inter',sans-serif;">Password</label>
+                        <input type="password" name="password" placeholder="Enter password" required
+                            style="width:100%;padding:10px 12px;border:1px solid #d7dde4;border-radius:4px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:#1b1b33;box-sizing:border-box;"
+                            onfocus="this.style.borderColor='#0069c2';this.style.boxShadow='0 0 0 2px rgba(0,105,194,0.15)'"
+                            onblur="this.style.borderColor='#d7dde4';this.style.boxShadow='none'">
+                    </div>
+
+                    <button type="submit"
+                        style="width:100%;padding:11px;background:#0069c2;color:white;border:none;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;"
+                        onmouseover="this.style.background='#003d82'" onmouseout="this.style.background='#0069c2'">
+                        Sign in as Admin
+                    </button>
+                </form>
+
+                <p style="text-align:center;margin-top:16px;font-size:12px;color:#696980;font-family:'Inter',sans-serif;">
+                    Use your administrator credentials
+                </p>
+            </div>
+
+            <!-- ── EMPLOYEE LOGIN FORM (hidden by default) ── -->
+            <div id="employee-form" style="display:none;">
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="login_type" value="employee">
+
+                    <div style="margin-bottom:16px;">
+                        <label style="display:block;font-size:12px;font-weight:600;color:#1b1b33;margin-bottom:6px;font-family:'Inter',sans-serif;">Employee ID</label>
+                        <input type="text" name="employee_id" placeholder="e.g. EMP001" required
+                            style="width:100%;padding:10px 12px;border:1px solid #d7dde4;border-radius:4px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:#1b1b33;box-sizing:border-box;text-transform:uppercase;"
+                            onfocus="this.style.borderColor='#1a9e5c';this.style.boxShadow='0 0 0 2px rgba(26,158,92,0.15)'"
+                            onblur="this.style.borderColor='#d7dde4';this.style.boxShadow='none'">
+                    </div>
+
+                    <div style="margin-bottom:24px;">
+                        <label style="display:block;font-size:12px;font-weight:600;color:#1b1b33;margin-bottom:6px;font-family:'Inter',sans-serif;">Password</label>
+                        <input type="password" name="emp_password" placeholder="First 3 digits of phone + year joined" required
+                            style="width:100%;padding:10px 12px;border:1px solid #d7dde4;border-radius:4px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:#1b1b33;box-sizing:border-box;"
+                            onfocus="this.style.borderColor='#1a9e5c';this.style.boxShadow='0 0 0 2px rgba(26,158,92,0.15)'"
+                            onblur="this.style.borderColor='#d7dde4';this.style.boxShadow='none'">
+                        <p style="font-size:11px;color:#999;margin-top:5px;font-family:'Inter',sans-serif;">
+                            e.g. phone 9876543210, joined 2024 → password is <strong>9872024</strong>
+                        </p>
+                    </div>
+
+                    <button type="submit"
+                        style="width:100%;padding:11px;background:#1a9e5c;color:white;border:none;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;"
+                        onmouseover="this.style.background='#116b3e'" onmouseout="this.style.background='#1a9e5c'">
+                        Sign in as Employee
+                    </button>
+                </form>
+
+                <p style="text-align:center;margin-top:16px;font-size:12px;color:#696980;font-family:'Inter',sans-serif;">
+                    Use your Employee ID and password
+                </p>
+            </div>
+
+            <!-- ── TOGGLE BUTTON at bottom ── -->
+            <div style="margin-top:24px;padding-top:20px;border-top:1px solid #eee;text-align:center;">
+                <button id="toggle-btn" onclick="toggleLoginMode()"
+                    style="background:none;border:1px solid #d7dde4;border-radius:4px;padding:8px 20px;font-size:13px;color:#0069c2;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.2s;"
+                    onmouseover="this.style.background='#f0f7ff'" onmouseout="this.style.background='none'">
+                    🏢 Login as Employee
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+var isEmployeeMode = {% if login_type == 'employee' %}true{% else %}false{% endif %};
+
+function toggleLoginMode() {
+    isEmployeeMode = !isEmployeeMode;
+    var adminForm    = document.getElementById('admin-form');
+    var empForm      = document.getElementById('employee-form');
+    var toggleBtn    = document.getElementById('toggle-btn');
+    var accentBar    = document.getElementById('accent-bar');
+    var logoIcon     = document.getElementById('logo-icon');
+    var loginTitle   = document.getElementById('login-title');
+    var loginSubtitle = document.getElementById('login-subtitle');
+
+    if (isEmployeeMode) {
+        adminForm.style.display    = 'none';
+        empForm.style.display      = 'block';
+        toggleBtn.innerHTML        = '🔑 Login as Admin';
+        toggleBtn.style.color      = '#1a9e5c';
+        accentBar.style.background = 'linear-gradient(90deg,#1a9e5c,#00c48c)';
+        logoIcon.style.background  = '#1a9e5c';
+        loginTitle.textContent     = 'Employee Sign in';
+        loginSubtitle.textContent  = 'Access your profile and update your status';
+        empForm.querySelector('input[name="employee_id"]').focus();
+    } else {
+        empForm.style.display      = 'none';
+        adminForm.style.display    = 'block';
+        toggleBtn.innerHTML        = '🏢 Login as Employee';
+        toggleBtn.style.color      = '#0069c2';
+        accentBar.style.background = 'linear-gradient(90deg,#0069c2,#00b3b3)';
+        logoIcon.style.background  = '#0069c2';
+        loginTitle.textContent     = 'Sign in';
+        loginSubtitle.textContent  = 'Employee Management System';
+        adminForm.querySelector('input[name="username"]').focus();
+    }
+}
+
+// If server returned error for employee mode, stay in employee mode
+if (isEmployeeMode) { toggleLoginMode(); }
+</script>
+{% endblock %}

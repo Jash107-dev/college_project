@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}EMS - Employee Management System{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --mdn-navy:      #1b1b33;
+            --mdn-blue:      #0069c2;
+            --mdn-blue-dark: #003d82;
+            --mdn-blue-light:#e8f0fb;
+            --mdn-teal:      #00b3b3;
+            --mdn-bg:        #f9f9fb;
+            --mdn-surface:   #ffffff;
+            --mdn-border:    #d7dde4;
+            --mdn-text:      #1b1b33;
+            --mdn-muted:     #696980;
+            --mdn-success:   #007a47;
+            --mdn-danger:    #c3002f;
+            --sidebar-w:     240px;
+            --topbar-h:      56px;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--mdn-bg);
+            color: var(--mdn-text);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ── Topbar ── */
+        .topbar {
+            background: var(--mdn-navy);
+            height: var(--topbar-h);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            border-bottom: 2px solid var(--mdn-blue);
+        }
+        .topbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .topbar-brand .logo {
+            width: 32px; height: 32px;
+            background: var(--mdn-blue);
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 15px; color: white;
+        }
+        .topbar-brand span {
+            font-size: 14px; font-weight: 600; color: white; letter-spacing: 0.1px;
+        }
+        .topbar-right { display: flex; align-items: center; gap: 16px; }
+
+        #live-clock {
+            font-size: 12px; color: rgba(255,255,255,0.6);
+            background: rgba(255,255,255,0.07);
+            padding: 4px 12px; border-radius: 4px;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.5px;
+        }
+        .topbar-user {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 13px; color: rgba(255,255,255,0.85); font-weight: 500;
+        }
+        .user-avatar {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: var(--mdn-blue);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 12px;
+        }
+        .logout-btn {
+            display: flex; align-items: center; gap: 5px;
+            background: transparent; color: rgba(255,255,255,0.7);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 5px 12px; border-radius: 4px;
+            cursor: pointer; font-size: 12px; font-weight: 500;
+            font-family: 'Inter', sans-serif; transition: all 0.15s;
+        }
+        .logout-btn:hover { background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.4); }
+
+        /* ── Sidebar ── */
+        .sidebar {
+            position: fixed; left: 0; top: var(--topbar-h);
+            width: var(--sidebar-w);
+            height: calc(100vh - var(--topbar-h));
+            background: var(--mdn-surface);
+            border-right: 1px solid var(--mdn-border);
+            padding: 16px 0;
+            overflow-y: auto;
+        }
+
+        .sidebar-search { margin: 0 12px 16px; position: relative; }
+        .sidebar-search input {
+            width: 100%; padding: 7px 10px 7px 32px;
+            border: 1px solid var(--mdn-border); border-radius: 4px;
+            font-size: 13px; font-family: 'Inter', sans-serif;
+            color: var(--mdn-text); outline: none; background: var(--mdn-bg);
+            transition: border 0.15s;
+        }
+        .sidebar-search input:focus { border-color: var(--mdn-blue); background: white; }
+        .sidebar-search .s-icon {
+            position: absolute; left: 9px; top: 50%; transform: translateY(-50%);
+            color: var(--mdn-muted); pointer-events: none;
+        }
+
+        .sidebar-section {
+            padding: 12px 16px 4px;
+            font-size: 10px; font-weight: 700; color: var(--mdn-muted);
+            text-transform: uppercase; letter-spacing: 1.2px;
+        }
+
+        .sidebar a {
+            display: flex; align-items: center; gap: 9px;
+            padding: 8px 16px;
+            color: var(--mdn-muted); text-decoration: none;
+            font-size: 13px; font-weight: 500;
+            transition: all 0.15s;
+            border-left: 3px solid transparent;
+        }
+        .sidebar a:hover { color: var(--mdn-blue); background: var(--mdn-blue-light); border-left-color: var(--mdn-blue); }
+        .sidebar a.active { color: var(--mdn-blue); background: var(--mdn-blue-light); border-left-color: var(--mdn-blue); font-weight: 600; }
+        .nav-icon { width: 16px; height: 16px; flex-shrink: 0; }
+
+        /* ── Main ── */
+        .main-content {
+            margin-left: var(--sidebar-w);
+            padding: 28px 32px;
+            min-height: calc(100vh - var(--topbar-h));
+        }
+
+        /* ── Alert ── */
+        .alert {
+            padding: 12px 16px; border-radius: 4px; margin-bottom: 18px;
+            font-size: 13px; font-weight: 500;
+            display: flex; align-items: center; gap: 8px;
+            animation: fadeIn 0.25s ease;
+        }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
+        .alert-success { background: #e6f4ee; color: var(--mdn-success); border-left: 3px solid var(--mdn-success); }
+
+        {% block extra_styles %}{% endblock %}
+    </style>
+</head>
+<body>
+
+{% if user.is_authenticated %}
+
+<div class="topbar">
+    <div class="topbar-brand">
+        <div class="logo">E</div>
+        <span>Employee Management System</span>
+    </div>
+    <div class="topbar-right">
+        <span id="live-clock">--:--:--</span>
+        <div class="topbar-user">
+            <div class="user-avatar">{{ user.username|first|upper }}</div>
+            <span>{{ user.username }}</span>
+        </div>
+        <form method="post" action="{% url 'logout' %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">
+                <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                </svg>
+                Sign out
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="sidebar">
+    <div class="sidebar-search">
+        <span class="s-icon">
+            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/>
+            </svg>
+        </span>
+        <form method="get" action="{% url 'employee_list' %}">
+            <input type="text" name="search" placeholder="Search...">
+        </form>
+    </div>
+
+    <div class="sidebar-section">Main</div>
+    <a href="{% url 'dashboard' %}" class="{% block nav_dashboard %}{% endblock %}">
+        <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        Dashboard
+    </a>
+
+    <div class="sidebar-section">Employees</div>
+    <a href="{% url 'employee_list' %}" class="{% block nav_list %}{% endblock %}">
+        <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        All Employees
+    </a>
+    <a href="{% url 'add_employee' %}" class="{% block nav_add %}{% endblock %}">
+        <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+        </svg>
+        Add Employee
+    </a>
+    <a href="{% url 'export_csv' %}" class="{% block nav_export %}{% endblock %}">
+        <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+        </svg>
+        Export CSV
+    </a>
+
+    <div class="sidebar-section">System</div>
+    <a href="/admin/">
+        <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        Admin Panel
+    </a>
+</div>
+
+<div class="main-content">
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endif %}
+    {% block content %}{% endblock %}
+</div>
+
+{% else %}
+
+<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--mdn-navy);">
+    {% block login_content %}{% endblock %}
+</div>
+
+{% endif %}
+
+<script>
+    function updateClock() {
+        const el = document.getElementById('live-clock');
+        if (!el) return;
+        const now = new Date();
+        el.textContent = [now.getHours(), now.getMinutes(), now.getSeconds()]
+            .map(n => String(n).padStart(2,'0')).join(':');
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block title %}Update My Status - EMS{% endblock %}
+
+{% block extra_styles %}
+.status-wrap { max-width: 480px; }
+.page-title  { font-size: 22px; font-weight: 700; color: var(--mdn-text); margin-bottom: 2px; }
+.page-sub    { font-size: 13px; color: var(--mdn-muted); margin-bottom: 24px; }
+
+.status-card {
+    background: var(--mdn-surface);
+    border: 1px solid var(--mdn-border);
+    border-radius: 8px;
+    padding: 28px;
+}
+
+.current-status-row {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 24px; padding-bottom: 18px;
+    border-bottom: 1px solid var(--mdn-border);
+    font-size: 13px; color: var(--mdn-muted);
+}
+
+.status-badge {
+    display: inline-block; padding: 3px 12px;
+    border-radius: 20px; font-size: 12px; font-weight: 600;
+}
+.status-Active   { background: #e6f4ea; color: #2d6a4f; }
+.status-Inactive { background: #fce8e6; color: #a33; }
+.status-On-Leave { background: #fff3cd; color: #856404; }
+
+.form-group label {
+    display: block; font-size: 12px; font-weight: 600;
+    color: var(--mdn-text); margin-bottom: 6px;
+}
+select.form-input {
+    width: 100%; padding: 10px 11px;
+    border: 1px solid var(--mdn-border); border-radius: 4px;
+    font-size: 13px; font-family: 'Inter', sans-serif;
+    outline: none; background: var(--mdn-bg); color: var(--mdn-text);
+    transition: border 0.15s;
+}
+select.form-input:focus {
+    border-color: var(--mdn-blue);
+    box-shadow: 0 0 0 2px rgba(0,105,194,0.12);
+}
+
+.form-actions {
+    display: flex; gap: 10px; margin-top: 24px;
+    padding-top: 18px; border-top: 1px solid var(--mdn-border);
+}
+.btn-save {
+    padding: 10px 28px; background: var(--mdn-blue); color: white;
+    border: none; border-radius: 4px; font-size: 13px; font-weight: 600;
+    font-family: 'Inter', sans-serif; cursor: pointer; transition: background 0.15s;
+}
+.btn-save:hover { background: var(--mdn-blue-dark); }
+.btn-cancel {
+    padding: 10px 22px; background: var(--mdn-bg); color: var(--mdn-muted);
+    border: 1px solid var(--mdn-border); border-radius: 4px;
+    font-size: 13px; text-decoration: none; font-weight: 500;
+    transition: background 0.15s;
+}
+.btn-cancel:hover { background: #eee; }
+
+.help-text {
+    font-size: 12px; color: var(--mdn-muted); margin-top: 6px;
+}
+{% endblock %}
+
+{% block content %}
+<div class="status-wrap">
+    <div class="page-title">Update My Status</div>
+    <div class="page-sub">You can update your current employment status below.</div>
+
+    <div class="status-card">
+        <div class="current-status-row">
+            Current status:
+            <span class="status-badge status-{{ emp.status|cut:' ' }}">{{ emp.status }}</span>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.status.id_for_label }}">New Status</label>
+                {{ form.status }}
+                {% for error in form.status.errors %}
+                    <div style="color: var(--mdn-danger); font-size: 11px; margin-top: 3px;">{{ error }}</div>
+                {% endfor %}
+                <div class="help-text">Select Active if you have returned from leave.</div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-save">Save Status</button>
+                <a href="{% url 'employee_self_dashboard' %}" class="btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
