@@ -2,149 +2,137 @@
 {% block title %}Sign In - EMS{% endblock %}
 
 {% block login_content %}
-<div style="width:100%;max-width:400px;padding:16px;">
-    <div style="background:white;border-radius:6px;box-shadow:0 4px 24px rgba(0,0,0,0.3);overflow:hidden;">
+<!-- login page - centered on screen, no sidebar since user isn't logged in yet -->
+<div style="width:100%; max-width:420px; padding:16px;">
 
-        <!-- Top accent bar: blue for admin, green for employee -->
-        <div id="accent-bar" style="height:4px;background:linear-gradient(90deg,#0069c2,#00b3b3);transition:background 0.3s;"></div>
+    <!-- logo + title above the card -->
+    <div style="text-align:center;margin-bottom:32px;">
+        <div style="width:48px;height:48px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:22px;font-weight:700;color:white;font-family:'Inter',sans-serif;box-shadow:0 4px 16px rgba(99,102,241,0.35);" id="logo-icon">E</div>
+        <h1 id="login-title" style="font-size:22px;font-weight:700;color:#1a1a2e;margin-bottom:4px;font-family:'Inter',sans-serif;letter-spacing:-0.3px;">Welcome back</h1>
+        <p id="login-subtitle" style="font-size:13px;color:#6b7280;font-family:'Inter',sans-serif;">Sign in to Employee Management System</p>
+    </div>
 
-        <div style="padding:40px 36px;">
+    <!-- white card with tab switcher + forms -->
+    <div style="background:white; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.08),0 1px 4px rgba(0,0,0,0.04); overflow:hidden;">
 
-            <!-- Logo + title -->
-            <div style="text-align:center;margin-bottom:28px;">
-                <div id="logo-icon" style="width:52px;height:52px;background:#0069c2;border-radius:8px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:22px;font-weight:700;color:white;font-family:'Inter',sans-serif;transition:background 0.3s;">E</div>
-                <h1 id="login-title" style="font-size:20px;font-weight:700;color:#1b1b33;margin-bottom:4px;font-family:'Inter',sans-serif;">Sign in</h1>
-                <p id="login-subtitle" style="font-size:13px;color:#696980;font-family:'Inter',sans-serif;">Employee Management System</p>
-            </div>
+        <!-- admin / employee tab switcher -->
+        <div style="display:flex; border-bottom:1px solid #e8eaed;">
+            <button id="tab-admin" onclick="switchTab('admin')"
+                style="flex:1;padding:14px;font-size:13px;font-weight:600;font-family:'Inter',sans-serif;border:none;cursor:pointer;transition:all 0.2s;background:white;color:#6366f1;border-bottom:2px solid #6366f1;">
+                Admin
+            </button>
+            <button id="tab-employee" onclick="switchTab('employee')"
+                style="flex:1;padding:14px;font-size:13px;font-weight:600;font-family:'Inter',sans-serif;border:none;cursor:pointer;transition:all 0.2s;background:white;color:#9ca3af;border-bottom:2px solid transparent;">
+                Employee
+            </button>
+        </div>
 
-            <!-- Error message -->
+        <div style="padding:28px 32px 32px;">
+
+            <!-- show error if login failed -->
             {% if error %}
-            <div style="background:#fff0f3;color:#c3002f;border:1px solid #ffc0cb;border-left:3px solid #c3002f;padding:10px 14px;border-radius:4px;font-size:13px;margin-bottom:20px;font-family:'Inter',sans-serif;">
+            <div style="background:#fee2e2;color:#991b1b;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;font-size:13px;margin-bottom:20px;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:8px;">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M12 8v4m0 4h.01"/></svg>
                 {{ error }}
             </div>
             {% endif %}
 
-            <!-- ── ADMIN LOGIN FORM (default) ── -->
+            <!-- Admin login form (shown by default) -->
             <div id="admin-form">
                 <form method="post">
                     {% csrf_token %}
                     <input type="hidden" name="login_type" value="admin">
-
                     <div style="margin-bottom:16px;">
-                        <label style="display:block;font-size:12px;font-weight:600;color:#1b1b33;margin-bottom:6px;font-family:'Inter',sans-serif;">Username</label>
-                        <input type="text" name="username" placeholder="Enter username" autofocus required
-                            style="width:100%;padding:10px 12px;border:1px solid #d7dde4;border-radius:4px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:#1b1b33;box-sizing:border-box;"
-                            onfocus="this.style.borderColor='#0069c2';this.style.boxShadow='0 0 0 2px rgba(0,105,194,0.15)'"
-                            onblur="this.style.borderColor='#d7dde4';this.style.boxShadow='none'">
+                        <label style="display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:6px;font-family:'Inter',sans-serif;">Username</label>
+                        <input type="text" name="username" placeholder="Enter your username" autofocus required
+                            style="width:100%;padding:11px 14px;border:1.5px solid #e8eaed;border-radius:10px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:#1a1a2e;background:#f7f8fa;transition:all 0.15s;"
+                            onfocus="this.style.borderColor='#6366f1';this.style.background='white';this.style.boxShadow='0 0 0 3px rgba(99,102,241,0.12)'"
+                            onblur="this.style.borderColor='#e8eaed';this.style.background='#f7f8fa';this.style.boxShadow='none'">
                     </div>
-
                     <div style="margin-bottom:24px;">
-                        <label style="display:block;font-size:12px;font-weight:600;color:#1b1b33;margin-bottom:6px;font-family:'Inter',sans-serif;">Password</label>
-                        <input type="password" name="password" placeholder="Enter password" required
-                            style="width:100%;padding:10px 12px;border:1px solid #d7dde4;border-radius:4px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:#1b1b33;box-sizing:border-box;"
-                            onfocus="this.style.borderColor='#0069c2';this.style.boxShadow='0 0 0 2px rgba(0,105,194,0.15)'"
-                            onblur="this.style.borderColor='#d7dde4';this.style.boxShadow='none'">
+                        <label style="display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:6px;font-family:'Inter',sans-serif;">Password</label>
+                        <input type="password" name="password" placeholder="Enter your password" required
+                            style="width:100%;padding:11px 14px;border:1.5px solid #e8eaed;border-radius:10px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:#1a1a2e;background:#f7f8fa;transition:all 0.15s;"
+                            onfocus="this.style.borderColor='#6366f1';this.style.background='white';this.style.boxShadow='0 0 0 3px rgba(99,102,241,0.12)'"
+                            onblur="this.style.borderColor='#e8eaed';this.style.background='#f7f8fa';this.style.boxShadow='none'">
                     </div>
-
                     <button type="submit"
-                        style="width:100%;padding:11px;background:#0069c2;color:white;border:none;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;"
-                        onmouseover="this.style.background='#003d82'" onmouseout="this.style.background='#0069c2'">
-                        Sign in as Admin
+                        style="width:100%;padding:12px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 4px 12px rgba(99,102,241,0.3);transition:opacity 0.15s;"
+                        onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                        Sign in
                     </button>
                 </form>
-
-                <p style="text-align:center;margin-top:16px;font-size:12px;color:#696980;font-family:'Inter',sans-serif;">
-                    Use your administrator credentials
-                </p>
             </div>
 
-            <!-- ── EMPLOYEE LOGIN FORM (hidden by default) ── -->
+            <!-- Employee login form (hidden until tab is clicked) -->
             <div id="employee-form" style="display:none;">
                 <form method="post">
                     {% csrf_token %}
                     <input type="hidden" name="login_type" value="employee">
-
                     <div style="margin-bottom:16px;">
-                        <label style="display:block;font-size:12px;font-weight:600;color:#1b1b33;margin-bottom:6px;font-family:'Inter',sans-serif;">Employee ID</label>
+                        <label style="display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:6px;font-family:'Inter',sans-serif;">Employee ID</label>
                         <input type="text" name="employee_id" placeholder="e.g. EMP001" required
-                            style="width:100%;padding:10px 12px;border:1px solid #d7dde4;border-radius:4px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:#1b1b33;box-sizing:border-box;text-transform:uppercase;"
-                            onfocus="this.style.borderColor='#1a9e5c';this.style.boxShadow='0 0 0 2px rgba(26,158,92,0.15)'"
-                            onblur="this.style.borderColor='#d7dde4';this.style.boxShadow='none'">
+                            style="width:100%;padding:11px 14px;border:1.5px solid #e8eaed;border-radius:10px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:#1a1a2e;background:#f7f8fa;text-transform:uppercase;transition:all 0.15s;"
+                            onfocus="this.style.borderColor='#10b981';this.style.background='white';this.style.boxShadow='0 0 0 3px rgba(16,185,129,0.12)'"
+                            onblur="this.style.borderColor='#e8eaed';this.style.background='#f7f8fa';this.style.boxShadow='none'">
                     </div>
-
-                    <div style="margin-bottom:24px;">
-                        <label style="display:block;font-size:12px;font-weight:600;color:#1b1b33;margin-bottom:6px;font-family:'Inter',sans-serif;">Password</label>
+                    <div style="margin-bottom:8px;">
+                        <label style="display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:6px;font-family:'Inter',sans-serif;">Password</label>
                         <input type="password" name="emp_password" placeholder="First 3 digits of phone + year joined" required
-                            style="width:100%;padding:10px 12px;border:1px solid #d7dde4;border-radius:4px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:#1b1b33;box-sizing:border-box;"
-                            onfocus="this.style.borderColor='#1a9e5c';this.style.boxShadow='0 0 0 2px rgba(26,158,92,0.15)'"
-                            onblur="this.style.borderColor='#d7dde4';this.style.boxShadow='none'">
-                        <p style="font-size:11px;color:#999;margin-top:5px;font-family:'Inter',sans-serif;">
-                            e.g. phone 9876543210, joined 2024 → password is <strong>9872024</strong>
-                        </p>
+                            style="width:100%;padding:11px 14px;border:1.5px solid #e8eaed;border-radius:10px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:#1a1a2e;background:#f7f8fa;transition:all 0.15s;"
+                            onfocus="this.style.borderColor='#10b981';this.style.background='white';this.style.boxShadow='0 0 0 3px rgba(16,185,129,0.12)'"
+                            onblur="this.style.borderColor='#e8eaed';this.style.background='#f7f8fa';this.style.boxShadow='none'">
+                        <p style="font-size:11px;color:#9ca3af;margin-top:6px;font-family:'Inter',sans-serif;">e.g. phone 9876543210, joined 2024 → <strong style="color:#6b7280;">9872024</strong></p>
                     </div>
-
+                    <div style="margin-bottom:24px;"></div>
                     <button type="submit"
-                        style="width:100%;padding:11px;background:#1a9e5c;color:white;border:none;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;"
-                        onmouseover="this.style.background='#116b3e'" onmouseout="this.style.background='#1a9e5c'">
+                        style="width:100%;padding:12px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 4px 12px rgba(16,185,129,0.3);transition:opacity 0.15s;"
+                        onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
                         Sign in as Employee
                     </button>
                 </form>
-
-                <p style="text-align:center;margin-top:16px;font-size:12px;color:#696980;font-family:'Inter',sans-serif;">
-                    Use your Employee ID and password
-                </p>
-            </div>
-
-            <!-- ── TOGGLE BUTTON at bottom ── -->
-            <div style="margin-top:24px;padding-top:20px;border-top:1px solid #eee;text-align:center;">
-                <button id="toggle-btn" onclick="toggleLoginMode()"
-                    style="background:none;border:1px solid #d7dde4;border-radius:4px;padding:8px 20px;font-size:13px;color:#0069c2;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.2s;"
-                    onmouseover="this.style.background='#f0f7ff'" onmouseout="this.style.background='none'">
-                    🏢 Login as Employee
-                </button>
             </div>
 
         </div>
     </div>
+
+    <p style="text-align:center;margin-top:20px;font-size:12px;color:#9ca3af;font-family:'Inter',sans-serif;">
+        Employee Management System &copy; 2026
+    </p>
 </div>
 
 <script>
-var isEmployeeMode = {% if login_type == 'employee' %}true{% else %}false{% endif %};
+/* check if server sent back login_type=employee (means employee login failed) */
+var currentTab = '{% if login_type == "employee" %}employee{% else %}admin{% endif %}';
 
-function toggleLoginMode() {
-    isEmployeeMode = !isEmployeeMode;
-    var adminForm    = document.getElementById('admin-form');
-    var empForm      = document.getElementById('employee-form');
-    var toggleBtn    = document.getElementById('toggle-btn');
-    var accentBar    = document.getElementById('accent-bar');
-    var logoIcon     = document.getElementById('logo-icon');
-    var loginTitle   = document.getElementById('login-title');
-    var loginSubtitle = document.getElementById('login-subtitle');
+/* switches between admin and employee tab */
+function switchTab(tab) {
+    currentTab = tab;
+    var adminForm = document.getElementById('admin-form');
+    var empForm   = document.getElementById('employee-form');
+    var tabAdmin  = document.getElementById('tab-admin');
+    var tabEmp    = document.getElementById('tab-employee');
 
-    if (isEmployeeMode) {
-        adminForm.style.display    = 'none';
-        empForm.style.display      = 'block';
-        toggleBtn.innerHTML        = '🔑 Login as Admin';
-        toggleBtn.style.color      = '#1a9e5c';
-        accentBar.style.background = 'linear-gradient(90deg,#1a9e5c,#00c48c)';
-        logoIcon.style.background  = '#1a9e5c';
-        loginTitle.textContent     = 'Employee Sign in';
-        loginSubtitle.textContent  = 'Access your profile and update your status';
-        empForm.querySelector('input[name="employee_id"]').focus();
-    } else {
-        empForm.style.display      = 'none';
-        adminForm.style.display    = 'block';
-        toggleBtn.innerHTML        = '🏢 Login as Employee';
-        toggleBtn.style.color      = '#0069c2';
-        accentBar.style.background = 'linear-gradient(90deg,#0069c2,#00b3b3)';
-        logoIcon.style.background  = '#0069c2';
-        loginTitle.textContent     = 'Sign in';
-        loginSubtitle.textContent  = 'Employee Management System';
+    if (tab === 'admin') {
+        adminForm.style.display = 'block';
+        empForm.style.display   = 'none';
+        tabAdmin.style.color    = '#6366f1';
+        tabAdmin.style.borderBottom = '2px solid #6366f1';
+        tabEmp.style.color      = '#9ca3af';
+        tabEmp.style.borderBottom = '2px solid transparent';
         adminForm.querySelector('input[name="username"]').focus();
+    } else {
+        empForm.style.display   = 'block';
+        adminForm.style.display = 'none';
+        tabEmp.style.color      = '#10b981';
+        tabEmp.style.borderBottom = '2px solid #10b981';
+        tabAdmin.style.color    = '#9ca3af';
+        tabAdmin.style.borderBottom = '2px solid transparent';
+        empForm.querySelector('input[name="employee_id"]').focus();
     }
 }
 
-// If server returned error for employee mode, stay in employee mode
-if (isEmployeeMode) { toggleLoginMode(); }
+/* if server returned employee error, auto-switch to employee tab on load */
+if (currentTab === 'employee') { switchTab('employee'); }
 </script>
 {% endblock %}

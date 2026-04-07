@@ -3,50 +3,70 @@
 {% block nav_list %}active{% endblock %}
 
 {% block extra_styles %}
-.form-page { max-width: 540px; }
-.page-title { font-size: 22px; font-weight: 700; color: var(--mdn-text); margin-bottom: 2px; }
-.page-sub { font-size: 13px; color: var(--mdn-muted); margin-bottom: 20px; }
+/* delete confirmation page - kept narrow so it feels focused */
 
+.form-page  { max-width: 560px; }
+.page-title { font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 2px; letter-spacing: -0.3px; }
+.page-sub   { font-size: 13px; color: var(--text-secondary); margin-bottom: 24px; }
+
+/* red warning banner at the top */
 .warning-card {
-    background: #fff0f3; border: 1px solid #ffc0cb;
-    border-left: 3px solid var(--mdn-danger);
-    border-radius: 4px; padding: 14px 16px; margin-bottom: 16px;
-    display: flex; align-items: flex-start; gap: 10px;
+    background: var(--red-light); border: 1px solid #fca5a5;
+    border-radius: var(--radius); padding: 16px 18px; margin-bottom: 20px;
+    display: flex; align-items: flex-start; gap: 12px;
 }
-.warning-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
-.warning-text { font-size: 13px; color: #7a001a; line-height: 1.5; }
+.warning-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #fee2e2; border: 1px solid #fca5a5;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.warning-text { font-size: 13px; color: #991b1b; line-height: 1.6; }
 
-.form-card { background: var(--mdn-surface); border: 1px solid var(--mdn-border); border-radius: 6px; padding: 24px; }
-.emp-id-badge {
-    display: inline-block; background: var(--mdn-blue-light); color: var(--mdn-blue);
-    padding: 3px 12px; border-radius: 3px; font-size: 12px; font-weight: 700; margin-bottom: 16px;
+/* main white card */
+.form-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; }
+
+/* employee preview row at top of card */
+.emp-preview {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px; background: var(--bg); border-radius: 10px;
+    border: 1px solid var(--border); margin-bottom: 20px;
 }
+.emp-avatar-del {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), #8b5cf6);
+    color: white; font-size: 16px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+
 .form-section-title {
-    font-size: 11px; font-weight: 700; color: var(--mdn-muted);
+    font-size: 11px; font-weight: 700; color: var(--text-secondary);
     text-transform: uppercase; letter-spacing: 0.8px;
-    margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--mdn-border);
-}
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 4px; }
-.form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--mdn-text); margin-bottom: 4px; }
-.form-group input {
-    width: 100%; padding: 8px 10px; border: 1px solid var(--mdn-border); border-radius: 4px;
-    font-size: 13px; font-family: 'Inter', sans-serif;
-    background: var(--mdn-bg); color: var(--mdn-muted); outline: none;
+    margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
 }
 
-.form-actions { display: flex; gap: 10px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--mdn-border); }
+/* 2-column grid for the read-only detail fields */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 4px; }
+.form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+.form-group input {
+    width: 100%; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 10px;
+    font-size: 13px; font-family: 'Inter', sans-serif;
+    background: var(--bg); color: var(--text-secondary); outline: none;
+}
+
+/* delete = red, cancel = neutral */
+.form-actions { display: flex; gap: 10px; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--border); }
 .btn-delete {
-    padding: 10px 28px; background: var(--mdn-danger); color: white; border: none;
-    border-radius: 4px; font-size: 13px; font-weight: 600;
+    padding: 11px 28px; background: var(--red); color: white; border: none;
+    border-radius: 10px; font-size: 13px; font-weight: 600;
     font-family: 'Inter', sans-serif; cursor: pointer; transition: background 0.15s;
 }
-.btn-delete:hover { background: #a0002a; }
+.btn-delete:hover { background: #dc2626; }
 .btn-cancel {
-    padding: 10px 22px; background: var(--mdn-bg); color: var(--mdn-muted);
-    border: 1px solid var(--mdn-border); border-radius: 4px; font-size: 13px;
+    padding: 11px 24px; background: var(--white); color: var(--text-secondary);
+    border: 1.5px solid var(--border); border-radius: 10px; font-size: 13px;
     text-decoration: none; font-weight: 500; transition: background 0.15s;
 }
-.btn-cancel:hover { background: #eee; }
+.btn-cancel:hover { background: var(--bg); }
 {% endblock %}
 
 {% block content %}
@@ -54,16 +74,33 @@
     <div class="page-title">Delete Employee</div>
     <div class="page-sub">This action is permanent and cannot be undone.</div>
 
+    <!-- warning banner -->
     <div class="warning-card">
-        <div class="warning-icon">&#9888;</div>
+        <div class="warning-icon">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#ef4444" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+        </div>
         <div class="warning-text">
             You are about to permanently delete <strong>{{ emp.name }}</strong> ({{ emp.employee_id }}).
-            All their data will be removed from the system.
+            All their data will be removed from the system and cannot be recovered.
         </div>
     </div>
 
     <div class="form-card">
-        <div class="emp-id-badge">{{ emp.employee_id }}</div>
+
+        <!-- employee preview so admin can confirm they have the right person -->
+        <div class="emp-preview">
+            <div class="emp-avatar-del">{{ emp.name|first|upper }}</div>
+            <div>
+                <div style="font-weight:700; font-size:14px; color:var(--text);">{{ emp.name }}</div>
+                <div style="font-size:12px; color:var(--text-secondary); margin-top:2px;">
+                    {{ emp.employee_id }} &middot; {{ emp.department|default:"No Department" }}
+                </div>
+            </div>
+        </div>
+
+        <!-- read-only fields showing employee details -->
         <div class="form-section-title">Employee Details</div>
         <div class="form-grid">
             <div class="form-group">
@@ -84,10 +121,11 @@
             </div>
         </div>
 
+        <!-- actual delete form - POST request -->
         <form method="post">
             {% csrf_token %}
             <div class="form-actions">
-                <button type="submit" class="btn-delete">Yes, Delete</button>
+                <button type="submit" class="btn-delete">Yes, Delete Employee</button>
                 <a href="{% url 'employee_list' %}" class="btn-cancel">Cancel</a>
             </div>
         </form>

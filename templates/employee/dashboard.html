@@ -3,115 +3,179 @@
 {% block nav_dashboard %}active{% endblock %}
 
 {% block extra_styles %}
-.page-title { font-size: 22px; font-weight: 700; color: var(--mdn-text); margin-bottom: 2px; }
-.page-sub { font-size: 13px; color: var(--mdn-muted); margin-bottom: 24px; }
+/* dashboard overview - shows stats, charts and recent employees */
 
-/* Stat cards */
-.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 24px; }
+/* page heading */
+.page-title { font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 2px; letter-spacing: -0.3px; }
+.page-sub   { font-size: 13px; color: var(--text-secondary); margin-bottom: 28px; }
+
+/* 4-column stat cards row */
+.stats-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px; margin-bottom: 28px;
+}
 .stat-card {
-    background: var(--mdn-surface); border: 1px solid var(--mdn-border);
-    border-radius: 6px; padding: 20px;
-    border-top: 3px solid var(--mdn-blue);
-    transition: box-shadow 0.15s;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 22px;
+    transition: box-shadow 0.2s, transform 0.2s;
+    position: relative; overflow: hidden;
 }
-.stat-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-.stat-card.green  { border-top-color: #007a47; }
-.stat-card.orange { border-top-color: #c05000; }
-.stat-card.red    { border-top-color: var(--mdn-danger); }
+.stat-card:hover { box-shadow: var(--shadow); transform: translateY(-1px); }
 
-.stat-label { font-size: 11px; font-weight: 600; color: var(--mdn-muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
-.stat-number { font-size: 32px; font-weight: 700; color: var(--mdn-text); line-height: 1; }
-.stat-footer { font-size: 11px; color: var(--mdn-muted); margin-top: 6px; }
+/* colored top strip on each stat card */
+.stat-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--accent);
+    border-radius: var(--radius) var(--radius) 0 0;
+}
+.stat-card.green::before  { background: var(--green); }
+.stat-card.orange::before { background: var(--orange); }
+.stat-card.red::before    { background: var(--red); }
 
-/* Grid */
-.grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 20px; }
+/* icon box inside stat card */
+.stat-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 14px; background: var(--accent-light);
+}
+.stat-card.green  .stat-icon { background: var(--green-light); }
+.stat-card.orange .stat-icon { background: var(--orange-light); }
+.stat-card.red    .stat-icon { background: var(--red-light); }
 
-/* Card */
-.card { background: var(--mdn-surface); border: 1px solid var(--mdn-border); border-radius: 6px; overflow: hidden; }
+.stat-label  { font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; }
+.stat-number { font-size: 34px; font-weight: 700; color: var(--text); line-height: 1; letter-spacing: -1px; }
+.stat-footer { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
+
+/* 3-column grid for salary, departments, gender */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+
+/* reusable card component */
+.card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .card-header {
-    padding: 14px 18px; border-bottom: 1px solid var(--mdn-border);
-    font-size: 13px; font-weight: 600; color: var(--mdn-text);
+    padding: 16px 20px; border-bottom: 1px solid var(--border-light);
+    font-size: 14px; font-weight: 600; color: var(--text);
     display: flex; justify-content: space-between; align-items: center;
-    background: #f5f6fa;
 }
-.card-header a { font-size: 12px; color: var(--mdn-blue); text-decoration: none; }
+.card-header a { font-size: 12px; color: var(--accent); text-decoration: none; font-weight: 500; }
 .card-header a:hover { text-decoration: underline; }
-.card-body { padding: 16px 18px; }
+.card-body { padding: 18px 20px; }
 
-/* Salary */
-.salary-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
-.salary-item { text-align: center; padding: 12px 8px; background: var(--mdn-bg); border-radius: 4px; border: 1px solid var(--mdn-border); }
-.salary-item .val { font-size: 16px; font-weight: 700; color: var(--mdn-text); }
-.salary-item .lbl { font-size: 10px; color: var(--mdn-muted); margin-top: 3px; text-transform: uppercase; letter-spacing: 0.5px; }
+/* salary min/avg/max boxes */
+.salary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.salary-item {
+    text-align: center; padding: 14px 8px;
+    background: var(--bg); border-radius: 10px; border: 1px solid var(--border);
+}
+.salary-item .val { font-size: 15px; font-weight: 700; color: var(--text); }
+.salary-item .lbl { font-size: 10px; color: var(--text-muted); margin-top: 3px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
 
-/* Dept bars */
-.dept-item { display: flex; align-items: center; padding: 8px 0; border-bottom: 1px solid #f0f0f5; gap: 10px; }
+/* department bar chart rows */
+.dept-item { display: flex; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--border-light); gap: 10px; }
 .dept-item:last-child { border-bottom: none; }
-.dept-name { font-size: 12px; font-weight: 500; color: var(--mdn-text); min-width: 90px; }
-.dept-bar-wrap { flex: 1; height: 5px; background: var(--mdn-bg); border-radius: 3px; overflow: hidden; }
-.dept-bar { height: 100%; background: var(--mdn-blue); border-radius: 3px; transition: width 0.5s ease; }
-.dept-count { font-size: 11px; font-weight: 700; color: var(--mdn-blue); min-width: 24px; text-align: right; }
+.dept-name { font-size: 12px; font-weight: 500; color: var(--text); min-width: 90px; }
+.dept-bar-wrap { flex: 1; height: 6px; background: var(--bg); border-radius: 3px; overflow: hidden; }
+.dept-bar { height: 100%; background: linear-gradient(90deg, var(--accent), #8b5cf6); border-radius: 3px; transition: width 0.6s ease; }
+.dept-count { font-size: 11px; font-weight: 700; color: var(--accent); min-width: 24px; text-align: right; }
 
-/* Gender */
-.gender-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f0f0f5; }
+/* gender distribution rows */
+.gender-item { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--border-light); }
 .gender-item:last-child { border-bottom: none; }
-.gender-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.gender-label { font-size: 13px; flex: 1; color: var(--mdn-text); }
-.gender-count { font-weight: 700; color: var(--mdn-text); font-size: 14px; }
+.gender-dot   { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.gender-label { font-size: 13px; flex: 1; color: var(--text); }
+.gender-count { font-weight: 700; color: var(--text); font-size: 14px; }
 
-/* Table */
+/* recent employees table at the bottom */
 .recent-table { width: 100%; border-collapse: collapse; }
 .recent-table th {
-    padding: 10px 14px; text-align: left;
-    font-size: 11px; font-weight: 600; color: var(--mdn-muted);
+    padding: 11px 16px; text-align: left;
+    font-size: 11px; font-weight: 600; color: var(--text-muted);
     text-transform: uppercase; letter-spacing: 0.6px;
-    border-bottom: 1px solid var(--mdn-border); background: #f5f6fa;
+    border-bottom: 1px solid var(--border); background: var(--bg);
 }
-.recent-table td { padding: 11px 14px; font-size: 13px; border-bottom: 1px solid #f0f0f5; color: var(--mdn-text); }
-.recent-table tr:hover td { background: var(--mdn-blue-light); }
+.recent-table td { padding: 13px 16px; font-size: 13px; border-bottom: 1px solid var(--border-light); color: var(--text); }
+.recent-table tr:last-child td { border-bottom: none; }
+.recent-table tbody tr:hover td { background: var(--accent-light); }
 
-.badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: 600; }
-.badge-active   { background: #e6f4ee; color: #007a47; }
-.badge-inactive { background: #fff0f3; color: var(--mdn-danger); }
-.badge-leave    { background: #fff8e6; color: #7a4700; }
+/* status badges - pill shaped with color */
+.badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+.badge-active   { background: var(--green-light);  color: #065f46; }
+.badge-inactive { background: var(--red-light);    color: #991b1b; }
+.badge-leave    { background: var(--orange-light); color: #92400e; }
 
+/* view button in table */
 .btn-view {
-    display: inline-block; padding: 4px 10px;
-    background: var(--mdn-blue-light); color: var(--mdn-blue);
-    border-radius: 3px; text-decoration: none; font-size: 11px; font-weight: 600;
+    display: inline-block; padding: 5px 12px;
+    background: var(--accent-light); color: var(--accent);
+    border-radius: 8px; text-decoration: none; font-size: 11px; font-weight: 600;
     transition: background 0.15s;
 }
-.btn-view:hover { background: #ccdff5; }
+.btn-view:hover { background: #e0e7ff; }
+
+/* small avatar circle used in the recent employees table */
+.emp-avatar-sm {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), #8b5cf6);
+    color: white; font-size: 11px; font-weight: 700;
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-right: 8px; flex-shrink: 0;
+}
+.name-cell { display: flex; align-items: center; }
 {% endblock %}
 
 {% block content %}
+
+<!-- page heading -->
 <div class="page-title">Dashboard</div>
 <div class="page-sub">Welcome back, {{ request.user.username }}. Here's your workforce overview.</div>
 
+<!-- 4 stat cards: total, active, on leave, inactive -->
 <div class="stats-grid">
     <div class="stat-card">
+        <div class="stat-icon">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#6366f1" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+        </div>
         <div class="stat-label">Total Employees</div>
         <div class="stat-number">{{ total }}</div>
         <div class="stat-footer">All records</div>
     </div>
     <div class="stat-card green">
+        <div class="stat-icon">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#10b981" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+        </div>
         <div class="stat-label">Active</div>
         <div class="stat-number">{{ active }}</div>
         <div class="stat-footer">Currently working</div>
     </div>
     <div class="stat-card orange">
+        <div class="stat-icon">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#f59e0b" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+        </div>
         <div class="stat-label">On Leave</div>
         <div class="stat-number">{{ on_leave }}</div>
         <div class="stat-footer">Temporarily away</div>
     </div>
     <div class="stat-card red">
+        <div class="stat-icon">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#ef4444" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+        </div>
         <div class="stat-label">Inactive</div>
         <div class="stat-number">{{ inactive }}</div>
         <div class="stat-footer">Not active</div>
     </div>
 </div>
 
+<!-- salary overview, departments, gender - 3 columns -->
 <div class="grid-3">
+
+    <!-- salary min/avg/max -->
     <div class="card">
         <div class="card-header">Salary Overview</div>
         <div class="card-body">
@@ -121,50 +185,56 @@
                     <div class="lbl">Average</div>
                 </div>
                 <div class="salary-item">
-                    <div class="val" style="color:#007a47;">₹{{ max_salary }}</div>
+                    <div class="val" style="color:var(--green);">₹{{ max_salary }}</div>
                     <div class="lbl">Highest</div>
                 </div>
                 <div class="salary-item">
-                    <div class="val" style="color:var(--mdn-danger);">₹{{ min_salary }}</div>
+                    <div class="val" style="color:var(--red);">₹{{ min_salary }}</div>
                     <div class="lbl">Lowest</div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- department breakdown with progress bars -->
     <div class="card">
         <div class="card-header">Departments</div>
-        <div class="card-body" style="padding:12px 18px;">
+        <div class="card-body" style="padding:14px 20px;">
             {% for dept in dept_data %}
             <div class="dept-item">
                 <span class="dept-name">{{ dept.department|default:"Unknown" }}</span>
                 <div class="dept-bar-wrap">
+                    <!-- widthratio calculates percentage width -->
                     <div class="dept-bar" style="width:{% if total_employees %}{% widthratio dept.count total_employees 100 %}{% else %}0{% endif %}%;"></div>
                 </div>
                 <span class="dept-count">{{ dept.count }}</span>
             </div>
             {% empty %}
-            <p style="color:var(--mdn-muted);font-size:13px;">No data yet.</p>
+            <p style="color:var(--text-muted); font-size:13px;">No data yet.</p>
             {% endfor %}
         </div>
     </div>
 
+    <!-- gender distribution -->
     <div class="card">
         <div class="card-header">Gender Distribution</div>
-        <div class="card-body" style="padding:12px 18px;">
+        <div class="card-body" style="padding:14px 20px;">
             {% for g in gender_data %}
             <div class="gender-item">
-                <div class="gender-dot" style="background:{% if g.gender == 'Male' %}#0069c2{% elif g.gender == 'Female' %}#c3002f{% else %}#c05000{% endif %};"></div>
+                <!-- different dot color per gender -->
+                <div class="gender-dot" style="background:{% if g.gender == 'Male' %}#6366f1{% elif g.gender == 'Female' %}#ec4899{% else %}#f59e0b{% endif %};"></div>
                 <span class="gender-label">{{ g.gender }}</span>
                 <span class="gender-count">{{ g.count }}</span>
             </div>
             {% empty %}
-            <p style="color:var(--mdn-muted);font-size:13px;">No data yet.</p>
+            <p style="color:var(--text-muted); font-size:13px;">No data yet.</p>
             {% endfor %}
         </div>
     </div>
+
 </div>
 
+<!-- recently added employees table -->
 <div class="card">
     <div class="card-header">
         Recently Added Employees
@@ -173,18 +243,29 @@
     <table class="recent-table">
         <thead>
             <tr>
-                <th>ID</th><th>Name</th><th>Department</th>
-                <th>Designation</th><th>Salary</th><th>Status</th><th>Action</th>
+                <th>Employee</th>
+                <th>Department</th>
+                <th>Designation</th>
+                <th>Salary</th>
+                <th>Status</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             {% for emp in recent_employees %}
             <tr>
-                <td style="font-weight:600;color:var(--mdn-blue);font-size:12px;">{{ emp.employee_id }}</td>
-                <td style="font-weight:600;">{{ emp.name }}</td>
+                <td>
+                    <div class="name-cell">
+                        <div class="emp-avatar-sm">{{ emp.name|first|upper }}</div>
+                        <div>
+                            <div style="font-weight:600; font-size:13px;">{{ emp.name }}</div>
+                            <div style="font-size:11px; color:var(--text-muted);">{{ emp.employee_id }}</div>
+                        </div>
+                    </div>
+                </td>
                 <td>{{ emp.department|default:"-" }}</td>
                 <td>{{ emp.designation|default:"-" }}</td>
-                <td style="font-weight:600;color:#007a47;">₹{{ emp.salary }}</td>
+                <td style="font-weight:600; color:var(--green);">₹{{ emp.salary }}</td>
                 <td>
                     <span class="badge {% if emp.status == 'Active' %}badge-active{% elif emp.status == 'Inactive' %}badge-inactive{% else %}badge-leave{% endif %}">
                         {{ emp.status }}
@@ -194,12 +275,13 @@
             </tr>
             {% empty %}
             <tr>
-                <td colspan="7" style="text-align:center;color:var(--mdn-muted);padding:32px;font-size:13px;">
-                    No employees yet. <a href="{% url 'add_employee' %}" style="color:var(--mdn-blue);font-weight:600;">Add one →</a>
+                <td colspan="6" style="text-align:center; color:var(--text-muted); padding:40px; font-size:13px;">
+                    No employees yet. <a href="{% url 'add_employee' %}" style="color:var(--accent); font-weight:600;">Add one →</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
+
 {% endblock %}

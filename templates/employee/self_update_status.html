@@ -2,79 +2,88 @@
 {% block title %}Update My Status - EMS{% endblock %}
 
 {% block extra_styles %}
-.status-wrap { max-width: 480px; }
-.page-title  { font-size: 22px; font-weight: 700; color: var(--mdn-text); margin-bottom: 2px; }
-.page-sub    { font-size: 13px; color: var(--mdn-muted); margin-bottom: 24px; }
+/* status update page - employee can change their own active/leave/inactive status */
 
+.status-wrap { max-width: 500px; }
+.page-title  { font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 2px; letter-spacing: -0.3px; }
+.page-sub    { font-size: 13px; color: var(--text-secondary); margin-bottom: 28px; }
+
+/* main white card */
 .status-card {
-    background: var(--mdn-surface);
-    border: 1px solid var(--mdn-border);
-    border-radius: 8px;
-    padding: 28px;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 32px;
 }
 
+/* current status row at the top of the card */
 .current-status-row {
     display: flex; align-items: center; gap: 10px;
-    margin-bottom: 24px; padding-bottom: 18px;
-    border-bottom: 1px solid var(--mdn-border);
-    font-size: 13px; color: var(--mdn-muted);
+    margin-bottom: 24px; padding: 14px 16px;
+    background: var(--bg); border-radius: 10px; border: 1px solid var(--border);
+    font-size: 13px; color: var(--text-secondary);
 }
 
-.status-badge {
-    display: inline-block; padding: 3px 12px;
-    border-radius: 20px; font-size: 12px; font-weight: 600;
-}
-.status-Active   { background: #e6f4ea; color: #2d6a4f; }
-.status-Inactive { background: #fce8e6; color: #a33; }
-.status-On-Leave { background: #fff3cd; color: #856404; }
+/* colored status badges */
+.status-badge    { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.status-Active   { background: var(--green-light);  color: #065f46; }
+.status-Inactive { background: var(--red-light);    color: #991b1b; }
+.status-On-Leave { background: var(--orange-light); color: #92400e; }
 
+/* form label */
 .form-group label {
     display: block; font-size: 12px; font-weight: 600;
-    color: var(--mdn-text); margin-bottom: 6px;
+    color: var(--text); margin-bottom: 7px;
 }
+
+/* the status dropdown */
 select.form-input {
-    width: 100%; padding: 10px 11px;
-    border: 1px solid var(--mdn-border); border-radius: 4px;
+    width: 100%; padding: 11px 13px;
+    border: 1.5px solid var(--border); border-radius: 10px;
     font-size: 13px; font-family: 'Inter', sans-serif;
-    outline: none; background: var(--mdn-bg); color: var(--mdn-text);
-    transition: border 0.15s;
+    outline: none; background: var(--bg); color: var(--text); transition: all 0.15s;
 }
 select.form-input:focus {
-    border-color: var(--mdn-blue);
-    box-shadow: 0 0 0 2px rgba(0,105,194,0.12);
+    border-color: var(--accent); background: white;
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
 }
 
+/* small hint text below the dropdown */
+.help-text { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+
+/* save + cancel buttons */
 .form-actions {
-    display: flex; gap: 10px; margin-top: 24px;
-    padding-top: 18px; border-top: 1px solid var(--mdn-border);
+    display: flex; gap: 10px; margin-top: 28px;
+    padding-top: 20px; border-top: 1px solid var(--border);
 }
 .btn-save {
-    padding: 10px 28px; background: var(--mdn-blue); color: white;
-    border: none; border-radius: 4px; font-size: 13px; font-weight: 600;
+    padding: 11px 32px; background: var(--accent); color: white;
+    border: none; border-radius: 10px; font-size: 13px; font-weight: 600;
     font-family: 'Inter', sans-serif; cursor: pointer; transition: background 0.15s;
+    box-shadow: 0 2px 8px rgba(99,102,241,0.25);
 }
-.btn-save:hover { background: var(--mdn-blue-dark); }
+.btn-save:hover { background: var(--accent-dark); }
 .btn-cancel {
-    padding: 10px 22px; background: var(--mdn-bg); color: var(--mdn-muted);
-    border: 1px solid var(--mdn-border); border-radius: 4px;
-    font-size: 13px; text-decoration: none; font-weight: 500;
-    transition: background 0.15s;
+    padding: 11px 24px; background: var(--white); color: var(--text-secondary);
+    border: 1.5px solid var(--border); border-radius: 10px;
+    font-size: 13px; text-decoration: none; font-weight: 500; transition: background 0.15s;
 }
-.btn-cancel:hover { background: #eee; }
-
-.help-text {
-    font-size: 12px; color: var(--mdn-muted); margin-top: 6px;
-}
+.btn-cancel:hover { background: var(--bg); }
 {% endblock %}
 
 {% block content %}
 <div class="status-wrap">
     <div class="page-title">Update My Status</div>
-    <div class="page-sub">You can update your current employment status below.</div>
+    <div class="page-sub">Let your team know your current availability.</div>
 
     <div class="status-card">
+
+        <!-- show what the current status is before they change it -->
         <div class="current-status-row">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path stroke-linecap="round" d="M12 8v4l3 3"/>
+            </svg>
             Current status:
+            <!-- cut:' ' removes the space so "On Leave" becomes "OnLeave" for the CSS class -->
             <span class="status-badge status-{{ emp.status|cut:' ' }}">{{ emp.status }}</span>
         </div>
 
@@ -84,7 +93,7 @@ select.form-input:focus {
                 <label for="{{ form.status.id_for_label }}">New Status</label>
                 {{ form.status }}
                 {% for error in form.status.errors %}
-                    <div style="color: var(--mdn-danger); font-size: 11px; margin-top: 3px;">{{ error }}</div>
+                    <div style="color:var(--red); font-size:11px; margin-top:4px;">{{ error }}</div>
                 {% endfor %}
                 <div class="help-text">Select Active if you have returned from leave.</div>
             </div>
@@ -94,6 +103,7 @@ select.form-input:focus {
                 <a href="{% url 'employee_self_dashboard' %}" class="btn-cancel">Cancel</a>
             </div>
         </form>
+
     </div>
 </div>
 {% endblock %}
