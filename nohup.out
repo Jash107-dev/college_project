@@ -1,0 +1,1414 @@
+Watching for file changes with StatReloader
+[01/Apr/2026 13:50:17] "GET /employee/profile/9/ HTTP/1.1" 200 15749
+[01/Apr/2026 13:50:31] "GET /employee/edit/9/ HTTP/1.1" 200 4
+[01/Apr/2026 13:55:27] "POST /login/ HTTP/1.1" 200 16008
+[01/Apr/2026 13:56:05] "GET /employee/edit/9/ HTTP/1.1" 200 16994
+Not Found: /manifests/secrets.yaml
+[01/Apr/2026 14:09:35] "GET /manifests/secrets.yaml HTTP/1.1" 404 2759
+Not Found: /.well-known/security.txt
+[01/Apr/2026 14:09:35] "GET /.well-known/security.txt HTTP/1.1" 404 2765
+Not Found: /api/debug
+[01/Apr/2026 14:09:35] "GET /api/debug HTTP/1.1" 404 2720
+Not Found: /config/app.php
+[01/Apr/2026 14:09:35] "GET /config/app.php HTTP/1.1" 404 2735
+Not Found: /actuator/threaddump
+[01/Apr/2026 14:09:35] "GET /actuator/threaddump HTTP/1.1" 404 2750
+Not Found: /config/gcp.json
+[01/Apr/2026 14:09:35] "GET /config/gcp.json HTTP/1.1" 404 2738
+Not Found: /root/.azure/azureProfile.json
+[01/Apr/2026 14:09:35] "GET /root/.azure/azureProfile.json HTTP/1.1" 404 2780
+Not Found: /.github/workflows/main.yml
+[01/Apr/2026 14:09:35] "GET /.github/workflows/main.yml HTTP/1.1" 404 2771
+Not Found: /docker-compose.override.yml
+[01/Apr/2026 14:09:35] "GET /docker-compose.override.yml HTTP/1.1" 404 2774
+Not Found: /ovh.conf
+[01/Apr/2026 14:09:35] "GET /ovh.conf HTTP/1.1" 404 2717
+Not Found: /prod/.env
+[01/Apr/2026 14:09:35] "GET /prod/.env HTTP/1.1" 404 2720
+Not Found: /env.yml
+[01/Apr/2026 14:09:35] "GET /env.yml HTTP/1.1" 404 2714
+Not Found: /wp-config-sample.php
+[01/Apr/2026 14:09:35] "GET /wp-config-sample.php HTTP/1.1" 404 2753
+Not Found: /.ovh.conf
+[01/Apr/2026 14:09:35] "GET /.ovh.conf HTTP/1.1" 404 2720
+Not Found: /security.txt
+[01/Apr/2026 14:09:35] "GET /security.txt HTTP/1.1" 404 2729
+Not Found: /js/config.js
+[01/Apr/2026 14:09:35] "GET /js/config.js HTTP/1.1" 404 2729
+Not Found: /buildspec.yml
+[01/Apr/2026 14:09:36] "GET /buildspec.yml HTTP/1.1" 404 2732
+Not Found: /app.js
+[01/Apr/2026 14:09:36] "GET /app.js HTTP/1.1" 404 2711
+Not Found: /vault.json
+[01/Apr/2026 14:09:36] "GET /vault.json HTTP/1.1" 404 2723
+Not Found: /instance/config.py
+[01/Apr/2026 14:09:36] "GET /instance/config.py HTTP/1.1" 404 2747
+Not Found: /home/ubuntu/.aws/config
+[01/Apr/2026 14:09:36] "GET /home/ubuntu/.aws/config HTTP/1.1" 404 2762
+Not Found: /keys.json
+[01/Apr/2026 14:09:36] "GET /keys.json HTTP/1.1" 404 2720
+Not Found: /docker-compose.yaml
+[01/Apr/2026 14:09:36] "GET /docker-compose.yaml HTTP/1.1" 404 2750
+Not Found: /.gcp/service-account.json
+[01/Apr/2026 14:09:36] "GET /.gcp/service-account.json HTTP/1.1" 404 2768
+Not Found: /application-local.properties
+[01/Apr/2026 14:09:36] "GET /application-local.properties HTTP/1.1" 404 2777
+Not Found: /.git/COMMIT_EDITMSG
+[01/Apr/2026 14:09:36] "GET /.git/COMMIT_EDITMSG HTTP/1.1" 404 2750
+Not Found: /home/app/.aws/credentials
+[01/Apr/2026 14:09:36] "GET /home/app/.aws/credentials HTTP/1.1" 404 2768
+Not Found: /project/.env
+[01/Apr/2026 14:09:36] "GET /project/.env HTTP/1.1" 404 2729
+Not Found: /service/.env
+[01/Apr/2026 14:09:36] "GET /service/.env HTTP/1.1" 404 2729
+Not Found: /robots.txt
+[01/Apr/2026 14:09:36] "GET /robots.txt HTTP/1.1" 404 2723
+Not Found: /application-prod.properties
+[01/Apr/2026 14:09:36] "GET /application-prod.properties HTTP/1.1" 404 2774
+Not Found: /secrets.json
+[01/Apr/2026 14:09:36] "GET /secrets.json HTTP/1.1" 404 2729
+Not Found: /manage/configprops
+[01/Apr/2026 14:09:36] "GET /manage/configprops HTTP/1.1" 404 2747
+Not Found: /.gcp/credentials.json
+[01/Apr/2026 14:09:36] "GET /.gcp/credentials.json HTTP/1.1" 404 2756
+Not Found: /home/deploy/.aws/credentials
+[01/Apr/2026 14:09:36] "GET /home/deploy/.aws/credentials HTTP/1.1" 404 2777
+Not Found: /config/initializers/devise.rb
+[01/Apr/2026 14:09:36] "GET /config/initializers/devise.rb HTTP/1.1" 404 2780
+Not Found: /serverless.yml
+[01/Apr/2026 14:09:36] "GET /serverless.yml HTTP/1.1" 404 2735
+Not Found: /pyproject.toml
+[01/Apr/2026 14:09:36] "GET /pyproject.toml HTTP/1.1" 404 2735
+Not Found: /app/credentials.json
+[01/Apr/2026 14:09:36] "GET /app/credentials.json HTTP/1.1" 404 2753
+Not Found: /.env.compose
+[01/Apr/2026 14:09:36] "GET /.env.compose HTTP/1.1" 404 2729
+Not Found: /kubeconfig
+[01/Apr/2026 14:09:36] "GET /kubeconfig HTTP/1.1" 404 2723
+Not Found: /bootstrap.yml
+[01/Apr/2026 14:09:36] "GET /bootstrap.yml HTTP/1.1" 404 2732
+Not Found: /root/.ovh.conf
+[01/Apr/2026 14:09:36] "GET /root/.ovh.conf HTTP/1.1" 404 2735
+[01/Apr/2026 14:09:36] "GET /admin/env HTTP/1.1" 302 0
+[01/Apr/2026 14:09:36] "GET /admin/login/?next=/admin/env HTTP/1.1" 200 4187
+Not Found: /env
+[01/Apr/2026 14:09:36] "GET /env HTTP/1.1" 404 2702
+Not Found: /secrets.yaml
+[01/Apr/2026 14:09:36] "GET /secrets.yaml HTTP/1.1" 404 2729
+Not Found: /infra/.env
+[01/Apr/2026 14:09:36] "GET /infra/.env HTTP/1.1" 404 2723
+Not Found: /manage/env
+[01/Apr/2026 14:09:36] "GET /manage/env HTTP/1.1" 404 2723
+Not Found: /healthcheck
+[01/Apr/2026 14:09:36] "GET /healthcheck HTTP/1.1" 404 2726
+Not Found: /instance/application.cfg
+[01/Apr/2026 14:09:37] "GET /instance/application.cfg HTTP/1.1" 404 2765
+Not Found: /.env.test
+[01/Apr/2026 14:09:37] "GET /.env.test HTTP/1.1" 404 2720
+Not Found: /.ssh/id_rsa
+[01/Apr/2026 14:09:37] "GET /.ssh/id_rsa HTTP/1.1" 404 2726
+Not Found: /env.json
+[01/Apr/2026 14:09:37] "GET /env.json HTTP/1.1" 404 2717
+Not Found: /.git/logs/HEAD
+[01/Apr/2026 14:09:37] "GET /.git/logs/HEAD HTTP/1.1" 404 2735
+Not Found: /kubeconfig.yaml
+[01/Apr/2026 14:09:37] "GET /kubeconfig.yaml HTTP/1.1" 404 2738
+Not Found: /actuator/info
+[01/Apr/2026 14:09:37] "GET /actuator/info HTTP/1.1" 404 2732
+Not Found: /root/.azure/accessTokens.json
+[01/Apr/2026 14:09:37] "GET /root/.azure/accessTokens.json HTTP/1.1" 404 2780
+Not Found: /appsettings.Development.json
+[01/Apr/2026 14:09:37] "GET /appsettings.Development.json HTTP/1.1" 404 2777
+Not Found: /.env.bak
+[01/Apr/2026 14:09:37] "GET /.env.bak HTTP/1.1" 404 2717
+Not Found: /anthropic.json
+[01/Apr/2026 14:09:37] "GET /anthropic.json HTTP/1.1" 404 2735
+Not Found: /gcp-service-account.json
+[01/Apr/2026 14:09:37] "GET /gcp-service-account.json HTTP/1.1" 404 2765
+Not Found: /html/.env
+[01/Apr/2026 14:09:37] "GET /html/.env HTTP/1.1" 404 2720
+Not Found: /commons.js
+[01/Apr/2026 14:09:37] "GET /commons.js HTTP/1.1" 404 2723
+Not Found: /.secrets.json
+[01/Apr/2026 14:09:37] "GET /.secrets.json HTTP/1.1" 404 2732
+Not Found: /data/config.json
+[01/Apr/2026 14:09:37] "GET /data/config.json HTTP/1.1" 404 2741
+Not Found: /app/config/parameters.yml
+[01/Apr/2026 14:09:37] "GET /app/config/parameters.yml HTTP/1.1" 404 2768
+Not Found: /config/database.php
+[01/Apr/2026 14:09:37] "GET /config/database.php HTTP/1.1" 404 2750
+Not Found: /.htpasswd
+[01/Apr/2026 14:09:37] "GET /.htpasswd HTTP/1.1" 404 2720
+Not Found: /home/node/.aws/credentials
+[01/Apr/2026 14:09:37] "GET /home/node/.aws/credentials HTTP/1.1" 404 2771
+Not Found: /application-prod.yml
+[01/Apr/2026 14:09:37] "GET /application-prod.yml HTTP/1.1" 404 2753
+Not Found: /.dockerenv
+[01/Apr/2026 14:09:37] "GET /.dockerenv HTTP/1.1" 404 2723
+Not Found: /public/.env
+[01/Apr/2026 14:09:37] "GET /public/.env HTTP/1.1" 404 2726
+Not Found: /docker-compose.yml
+[01/Apr/2026 14:09:37] "GET /docker-compose.yml HTTP/1.1" 404 2747
+Not Found: /google-credentials.json
+[01/Apr/2026 14:09:37] "GET /google-credentials.json HTTP/1.1" 404 2762
+Not Found: /var/www/.aws/credentials
+[01/Apr/2026 14:09:37] "GET /var/www/.aws/credentials HTTP/1.1" 404 2765
+Not Found: /auth.yaml
+[01/Apr/2026 14:09:37] "GET /auth.yaml HTTP/1.1" 404 2720
+Not Found: /_next/static/chunks/webpack.js
+[01/Apr/2026 14:09:37] "GET /_next/static/chunks/webpack.js HTTP/1.1" 404 2783
+Not Found: /server-info
+[01/Apr/2026 14:09:37] "GET /server-info HTTP/1.1" 404 2726
+Not Found: /Gemfile
+[01/Apr/2026 14:09:37] "GET /Gemfile HTTP/1.1" 404 2714
+Not Found: /package.json
+[01/Apr/2026 14:09:37] "GET /package.json HTTP/1.1" 404 2729
+Not Found: /common/.env
+[01/Apr/2026 14:09:37] "GET /common/.env HTTP/1.1" 404 2726
+Not Found: /Dockerfile.prod
+[01/Apr/2026 14:09:37] "GET /Dockerfile.prod HTTP/1.1" 404 2738
+Not Found: /.env.example
+[01/Apr/2026 14:09:37] "GET /.env.example HTTP/1.1" 404 2729
+Not Found: /crossdomain.xml
+[01/Apr/2026 14:09:38] "GET /crossdomain.xml HTTP/1.1" 404 2738
+Not Found: /actuator/configprops
+[01/Apr/2026 14:09:38] "GET /actuator/configprops HTTP/1.1" 404 2753
+Not Found: /_next/static/chunks/app.js
+[01/Apr/2026 14:09:38] "GET /_next/static/chunks/app.js HTTP/1.1" 404 2771
+Not Found: /config.py
+[01/Apr/2026 14:09:38] "GET /config.py HTTP/1.1" 404 2720
+Not Found: /auth.json
+[01/Apr/2026 14:09:38] "GET /auth.json HTTP/1.1" 404 2720
+Not Found: /api_keys.json
+[01/Apr/2026 14:09:38] "GET /api_keys.json HTTP/1.1" 404 2732
+Not Found: /internal/.env
+[01/Apr/2026 14:09:38] "GET /internal/.env HTTP/1.1" 404 2732
+Not Found: /main.js
+[01/Apr/2026 14:09:38] "GET /main.js HTTP/1.1" 404 2714
+Not Found: /home/node/.config/gcloud/application_default_credentials.json
+[01/Apr/2026 14:09:38] "GET /home/node/.config/gcloud/application_default_credentials.json HTTP/1.1" 404 2876
+Not Found: /api-key.txt
+[01/Apr/2026 14:09:38] "GET /api-key.txt HTTP/1.1" 404 2726
+Not Found: /actuator/heapdump
+[01/Apr/2026 14:09:38] "GET /actuator/heapdump HTTP/1.1" 404 2744
+Not Found: /wp-config.php.swp
+[01/Apr/2026 14:09:38] "GET /wp-config.php.swp HTTP/1.1" 404 2744
+Not Found: /.git/FETCH_HEAD
+[01/Apr/2026 14:09:38] "GET /.git/FETCH_HEAD HTTP/1.1" 404 2738
+Not Found: /docker-compose.dev.yml
+[01/Apr/2026 14:09:38] "GET /docker-compose.dev.yml HTTP/1.1" 404 2759
+Not Found: /wp-config.php.old
+[01/Apr/2026 14:09:38] "GET /wp-config.php.old HTTP/1.1" 404 2744
+Not Found: /home/ec2-user/.aws/config
+[01/Apr/2026 14:09:38] "GET /home/ec2-user/.aws/config HTTP/1.1" 404 2768
+Not Found: /api/.env
+[01/Apr/2026 14:09:38] "GET /api/.env HTTP/1.1" 404 2717
+Not Found: /debug/vars
+[01/Apr/2026 14:09:38] "GET /debug/vars HTTP/1.1" 404 2723
+Not Found: /appsettings.json
+[01/Apr/2026 14:09:38] "GET /appsettings.json HTTP/1.1" 404 2741
+Not Found: /development_settings.py
+[01/Apr/2026 14:09:38] "GET /development_settings.py HTTP/1.1" 404 2762
+Not Found: /shared/.env
+[01/Apr/2026 14:09:38] "GET /shared/.env HTTP/1.1" 404 2726
+Not Found: /.env.1
+[01/Apr/2026 14:09:38] "GET /.env.1 HTTP/1.1" 404 2711
+Not Found: /supabase/.env
+[01/Apr/2026 14:09:38] "GET /supabase/.env HTTP/1.1" 404 2732
+Not Found: /config.ts
+[01/Apr/2026 14:09:38] "GET /config.ts HTTP/1.1" 404 2720
+Not Found: /config.json
+[01/Apr/2026 14:09:38] "GET /config.json HTTP/1.1" 404 2726
+Not Found: /application.properties
+[01/Apr/2026 14:09:38] "GET /application.properties HTTP/1.1" 404 2759
+Not Found: /k8s/configmap.yaml
+[01/Apr/2026 14:09:38] "GET /k8s/configmap.yaml HTTP/1.1" 404 2747
+Not Found: /.flaskenv
+[01/Apr/2026 14:09:38] "GET /.flaskenv HTTP/1.1" 404 2720
+Not Found: /.env
+[01/Apr/2026 14:09:38] "GET /.env HTTP/1.1" 404 2705
+Not Found: /htdocs/.env
+[01/Apr/2026 14:09:38] "GET /htdocs/.env HTTP/1.1" 404 2726
+Not Found: /settings.js
+[01/Apr/2026 14:09:38] "GET /settings.js HTTP/1.1" 404 2726
+Not Found: /terraform.auto.tfvars
+[01/Apr/2026 14:09:39] "GET /terraform.auto.tfvars HTTP/1.1" 404 2756
+Not Found: /token.txt
+[01/Apr/2026 14:09:39] "GET /token.txt HTTP/1.1" 404 2720
+Not Found: /settings.py
+[01/Apr/2026 14:09:39] "GET /settings.py HTTP/1.1" 404 2726
+Not Found: /root/.kube/config
+[01/Apr/2026 14:09:39] "GET /root/.kube/config HTTP/1.1" 404 2744
+Not Found: /assets/index.js
+[01/Apr/2026 14:09:39] "GET /assets/index.js HTTP/1.1" 404 2738
+Not Found: /root/.config/linode-cli
+[01/Apr/2026 14:09:39] "GET /root/.config/linode-cli HTTP/1.1" 404 2762
+Not Found: /phpinfo.php
+[01/Apr/2026 14:09:39] "GET /phpinfo.php HTTP/1.1" 404 2726
+Not Found: /root/.ssh/config
+[01/Apr/2026 14:09:39] "GET /root/.ssh/config HTTP/1.1" 404 2741
+Not Found: /env.yaml
+[01/Apr/2026 14:09:39] "GET /env.yaml HTTP/1.1" 404 2717
+Not Found: /bitbucket-pipelines.yml
+[01/Apr/2026 14:09:39] "GET /bitbucket-pipelines.yml HTTP/1.1" 404 2762
+Not Found: /secrets.yml
+[01/Apr/2026 14:09:39] "GET /secrets.yml HTTP/1.1" 404 2726
+Not Found: /build/bundle.js
+[01/Apr/2026 14:09:39] "GET /build/bundle.js HTTP/1.1" 404 2738
+Not Found: /home/deploy/.config/gcloud/application_default_credentials.json
+[01/Apr/2026 14:09:39] "GET /home/deploy/.config/gcloud/application_default_credentials.json HTTP/1.1" 404 2882
+Not Found: /.env.swp
+[01/Apr/2026 14:09:39] "GET /.env.swp HTTP/1.1" 404 2717
+Not Found: /.azure/credentials
+[01/Apr/2026 14:09:39] "GET /.azure/credentials HTTP/1.1" 404 2747
+Not Found: /web/.env
+[01/Apr/2026 14:09:39] "GET /web/.env HTTP/1.1" 404 2717
+[01/Apr/2026 14:09:39] "GET /admin/settings HTTP/1.1" 302 0
+[01/Apr/2026 14:09:39] "GET /admin/login/?next=/admin/settings HTTP/1.1" 200 4197
+Not Found: /helm/values.yaml
+[01/Apr/2026 14:09:39] "GET /helm/values.yaml HTTP/1.1" 404 2741
+Not Found: /.env.qa
+[01/Apr/2026 14:09:39] "GET /.env.qa HTTP/1.1" 404 2714
+Not Found: /secrets.json
+[01/Apr/2026 14:09:39] "GET /secrets.json HTTP/1.1" 404 2729
+Not Found: /api/v1/settings
+[01/Apr/2026 14:09:39] "GET /api/v1/settings HTTP/1.1" 404 2738
+Not Found: /.vault-token
+[01/Apr/2026 14:09:39] "GET /.vault-token HTTP/1.1" 404 2729
+Not Found: /config/custom-environment-variables.json
+[01/Apr/2026 14:09:39] "GET /config/custom-environment-variables.json HTTP/1.1" 404 2813
+Not Found: /backend.tf
+[01/Apr/2026 14:09:39] "GET /backend.tf HTTP/1.1" 404 2723
+Not Found: /env.js
+[01/Apr/2026 14:09:39] "GET /env.js HTTP/1.1" 404 2711
+Not Found: /etc/shadow
+[01/Apr/2026 14:09:40] "GET /etc/shadow HTTP/1.1" 404 2723
+Not Found: /.env.backup
+[01/Apr/2026 14:09:40] "GET /.env.backup HTTP/1.1" 404 2726
+Not Found: /docker-compose.staging.yml
+[01/Apr/2026 14:09:40] "GET /docker-compose.staging.yml HTTP/1.1" 404 2771
+Not Found: /server/.env.local
+[01/Apr/2026 14:09:40] "GET /server/.env.local HTTP/1.1" 404 2744
+Not Found: /laravel/.env
+[01/Apr/2026 14:09:40] "GET /laravel/.env HTTP/1.1" 404 2729
+Not Found: /k8s/secrets.yaml
+[01/Apr/2026 14:09:40] "GET /k8s/secrets.yaml HTTP/1.1" 404 2741
+Not Found: /.npmrc
+[01/Apr/2026 14:09:40] "GET /.npmrc HTTP/1.1" 404 2711
+Not Found: /api-keys.json
+[01/Apr/2026 14:09:40] "GET /api-keys.json HTTP/1.1" 404 2732
+Not Found: /app/service-account.json
+[01/Apr/2026 14:09:40] "GET /app/service-account.json HTTP/1.1" 404 2765
+Not Found: /root/.ssh/id_ed25519
+[01/Apr/2026 14:09:40] "GET /root/.ssh/id_ed25519 HTTP/1.1" 404 2753
+Not Found: /server-status
+[01/Apr/2026 14:09:40] "GET /server-status HTTP/1.1" 404 2732
+Not Found: /actuator/beans
+[01/Apr/2026 14:09:40] "GET /actuator/beans HTTP/1.1" 404 2735
+[01/Apr/2026 14:09:40] "GET /static/js/chunk.js HTTP/1.1" 404 1794
+Not Found: /.env.production.local
+[01/Apr/2026 14:09:40] "GET /.env.production.local HTTP/1.1" 404 2756
+Not Found: /.env.previous
+[01/Apr/2026 14:09:40] "GET /.env.previous HTTP/1.1" 404 2732
+Not Found: /.secrets
+[01/Apr/2026 14:09:40] "GET /.secrets HTTP/1.1" 404 2717
+Not Found: /archive/.env
+[01/Apr/2026 14:09:40] "GET /archive/.env HTTP/1.1" 404 2729
+Not Found: /home/ubuntu/.aws/credentials
+[01/Apr/2026 14:09:40] "GET /home/ubuntu/.aws/credentials HTTP/1.1" 404 2777
+Not Found: /.github/workflows/ci.yml
+[01/Apr/2026 14:09:40] "GET /.github/workflows/ci.yml HTTP/1.1" 404 2765
+Not Found: /api_key.txt
+[01/Apr/2026 14:09:40] "GET /api_key.txt HTTP/1.1" 404 2726
+Not Found: /WEB-INF/applicationContext.xml
+[01/Apr/2026 14:09:40] "GET /WEB-INF/applicationContext.xml HTTP/1.1" 404 2783
+Not Found: /cloudbuild.yaml
+[01/Apr/2026 14:09:40] "GET /cloudbuild.yaml HTTP/1.1" 404 2738
+Not Found: /cdk.context.json
+[01/Apr/2026 14:09:40] "GET /cdk.context.json HTTP/1.1" 404 2741
+Not Found: /backend/.env
+[01/Apr/2026 14:09:40] "GET /backend/.env HTTP/1.1" 404 2729
+Not Found: /test/.env
+[01/Apr/2026 14:09:40] "GET /test/.env HTTP/1.1" 404 2720
+Not Found: /parameters.yaml
+[01/Apr/2026 14:09:40] "GET /parameters.yaml HTTP/1.1" 404 2738
+Not Found: /config.toml
+[01/Apr/2026 14:09:40] "GET /config.toml HTTP/1.1" 404 2726
+Not Found: /dist/main.js
+[01/Apr/2026 14:09:40] "GET /dist/main.js HTTP/1.1" 404 2729
+Not Found: /proc/self/cmdline
+[01/Apr/2026 14:09:41] "GET /proc/self/cmdline HTTP/1.1" 404 2744
+Not Found: /base_settings.py
+[01/Apr/2026 14:09:41] "GET /base_settings.py HTTP/1.1" 404 2741
+Not Found: /assets/main.js
+[01/Apr/2026 14:09:41] "GET /assets/main.js HTTP/1.1" 404 2735
+Not Found: /.env.save
+[01/Apr/2026 14:09:41] "GET /.env.save HTTP/1.1" 404 2720
+Not Found: /home/ec2-user/.aws/credentials
+[01/Apr/2026 14:09:41] "GET /home/ec2-user/.aws/credentials HTTP/1.1" 404 2783
+Not Found: /.circleci/config.yml
+[01/Apr/2026 14:09:41] "GET /.circleci/config.yml HTTP/1.1" 404 2753
+Not Found: /root/.config/gcloud/properties
+[01/Apr/2026 14:09:41] "GET /root/.config/gcloud/properties HTTP/1.1" 404 2783
+Not Found: /apiKeys.json
+[01/Apr/2026 14:09:41] "GET /apiKeys.json HTTP/1.1" 404 2729
+Not Found: /js/app.js
+[01/Apr/2026 14:09:41] "GET /js/app.js HTTP/1.1" 404 2720
+[01/Apr/2026 14:09:41] "GET /admin/.env HTTP/1.1" 302 0
+[01/Apr/2026 14:09:41] "GET /admin/login/?next=/admin/.env HTTP/1.1" 200 4189
+Not Found: /application-staging.properties
+[01/Apr/2026 14:09:41] "GET /application-staging.properties HTTP/1.1" 404 2783
+Not Found: /api/v1/config
+[01/Apr/2026 14:09:41] "GET /api/v1/config HTTP/1.1" 404 2732
+Not Found: /terraform.tfstate
+[01/Apr/2026 14:09:41] "GET /terraform.tfstate HTTP/1.1" 404 2744
+Not Found: /app/.env
+[01/Apr/2026 14:09:41] "GET /app/.env HTTP/1.1" 404 2717
+Not Found: /wp-config.php.orig
+[01/Apr/2026 14:09:41] "GET /wp-config.php.orig HTTP/1.1" 404 2747
+Not Found: /index.js
+[01/Apr/2026 14:09:41] "GET /index.js HTTP/1.1" 404 2717
+Not Found: /appsettings.Staging.json
+[01/Apr/2026 14:09:41] "GET /appsettings.Staging.json HTTP/1.1" 404 2765
+Not Found: /config/database.yml
+[01/Apr/2026 14:09:41] "GET /config/database.yml HTTP/1.1" 404 2750
+Not Found: /.gitconfig
+[01/Apr/2026 14:09:41] "GET /.gitconfig HTTP/1.1" 404 2723
+Not Found: /actuator/health
+[01/Apr/2026 14:09:41] "GET /actuator/health HTTP/1.1" 404 2738
+Not Found: /frontend/.env
+[01/Apr/2026 14:09:41] "GET /frontend/.env HTTP/1.1" 404 2732
+Not Found: /.env.2
+[01/Apr/2026 14:09:41] "GET /.env.2 HTTP/1.1" 404 2711
+Not Found: /app/.env.backup
+[01/Apr/2026 14:09:41] "GET /app/.env.backup HTTP/1.1" 404 2738
+Not Found: /credentials.py
+[01/Apr/2026 14:09:41] "GET /credentials.py HTTP/1.1" 404 2735
+Not Found: /README.md
+[01/Apr/2026 14:09:41] "GET /README.md HTTP/1.1" 404 2720
+Not Found: /config/secrets.yml
+[01/Apr/2026 14:09:41] "GET /config/secrets.yml HTTP/1.1" 404 2747
+Not Found: /nodemon.json
+[01/Apr/2026 14:09:41] "GET /nodemon.json HTTP/1.1" 404 2729
+Not Found: /home/ubuntu/.config/linode-cli
+[01/Apr/2026 14:09:41] "GET /home/ubuntu/.config/linode-cli HTTP/1.1" 404 2783
+Not Found: /hcloud.yaml
+[01/Apr/2026 14:09:42] "GET /hcloud.yaml HTTP/1.1" 404 2726
+Not Found: /_next/static/chunks/main.js
+[01/Apr/2026 14:09:42] "GET /_next/static/chunks/main.js HTTP/1.1" 404 2774
+Not Found: /Pulumi.yaml
+[01/Apr/2026 14:09:42] "GET /Pulumi.yaml HTTP/1.1" 404 2726
+Not Found: /workspace/.env
+[01/Apr/2026 14:09:42] "GET /workspace/.env HTTP/1.1" 404 2735
+Not Found: /.vultr-cli.yaml
+[01/Apr/2026 14:09:42] "GET /.vultr-cli.yaml HTTP/1.1" 404 2738
+Not Found: /.linode-cli
+[01/Apr/2026 14:09:42] "GET /.linode-cli HTTP/1.1" 404 2726
+Not Found: /storage/logs/laravel.log
+[01/Apr/2026 14:09:42] "GET /storage/logs/laravel.log HTTP/1.1" 404 2765
+[01/Apr/2026 14:09:42] "GET /static/js/runtime.js HTTP/1.1" 404 1800
+Not Found: /variables.tf
+[01/Apr/2026 14:09:42] "GET /variables.tf HTTP/1.1" 404 2729
+Not Found: /__debug__
+[01/Apr/2026 14:09:42] "GET /__debug__ HTTP/1.1" 404 2720
+Not Found: /Jenkinsfile
+[01/Apr/2026 14:09:42] "GET /Jenkinsfile HTTP/1.1" 404 2726
+Not Found: /settings/local.py
+[01/Apr/2026 14:09:42] "GET /settings/local.py HTTP/1.1" 404 2744
+Not Found: /build/static/js/bundle.js
+[01/Apr/2026 14:09:42] "GET /build/static/js/bundle.js HTTP/1.1" 404 2768
+Not Found: /.env.uat
+[01/Apr/2026 14:09:42] "GET /.env.uat HTTP/1.1" 404 2717
+Not Found: /js/env.js
+[01/Apr/2026 14:09:42] "GET /js/env.js HTTP/1.1" 404 2720
+Not Found: /server/.env
+[01/Apr/2026 14:09:42] "GET /server/.env HTTP/1.1" 404 2726
+Not Found: /tokens.json
+[01/Apr/2026 14:09:42] "GET /tokens.json HTTP/1.1" 404 2726
+Not Found: /home/deploy/.ssh/id_rsa
+[01/Apr/2026 14:09:42] "GET /home/deploy/.ssh/id_rsa HTTP/1.1" 404 2762
+Not Found: /.azure/accessTokens.json
+[01/Apr/2026 14:09:42] "GET /.azure/accessTokens.json HTTP/1.1" 404 2765
+Not Found: /config.ini
+[01/Apr/2026 14:09:42] "GET /config.ini HTTP/1.1" 404 2723
+Not Found: /.env.prod
+[01/Apr/2026 14:09:42] "GET /.env.prod HTTP/1.1" 404 2720
+Not Found: /root/.ssh/authorized_keys
+[01/Apr/2026 14:09:42] "GET /root/.ssh/authorized_keys HTTP/1.1" 404 2768
+Not Found: /values.yaml
+[01/Apr/2026 14:09:42] "GET /values.yaml HTTP/1.1" 404 2726
+Not Found: /bundle.js
+[01/Apr/2026 14:09:42] "GET /bundle.js HTTP/1.1" 404 2720
+Not Found: /home/ubuntu/.oci/config
+[01/Apr/2026 14:09:42] "GET /home/ubuntu/.oci/config HTTP/1.1" 404 2762
+Not Found: /parameters.yml
+[01/Apr/2026 14:09:42] "GET /parameters.yml HTTP/1.1" 404 2735
+Not Found: /application.yml
+[01/Apr/2026 14:09:42] "GET /application.yml HTTP/1.1" 404 2738
+Not Found: /api/settings
+[01/Apr/2026 14:09:42] "GET /api/settings HTTP/1.1" 404 2729
+Not Found: /tokens.txt
+[01/Apr/2026 14:09:43] "GET /tokens.txt HTTP/1.1" 404 2723
+Not Found: /portal/.env
+[01/Apr/2026 14:09:43] "GET /portal/.env HTTP/1.1" 404 2726
+Not Found: /config.yml
+[01/Apr/2026 14:09:43] "GET /config.yml HTTP/1.1" 404 2723
+Not Found: /private/.env
+[01/Apr/2026 14:09:43] "GET /private/.env HTTP/1.1" 404 2729
+Not Found: /config/development.json
+[01/Apr/2026 14:09:43] "GET /config/development.json HTTP/1.1" 404 2762
+Not Found: /config/azure.json
+[01/Apr/2026 14:09:43] "GET /config/azure.json HTTP/1.1" 404 2744
+Not Found: /config/production.json
+[01/Apr/2026 14:09:43] "GET /config/production.json HTTP/1.1" 404 2759
+Not Found: /.aws/credentials
+[01/Apr/2026 14:09:43] "GET /.aws/credentials HTTP/1.1" 404 2741
+Not Found: /.env.dist
+[01/Apr/2026 14:09:43] "GET /.env.dist HTTP/1.1" 404 2720
+Not Found: /home/node/.ssh/id_rsa
+[01/Apr/2026 14:09:43] "GET /home/node/.ssh/id_rsa HTTP/1.1" 404 2756
+Not Found: /health
+[01/Apr/2026 14:09:43] "GET /health HTTP/1.1" 404 2711
+Not Found: /Dockerfile.dev
+[01/Apr/2026 14:09:43] "GET /Dockerfile.dev HTTP/1.1" 404 2735
+Not Found: /home/node/.streamlit/secrets.toml
+[01/Apr/2026 14:09:43] "GET /home/node/.streamlit/secrets.toml HTTP/1.1" 404 2792
+Not Found: /vendor.js
+[01/Apr/2026 14:09:43] "GET /vendor.js HTTP/1.1" 404 2720
+Not Found: /config/.env.local
+[01/Apr/2026 14:09:43] "GET /config/.env.local HTTP/1.1" 404 2744
+Not Found: /.yarnrc
+[01/Apr/2026 14:09:43] "GET /.yarnrc HTTP/1.1" 404 2714
+[01/Apr/2026 14:09:43] "GET /static/js/vendor.js HTTP/1.1" 404 1797
+Not Found: /app/.env.production
+[01/Apr/2026 14:09:43] "GET /app/.env.production HTTP/1.1" 404 2750
+Not Found: /config/filesystems.php
+[01/Apr/2026 14:09:43] "GET /config/filesystems.php HTTP/1.1" 404 2759
+[01/Apr/2026 14:09:43] "GET /static/js/main.js HTTP/1.1" 404 1791
+Not Found: /vercel.json
+[01/Apr/2026 14:09:43] "GET /vercel.json HTTP/1.1" 404 2726
+Not Found: /runtime.js
+[01/Apr/2026 14:09:43] "GET /runtime.js HTTP/1.1" 404 2723
+Not Found: /.git/HEAD
+[01/Apr/2026 14:09:43] "GET /.git/HEAD HTTP/1.1" 404 2720
+Not Found: /firebase.json
+[01/Apr/2026 14:09:43] "GET /firebase.json HTTP/1.1" 404 2732
+Not Found: /local_settings.py
+[01/Apr/2026 14:09:43] "GET /local_settings.py HTTP/1.1" 404 2744
+Not Found: /settings.json
+[01/Apr/2026 14:09:43] "GET /settings.json HTTP/1.1" 404 2732
+Not Found: /.github/workflows/deploy.yml
+[01/Apr/2026 14:09:43] "GET /.github/workflows/deploy.yml HTTP/1.1" 404 2777
+Not Found: /root/.aws/credentials
+[01/Apr/2026 14:09:43] "GET /root/.aws/credentials HTTP/1.1" 404 2756
+Not Found: /src/.env
+[01/Apr/2026 14:09:44] "GET /src/.env HTTP/1.1" 404 2717
+Not Found: /.env.development
+[01/Apr/2026 14:09:44] "GET /.env.development HTTP/1.1" 404 2741
+Not Found: /CHANGELOG.md
+[01/Apr/2026 14:09:44] "GET /CHANGELOG.md HTTP/1.1" 404 2729
+Not Found: /api/v2/config
+[01/Apr/2026 14:09:44] "GET /api/v2/config HTTP/1.1" 404 2732
+Not Found: /openai-key.txt
+[01/Apr/2026 14:09:44] "GET /openai-key.txt HTTP/1.1" 404 2735
+Not Found: /app/.env.local
+[01/Apr/2026 14:09:44] "GET /app/.env.local HTTP/1.1" 404 2735
+Not Found: /.hcloud.toml
+[01/Apr/2026 14:09:44] "GET /.hcloud.toml HTTP/1.1" 404 2729
+Not Found: /.aws/config
+[01/Apr/2026 14:09:44] "GET /.aws/config HTTP/1.1" 404 2726
+Not Found: /.ssh/config
+[01/Apr/2026 14:09:44] "GET /.ssh/config HTTP/1.1" 404 2726
+Not Found: /openai.json
+[01/Apr/2026 14:09:44] "GET /openai.json HTTP/1.1" 404 2726
+Not Found: /docker-compose.local.yml
+[01/Apr/2026 14:09:44] "GET /docker-compose.local.yml HTTP/1.1" 404 2765
+Not Found: /web.config
+[01/Apr/2026 14:09:44] "GET /web.config HTTP/1.1" 404 2723
+Not Found: /status
+[01/Apr/2026 14:09:44] "GET /status HTTP/1.1" 404 2711
+Not Found: /polyfills.js
+[01/Apr/2026 14:09:44] "GET /polyfills.js HTTP/1.1" 404 2729
+Not Found: /pm2.config.js
+[01/Apr/2026 14:09:44] "GET /pm2.config.js HTTP/1.1" 404 2732
+Not Found: /hcloud.yml
+[01/Apr/2026 14:09:44] "GET /hcloud.yml HTTP/1.1" 404 2723
+Not Found: /terraform.tfstate.backup
+[01/Apr/2026 14:09:44] "GET /terraform.tfstate.backup HTTP/1.1" 404 2765
+Not Found: /firestore.rules
+[01/Apr/2026 14:09:44] "GET /firestore.rules HTTP/1.1" 404 2738
+Not Found: /.git/config
+[01/Apr/2026 14:09:44] "GET /.git/config HTTP/1.1" 404 2726
+Not Found: /pulumi.yaml
+[01/Apr/2026 14:09:44] "GET /pulumi.yaml HTTP/1.1" 404 2726
+Not Found: /_debug
+[01/Apr/2026 14:09:44] "GET /_debug HTTP/1.1" 404 2711
+Not Found: /settings/production.py
+[01/Apr/2026 14:09:44] "GET /settings/production.py HTTP/1.1" 404 2759
+Not Found: /config/mail.php
+[01/Apr/2026 14:09:44] "GET /config/mail.php HTTP/1.1" 404 2738
+Not Found: /home/ubuntu/.azure/credentials
+[01/Apr/2026 14:09:44] "GET /home/ubuntu/.azure/credentials HTTP/1.1" 404 2783
+Not Found: /terraform.tfvars
+[01/Apr/2026 14:09:44] "GET /terraform.tfvars HTTP/1.1" 404 2741
+Not Found: /config/default.json
+[01/Apr/2026 14:09:44] "GET /config/default.json HTTP/1.1" 404 2750
+Not Found: /staging/.env
+[01/Apr/2026 14:09:44] "GET /staging/.env HTTP/1.1" 404 2729
+Not Found: /.env.local
+[01/Apr/2026 14:09:44] "GET /.env.local HTTP/1.1" 404 2723
+Not Found: /home/www-data/.aws/credentials
+[01/Apr/2026 14:09:44] "GET /home/www-data/.aws/credentials HTTP/1.1" 404 2783
+Not Found: /_next/static/chunks/pages/_app.js
+[01/Apr/2026 14:09:45] "GET /_next/static/chunks/pages/_app.js HTTP/1.1" 404 2792
+Not Found: /storage/framework/.env
+[01/Apr/2026 14:09:45] "GET /storage/framework/.env HTTP/1.1" 404 2759
+Not Found: /wp-config.php.bak
+[01/Apr/2026 14:09:45] "GET /wp-config.php.bak HTTP/1.1" 404 2744
+Not Found: /src/.env.local
+[01/Apr/2026 14:09:45] "GET /src/.env.local HTTP/1.1" 404 2735
+Not Found: /home/www/.aws/credentials
+[01/Apr/2026 14:09:45] "GET /home/www/.aws/credentials HTTP/1.1" 404 2768
+Not Found: /dist/app.js
+[01/Apr/2026 14:09:45] "GET /dist/app.js HTTP/1.1" 404 2726
+Not Found: /root/.config/gcloud/application_default_credentials.json
+[01/Apr/2026 14:09:45] "GET /root/.config/gcloud/application_default_credentials.json HTTP/1.1" 404 2861
+Not Found: /setup.cfg
+[01/Apr/2026 14:09:45] "GET /setup.cfg HTTP/1.1" 404 2720
+[01/Apr/2026 14:09:45] "GET /static/js/app.js HTTP/1.1" 404 1788
+Not Found: /worker.js
+[01/Apr/2026 14:09:45] "GET /worker.js HTTP/1.1" 404 2720
+Not Found: /bak/.env
+[01/Apr/2026 14:09:45] "GET /bak/.env HTTP/1.1" 404 2717
+Not Found: /values.yml
+[01/Apr/2026 14:09:45] "GET /values.yml HTTP/1.1" 404 2723
+Not Found: /secrets.toml
+[01/Apr/2026 14:09:45] "GET /secrets.toml HTTP/1.1" 404 2729
+Not Found: /.env.tmp
+[01/Apr/2026 14:09:45] "GET /.env.tmp HTTP/1.1" 404 2717
+Not Found: /.env.development.local
+[01/Apr/2026 14:09:45] "GET /.env.development.local HTTP/1.1" 404 2759
+Not Found: /deploy/.env
+[01/Apr/2026 14:09:45] "GET /deploy/.env HTTP/1.1" 404 2726
+Not Found: /firebase-adminsdk.json
+[01/Apr/2026 14:09:45] "GET /firebase-adminsdk.json HTTP/1.1" 404 2759
+Not Found: /secrets.py
+[01/Apr/2026 14:09:45] "GET /secrets.py HTTP/1.1" 404 2723
+Not Found: /env.toml
+[01/Apr/2026 14:09:45] "GET /env.toml HTTP/1.1" 404 2717
+Not Found: /.secrets.yaml
+[01/Apr/2026 14:09:45] "GET /.secrets.yaml HTTP/1.1" 404 2732
+Not Found: /.env.production
+[01/Apr/2026 14:09:45] "GET /.env.production HTTP/1.1" 404 2738
+Not Found: /dump/.env
+[01/Apr/2026 14:09:45] "GET /dump/.env HTTP/1.1" 404 2720
+Not Found: /home/ubuntu/.docker/config.json
+[01/Apr/2026 14:09:45] "GET /home/ubuntu/.docker/config.json HTTP/1.1" 404 2786
+Not Found: /dist/index.js
+[01/Apr/2026 14:09:45] "GET /dist/index.js HTTP/1.1" 404 2732
+Not Found: /.envrc
+[01/Apr/2026 14:09:45] "GET /.envrc HTTP/1.1" 404 2711
+Not Found: /build/app.js
+[01/Apr/2026 14:09:45] "GET /build/app.js HTTP/1.1" 404 2729
+Not Found: /root/.streamlit/secrets.toml
+[01/Apr/2026 14:09:45] "GET /root/.streamlit/secrets.toml HTTP/1.1" 404 2777
+Not Found: /temp/.env
+[01/Apr/2026 14:09:45] "GET /temp/.env HTTP/1.1" 404 2720
+Not Found: /root/.docker/config.json
+[01/Apr/2026 14:09:46] "GET /root/.docker/config.json HTTP/1.1" 404 2765
+Not Found: /ecosystem.config.js
+[01/Apr/2026 14:09:46] "GET /ecosystem.config.js HTTP/1.1" 404 2750
+Not Found: /WEB-INF/web.xml
+[01/Apr/2026 14:09:46] "GET /WEB-INF/web.xml HTTP/1.1" 404 2738
+Not Found: /vault-config.json
+[01/Apr/2026 14:09:46] "GET /vault-config.json HTTP/1.1" 404 2744
+Not Found: /Dockerfile
+[01/Apr/2026 14:09:46] "GET /Dockerfile HTTP/1.1" 404 2723
+Not Found: /ecosystem.config.cjs
+[01/Apr/2026 14:09:46] "GET /ecosystem.config.cjs HTTP/1.1" 404 2753
+Not Found: /serverless.yaml
+[01/Apr/2026 14:09:46] "GET /serverless.yaml HTTP/1.1" 404 2738
+Not Found: /app.bundle.js
+[01/Apr/2026 14:09:46] "GET /app.bundle.js HTTP/1.1" 404 2732
+Not Found: /release/.env
+[01/Apr/2026 14:09:46] "GET /release/.env HTTP/1.1" 404 2729
+Not Found: /wp-config.php
+[01/Apr/2026 14:09:46] "GET /wp-config.php HTTP/1.1" 404 2732
+Not Found: /Web.config
+[01/Apr/2026 14:09:46] "GET /Web.config HTTP/1.1" 404 2723
+Not Found: /firebase-credentials.json
+[01/Apr/2026 14:09:46] "GET /firebase-credentials.json HTTP/1.1" 404 2768
+Not Found: /.env.defaults
+[01/Apr/2026 14:09:46] "GET /.env.defaults HTTP/1.1" 404 2732
+Not Found: /application-dev.yml
+[01/Apr/2026 14:09:46] "GET /application-dev.yml HTTP/1.1" 404 2750
+Not Found: /home/ubuntu/.config/hcloud/cli.toml
+[01/Apr/2026 14:09:46] "GET /home/ubuntu/.config/hcloud/cli.toml HTTP/1.1" 404 2798
+Not Found: /root/.config/gcloud/credentials.db
+[01/Apr/2026 14:09:46] "GET /root/.config/gcloud/credentials.db HTTP/1.1" 404 2795
+Not Found: /server.js
+[01/Apr/2026 14:09:46] "GET /server.js HTTP/1.1" 404 2720
+Not Found: /.openai
+[01/Apr/2026 14:09:46] "GET /.openai HTTP/1.1" 404 2714
+Not Found: /keys.py
+[01/Apr/2026 14:09:46] "GET /keys.py HTTP/1.1" 404 2714
+Not Found: /.env.dev
+[01/Apr/2026 14:09:46] "GET /.env.dev HTTP/1.1" 404 2717
+Not Found: /azure.json
+[01/Apr/2026 14:09:46] "GET /azure.json HTTP/1.1" 404 2723
+Not Found: /config.yaml
+[01/Apr/2026 14:09:46] "GET /config.yaml HTTP/1.1" 404 2726
+Not Found: /dist/server.js
+[01/Apr/2026 14:09:46] "GET /dist/server.js HTTP/1.1" 404 2735
+Not Found: /.env.staging
+[01/Apr/2026 14:09:46] "GET /.env.staging HTTP/1.1" 404 2729
+Not Found: /.env~
+[01/Apr/2026 14:09:46] "GET /.env~ HTTP/1.1" 404 2708
+Not Found: /api/config
+[01/Apr/2026 14:09:46] "GET /api/config HTTP/1.1" 404 2723
+Not Found: /actuator/mappings
+[01/Apr/2026 14:09:46] "GET /actuator/mappings HTTP/1.1" 404 2744
+Not Found: /js/main.js
+[01/Apr/2026 14:09:46] "GET /js/main.js HTTP/1.1" 404 2723
+Not Found: /root/.config/hcloud/cli.toml
+[01/Apr/2026 14:09:46] "GET /root/.config/hcloud/cli.toml HTTP/1.1" 404 2777
+Not Found: /actuator/env
+[01/Apr/2026 14:09:46] "GET /actuator/env HTTP/1.1" 404 2729
+Not Found: /provider.tf
+[01/Apr/2026 14:09:47] "GET /provider.tf HTTP/1.1" 404 2726
+Not Found: /.docker/config.json
+[01/Apr/2026 14:09:47] "GET /.docker/config.json HTTP/1.1" 404 2750
+Not Found: /settings.ts
+[01/Apr/2026 14:09:47] "GET /settings.ts HTTP/1.1" 404 2726
+Not Found: /backend/.env.local
+[01/Apr/2026 14:09:47] "GET /backend/.env.local HTTP/1.1" 404 2747
+Not Found: /.travis.yml
+[01/Apr/2026 14:09:47] "GET /.travis.yml HTTP/1.1" 404 2726
+Not Found: /frontend/.env.local
+[01/Apr/2026 14:09:47] "GET /frontend/.env.local HTTP/1.1" 404 2750
+Not Found: /config.xml
+[01/Apr/2026 14:09:47] "GET /config.xml HTTP/1.1" 404 2723
+Not Found: /copy/.env
+[01/Apr/2026 14:09:47] "GET /copy/.env HTTP/1.1" 404 2720
+Not Found: /services/.env
+[01/Apr/2026 14:09:47] "GET /services/.env HTTP/1.1" 404 2732
+Not Found: /taskfile.yml
+[01/Apr/2026 14:09:47] "GET /taskfile.yml HTTP/1.1" 404 2729
+Not Found: /wp-config.php.save
+[01/Apr/2026 14:09:47] "GET /wp-config.php.save HTTP/1.1" 404 2747
+Not Found: /root/.ssh/id_rsa
+[01/Apr/2026 14:09:47] "GET /root/.ssh/id_rsa HTTP/1.1" 404 2741
+Not Found: /info.php
+[01/Apr/2026 14:09:47] "GET /info.php HTTP/1.1" 404 2717
+Not Found: /api/.env.local
+[01/Apr/2026 14:09:47] "GET /api/.env.local HTTP/1.1" 404 2735
+Not Found: /config/storage.yml
+[01/Apr/2026 14:09:47] "GET /config/storage.yml HTTP/1.1" 404 2747
+Not Found: /.env.docker
+[01/Apr/2026 14:09:47] "GET /.env.docker HTTP/1.1" 404 2726
+Not Found: /proc/self/maps
+[01/Apr/2026 14:09:47] "GET /proc/self/maps HTTP/1.1" 404 2735
+Not Found: /backups/.env
+[01/Apr/2026 14:09:47] "GET /backups/.env HTTP/1.1" 404 2729
+Not Found: /debug/pprof
+[01/Apr/2026 14:09:47] "GET /debug/pprof HTTP/1.1" 404 2726
+Not Found: /actuator
+[01/Apr/2026 14:09:47] "GET /actuator HTTP/1.1" 404 2717
+Not Found: /credentials.json
+[01/Apr/2026 14:09:47] "GET /credentials.json HTTP/1.1" 404 2741
+Not Found: /now.json
+[01/Apr/2026 14:09:47] "GET /now.json HTTP/1.1" 404 2717
+Not Found: /dashboard/.env
+[01/Apr/2026 14:09:47] "GET /dashboard/.env HTTP/1.1" 404 2735
+Not Found: /config/.env
+[01/Apr/2026 14:09:47] "GET /config/.env HTTP/1.1" 404 2726
+Not Found: /api/internal/config
+[01/Apr/2026 14:09:47] "GET /api/internal/config HTTP/1.1" 404 2750
+Not Found: /google-cloud-key.json
+[01/Apr/2026 14:09:47] "GET /google-cloud-key.json HTTP/1.1" 404 2756
+Not Found: /META-INF/spring-configuration-metadata.json
+[01/Apr/2026 14:09:47] "GET /META-INF/spring-configuration-metadata.json HTTP/1.1" 404 2822
+Not Found: /home/ubuntu/.vultr-cli.yaml
+[01/Apr/2026 14:09:47] "GET /home/ubuntu/.vultr-cli.yaml HTTP/1.1" 404 2774
+Not Found: /.yarnrc.yml
+[01/Apr/2026 14:09:47] "GET /.yarnrc.yml HTTP/1.1" 404 2726
+Not Found: /.htaccess
+[01/Apr/2026 14:09:48] "GET /.htaccess HTTP/1.1" 404 2720
+Not Found: /config/master.key
+[01/Apr/2026 14:09:48] "GET /config/master.key HTTP/1.1" 404 2744
+Not Found: /wp-config.php~
+[01/Apr/2026 14:09:48] "GET /wp-config.php~ HTTP/1.1" 404 2735
+Not Found: /site/.env
+[01/Apr/2026 14:09:48] "GET /site/.env HTTP/1.1" 404 2720
+Not Found: /info
+[01/Apr/2026 14:09:48] "GET /info HTTP/1.1" 404 2705
+Not Found: /.env.staging.local
+[01/Apr/2026 14:09:48] "GET /.env.staging.local HTTP/1.1" 404 2747
+Not Found: /home/ubuntu/.kube/config
+[01/Apr/2026 14:09:48] "GET /home/ubuntu/.kube/config HTTP/1.1" 404 2765
+Not Found: /home/admin/.aws/credentials
+[01/Apr/2026 14:09:48] "GET /home/admin/.aws/credentials HTTP/1.1" 404 2774
+Not Found: /config/credentials.yml.enc
+[01/Apr/2026 14:09:48] "GET /config/credentials.yml.enc HTTP/1.1" 404 2771
+Not Found: /Procfile
+[01/Apr/2026 14:09:48] "GET /Procfile HTTP/1.1" 404 2717
+Not Found: /apikeys.json
+[01/Apr/2026 14:09:48] "GET /apikeys.json HTTP/1.1" 404 2729
+Not Found: /service-principal.json
+[01/Apr/2026 14:09:48] "GET /service-principal.json HTTP/1.1" 404 2759
+Not Found: /production_settings.py
+[01/Apr/2026 14:09:48] "GET /production_settings.py HTTP/1.1" 404 2759
+Not Found: /chunk.js
+[01/Apr/2026 14:09:48] "GET /chunk.js HTTP/1.1" 404 2717
+Not Found: /settings/base.py
+[01/Apr/2026 14:09:48] "GET /settings/base.py HTTP/1.1" 404 2741
+Not Found: /config/firebase.json
+[01/Apr/2026 14:09:48] "GET /config/firebase.json HTTP/1.1" 404 2753
+Not Found: /.env.ci
+[01/Apr/2026 14:09:48] "GET /.env.ci HTTP/1.1" 404 2714
+Not Found: /var/.env
+[01/Apr/2026 14:09:48] "GET /var/.env HTTP/1.1" 404 2717
+Not Found: /.gitlab-ci.yml
+[01/Apr/2026 14:09:48] "GET /.gitlab-ci.yml HTTP/1.1" 404 2735
+Not Found: /dev/.env
+[01/Apr/2026 14:09:48] "GET /dev/.env HTTP/1.1" 404 2717
+Not Found: /.firebaserc
+[01/Apr/2026 14:09:48] "GET /.firebaserc HTTP/1.1" 404 2726
+Not Found: /bootstrap.properties
+[01/Apr/2026 14:09:48] "GET /bootstrap.properties HTTP/1.1" 404 2753
+Not Found: /.env.vault
+[01/Apr/2026 14:09:48] "GET /.env.vault HTTP/1.1" 404 2723
+Not Found: /.github/workflows/build.yml
+[01/Apr/2026 14:09:48] "GET /.github/workflows/build.yml HTTP/1.1" 404 2774
+Not Found: /config.js
+[01/Apr/2026 14:09:48] "GET /config.js HTTP/1.1" 404 2720
+[01/Apr/2026 14:09:48] "GET /admin/config HTTP/1.1" 302 0
+[01/Apr/2026 14:09:48] "GET /admin/login/?next=/admin/config HTTP/1.1" 200 4193
+Not Found: /proc/1/environ
+[01/Apr/2026 14:09:48] "GET /proc/1/environ HTTP/1.1" 404 2735
+Not Found: /home/ubuntu/.ssh/authorized_keys
+[01/Apr/2026 14:09:48] "GET /home/ubuntu/.ssh/authorized_keys HTTP/1.1" 404 2789
+Not Found: /client/.env
+[01/Apr/2026 14:09:48] "GET /client/.env HTTP/1.1" 404 2726
+Not Found: /.env.sample
+[01/Apr/2026 14:09:48] "GET /.env.sample HTTP/1.1" 404 2726
+Not Found: /Pipfile
+[01/Apr/2026 14:09:49] "GET /Pipfile HTTP/1.1" 404 2714
+Not Found: /connectionStrings.config
+[01/Apr/2026 14:09:49] "GET /connectionStrings.config HTTP/1.1" 404 2765
+Not Found: /config/local.json
+[01/Apr/2026 14:09:49] "GET /config/local.json HTTP/1.1" 404 2744
+Not Found: /save/.env
+[01/Apr/2026 14:09:49] "GET /save/.env HTTP/1.1" 404 2720
+Not Found: /.env.old
+[01/Apr/2026 14:09:49] "GET /.env.old HTTP/1.1" 404 2717
+Not Found: /root/.vultr-cli.yaml
+[01/Apr/2026 14:09:49] "GET /root/.vultr-cli.yaml HTTP/1.1" 404 2753
+Not Found: /supabase/config.toml
+[01/Apr/2026 14:09:49] "GET /supabase/config.toml HTTP/1.1" 404 2753
+Not Found: /.streamlit/secrets.toml
+[01/Apr/2026 14:09:49] "GET /.streamlit/secrets.toml HTTP/1.1" 404 2762
+Not Found: /oci-config
+[01/Apr/2026 14:09:49] "GET /oci-config HTTP/1.1" 404 2723
+Not Found: /outputs.tf
+[01/Apr/2026 14:09:49] "GET /outputs.tf HTTP/1.1" 404 2723
+Not Found: /old/.env
+[01/Apr/2026 14:09:49] "GET /old/.env HTTP/1.1" 404 2717
+Not Found: /.env.copy
+[01/Apr/2026 14:09:49] "GET /.env.copy HTTP/1.1" 404 2720
+Not Found: /.streamlit/config.toml
+[01/Apr/2026 14:09:49] "GET /.streamlit/config.toml HTTP/1.1" 404 2759
+Not Found: /.env.php
+[01/Apr/2026 14:09:49] "GET /.env.php HTTP/1.1" 404 2717
+Not Found: /build/main.js
+[01/Apr/2026 14:09:49] "GET /build/main.js HTTP/1.1" 404 2732
+Not Found: /docker-compose.prod.yml
+[01/Apr/2026 14:09:49] "GET /docker-compose.prod.yml HTTP/1.1" 404 2762
+Not Found: /monorepo/.env
+[01/Apr/2026 14:09:49] "GET /monorepo/.env HTTP/1.1" 404 2732
+Not Found: /service-account.json
+[01/Apr/2026 14:09:49] "GET /service-account.json HTTP/1.1" 404 2753
+Not Found: /cdk.json
+[01/Apr/2026 14:09:49] "GET /cdk.json HTTP/1.1" 404 2717
+Not Found: /application-dev.properties
+[01/Apr/2026 14:09:49] "GET /application-dev.properties HTTP/1.1" 404 2771
+Not Found: /main.tf
+[01/Apr/2026 14:09:49] "GET /main.tf HTTP/1.1" 404 2714
+Not Found: /.azure/azureProfile.json
+[01/Apr/2026 14:09:49] "GET /.azure/azureProfile.json HTTP/1.1" 404 2765
+Not Found: /etc/environment
+[01/Apr/2026 14:09:49] "GET /etc/environment HTTP/1.1" 404 2738
+Not Found: /build/static/js/main.js
+[01/Apr/2026 14:09:49] "GET /build/static/js/main.js HTTP/1.1" 404 2762
+Not Found: /_next/static/chunks/pages/index.js
+[01/Apr/2026 14:09:49] "GET /_next/static/chunks/pages/index.js HTTP/1.1" 404 2795
+Not Found: /home/ubuntu/.ovh.conf
+[01/Apr/2026 14:09:49] "GET /home/ubuntu/.ovh.conf HTTP/1.1" 404 2756
+Not Found: /.env.template
+[01/Apr/2026 14:09:49] "GET /.env.template HTTP/1.1" 404 2732
+Not Found: /conf/settings.json
+[01/Apr/2026 14:09:49] "GET /conf/settings.json HTTP/1.1" 404 2747
+Not Found: /root/.aws/config
+[01/Apr/2026 14:09:49] "GET /root/.aws/config HTTP/1.1" 404 2741
+Not Found: /root/.oci/config
+[01/Apr/2026 14:09:49] "GET /root/.oci/config HTTP/1.1" 404 2741
+Not Found: /azure-credentials.json
+[01/Apr/2026 14:09:49] "GET /azure-credentials.json HTTP/1.1" 404 2759
+Not Found: /gcp-credentials.json
+[01/Apr/2026 14:09:49] "GET /gcp-credentials.json HTTP/1.1" 404 2753
+Not Found: /config/services.php
+[01/Apr/2026 14:09:49] "GET /config/services.php HTTP/1.1" 404 2750
+Not Found: /backup/.env
+[01/Apr/2026 14:09:49] "GET /backup/.env HTTP/1.1" 404 2726
+Not Found: /main.bundle.js
+[01/Apr/2026 14:09:49] "GET /main.bundle.js HTTP/1.1" 404 2735
+Not Found: /conf.py
+[01/Apr/2026 14:09:50] "GET /conf.py HTTP/1.1" 404 2714
+Not Found: /core/.env
+[01/Apr/2026 14:09:50] "GET /core/.env HTTP/1.1" 404 2720
+Not Found: /wp-config.php.txt
+[01/Apr/2026 14:09:50] "GET /wp-config.php.txt HTTP/1.1" 404 2744
+Not Found: /@fs/app/.env
+[01/Apr/2026 14:09:50] "GET /@fs/app/.env?raw?? HTTP/1.1" 404 2735
+Not Found: /@fs/root/.env
+[01/Apr/2026 14:09:50] "GET /@fs/root/.env?raw?? HTTP/1.1" 404 2738
+Not Found: /@fs/.env
+[01/Apr/2026 14:09:50] "GET /@fs/.env?raw?? HTTP/1.1" 404 2723
+Not Found: /@fs/etc/shadow
+[01/Apr/2026 14:09:50] "GET /@fs/etc/shadow?raw?? HTTP/1.1" 404 2741
+Not Found: /@fs/etc/environment
+[01/Apr/2026 14:09:50] "GET /@fs/etc/environment?raw?? HTTP/1.1" 404 2756
+Not Found: /@fs/../../../../../root/.env
+[01/Apr/2026 14:09:50] "GET /@fs/..%2f..%2f..%2f..%2f..%2froot/.env?raw?? HTTP/1.1" 404 2764
+Not Found: /@fs/../../../../../proc/self/environ
+[01/Apr/2026 14:09:50] "GET /@fs/..%2f..%2f..%2f..%2f..%2fproc/self/environ?raw?? HTTP/1.1" 404 2788
+Not Found: /@fs/../../../../../etc/passwd
+[01/Apr/2026 14:09:50] "GET /@fs/..%2f..%2f..%2f..%2f..%2fetc/passwd?raw?? HTTP/1.1" 404 2767
+Not Found: /@fs/..%2f..%2f..%2f..%2f..%2froot/.env
+[01/Apr/2026 14:09:50] "GET /@fs/..%252f..%252f..%252f..%252f..%252froot/.env?raw?? HTTP/1.1" 404 2823
+Not Found: /@fs/..%2f..%2f..%2f..%2f..%2fproc/self/environ
+[01/Apr/2026 14:09:50] "GET /@fs/..%252f..%252f..%252f..%252f..%252fproc/self/environ?raw?? HTTP/1.1" 404 2847
+Not Found: /@fs/..%2f..%2f..%2f..%2f..%2fapp/.env
+[01/Apr/2026 14:09:50] "GET /@fs/..%252f..%252f..%252f..%252f..%252fapp/.env?raw?? HTTP/1.1" 404 2820
+Not Found: /@fs/../../../../../root/.env
+[01/Apr/2026 14:09:50] "GET /@fs/../../../../../root/.env?raw?? HTTP/1.1" 404 2764
+[01/Apr/2026 14:37:41] "GET / HTTP/1.1" 302 0
+[01/Apr/2026 14:37:44] "GET /login/?next=/ HTTP/1.1" 200 15676
+[01/Apr/2026 14:39:03] "GET / HTTP/1.1" 302 0
+[01/Apr/2026 14:39:04] "GET /login/?next=/ HTTP/1.1" 200 15676
+Not Found: /favicon.ico
+[01/Apr/2026 14:39:05] "GET /favicon.ico HTTP/1.1" 404 2726
+[01/Apr/2026 14:39:10] "POST /login/?next=/ HTTP/1.1" 200 16008
+[01/Apr/2026 14:39:31] "POST /login/?next=/ HTTP/1.1" 200 16008
+[01/Apr/2026 14:39:49] "POST /login/?next=/ HTTP/1.1" 200 16008
+[01/Apr/2026 14:40:05] "POST /login/?next=/ HTTP/1.1" 302 0
+[01/Apr/2026 14:40:06] "GET /employee/ HTTP/1.1" 200 18330
+[01/Apr/2026 14:40:12] "GET /employee/profile/9/ HTTP/1.1" 200 15749
+[01/Apr/2026 14:40:21] "GET /employee/edit/9/ HTTP/1.1" 200 16994
+[01/Apr/2026 14:40:35] "POST /employee/edit/9/ HTTP/1.1" 302 0
+[01/Apr/2026 14:40:36] "GET /employee/list/ HTTP/1.1" 200 18729
+[01/Apr/2026 14:41:00] code 400, message Bad request version ('êê\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063')
+[01/Apr/2026 14:41:00] You're accessing the development server over HTTPS, but it only supports HTTP.
+[01/Apr/2026 14:41:01] code 400, message Bad request version ('ìÍ#L)P³AéëouôjPPfVê\x8b\x05\x14¯\x03¤')
+[01/Apr/2026 14:41:01] You're accessing the development server over HTTPS, but it only supports HTTP.
+[01/Apr/2026 14:41:04] "GET / HTTP/1.1" 302 0
+[01/Apr/2026 14:41:04] "GET /login/?next=/ HTTP/1.1" 200 15676
+[01/Apr/2026 14:41:20] "POST /login/?next=/ HTTP/1.1" 200 16008
+[01/Apr/2026 14:41:57] "GET /employee/ HTTP/1.1" 200 18330
+[01/Apr/2026 14:42:00] "GET /employee/profile/9/ HTTP/1.1" 200 15748
+[01/Apr/2026 14:42:03] "GET /employee/edit/9/ HTTP/1.1" 200 16993
+[01/Apr/2026 14:42:07] "POST /employee/edit/9/ HTTP/1.1" 302 0
+[01/Apr/2026 14:42:07] "GET /employee/list/ HTTP/1.1" 200 18729
+[01/Apr/2026 14:42:22] "GET / HTTP/1.1" 302 0
+[01/Apr/2026 14:42:22] "GET /login/?next=/ HTTP/1.1" 200 15676
+[01/Apr/2026 14:42:39] "POST /login/?next=/ HTTP/1.1" 200 16008
+[01/Apr/2026 14:42:45] "GET /login/?next=/ HTTP/1.1" 200 15676
+[01/Apr/2026 14:42:56] "GET /employee/list/ HTTP/1.1" 200 18336
+[01/Apr/2026 14:43:03] "GET /employee/ HTTP/1.1" 200 18330
+[01/Apr/2026 14:43:05] "POST /logout/ HTTP/1.1" 302 0
+[01/Apr/2026 14:43:06] "GET /login/ HTTP/1.1" 200 15676
+[01/Apr/2026 14:43:17] "GET /employee/list/ HTTP/1.1" 302 0
+[01/Apr/2026 14:43:18] "GET /employee/ HTTP/1.1" 302 0
+[01/Apr/2026 14:43:18] "GET /login/?next=/employee/ HTTP/1.1" 200 15676
+[01/Apr/2026 14:43:23] "GET /employee/ HTTP/1.1" 302 0
+[01/Apr/2026 14:43:23] "GET /login/?next=/employee/ HTTP/1.1" 200 15676
+[01/Apr/2026 14:43:38] "POST /login/?next=/employee/ HTTP/1.1" 302 0
+[01/Apr/2026 14:43:39] "GET /employee/ HTTP/1.1" 200 18330
+[01/Apr/2026 14:44:05] "GET / HTTP/1.1" 302 0
+[01/Apr/2026 14:44:06] "GET /login/?next=/ HTTP/1.1" 200 15676
+[01/Apr/2026 14:44:13] "GET /employee/profile/9/ HTTP/1.1" 200 15748
+[01/Apr/2026 14:44:51] "POST /login/?next=/ HTTP/1.1" 200 16008
+[01/Apr/2026 14:45:18] "POST /login/?next=/ HTTP/1.1" 200 16008
+[01/Apr/2026 14:45:26] "GET /employee/list/ HTTP/1.1" 200 18336
+[01/Apr/2026 14:45:30] "GET /employee/add/ HTTP/1.1" 200 16432
+[01/Apr/2026 14:46:15] "POST /employee/add/ HTTP/1.1" 302 0
+[01/Apr/2026 14:46:15] "GET /employee/list/ HTTP/1.1" 200 19732
+[01/Apr/2026 14:46:36] "POST /login/?next=/ HTTP/1.1" 302 0
+[01/Apr/2026 14:46:37] "GET /employee/me/ HTTP/1.1" 200 14693
+[01/Apr/2026 14:46:45] "GET /employee/me/update-status/ HTTP/1.1" 200 13875
+[01/Apr/2026 14:46:50] "POST /employee/me/update-status/ HTTP/1.1" 302 0
+[01/Apr/2026 14:46:51] "GET /employee/me/ HTTP/1.1" 200 15167
+[01/Apr/2026 14:46:56] "GET /employee/list/ HTTP/1.1" 200 19330
+[01/Apr/2026 14:47:00] "GET /employee/list/ HTTP/1.1" 200 19330
+[01/Apr/2026 14:47:03] "GET /employee/ HTTP/1.1" 200 19218
+[01/Apr/2026 14:47:24,984] - Broken pipe from ('152.57.229.176', 35244)
+[01/Apr/2026 14:47:36] "GET /logout/ HTTP/1.1" 302 0
+[01/Apr/2026 14:47:36] "GET /login/ HTTP/1.1" 200 15676
+[01/Apr/2026 14:48:02] "GET / HTTP/1.1" 302 0
+[01/Apr/2026 14:48:02] "GET /login/?next=/ HTTP/1.1" 200 15676
+Not Found: /favicon.ico
+[01/Apr/2026 14:48:03] "GET /favicon.ico HTTP/1.1" 404 2726
+[01/Apr/2026 15:07:01] code 400, message Bad request version ('\x0eûÎ\x1b9¡àßÑ\x9f\x9dÇêÊ')
+[01/Apr/2026 15:07:01] You're accessing the development server over HTTPS, but it only supports HTTP.
+[01/Apr/2026 15:07:04] "GET / HTTP/1.1" 302 0
+[01/Apr/2026 16:00:38] "GET / HTTP/1.1" 302 0
+[01/Apr/2026 16:00:38] "GET /login/?next=/ HTTP/1.1" 200 15676
+Not Found: /favicon.ico
+[01/Apr/2026 16:00:39] "GET /favicon.ico HTTP/1.1" 404 2726
+[01/Apr/2026 16:00:55] "GET / HTTP/1.1" 302 0
+[01/Apr/2026 16:00:56] "GET /login/?next=/ HTTP/1.1" 200 15676
+Not Found: /favicon.ico
+[01/Apr/2026 16:01:00] "GET /favicon.ico HTTP/1.1" 404 2726
+[01/Apr/2026 16:01:07] "GET /login/?next=%2F HTTP/1.1" 200 15676
+[01/Apr/2026 16:01:07] "GET /login/?next=/ HTTP/1.1" 200 15676
+Not Found: /favicon.ico
+[01/Apr/2026 16:01:10] "GET /favicon.ico HTTP/1.1" 404 2726
+Not Found: /favicon.ico
+[01/Apr/2026 16:01:11] "GET /favicon.ico HTTP/1.1" 404 2726
+[01/Apr/2026 16:05:24,622] - Broken pipe from ('152.59.204.21', 18731)
+[01/Apr/2026 16:48:00] "POST /login/ HTTP/1.1" 200 16008
+[01/Apr/2026 16:48:14] "POST /employee/edit/9/ HTTP/1.1" 200 17071
+[01/Apr/2026 16:48:18] "POST /employee/edit/9/ HTTP/1.1" 302 0
+[01/Apr/2026 16:48:19] "GET /employee/list/ HTTP/1.1" 200 19723
+[01/Apr/2026 16:48:39] "GET /employee/profile/10/ HTTP/1.1" 200 15736
+[01/Apr/2026 16:48:55] "POST /login/ HTTP/1.1" 302 0
+[01/Apr/2026 16:48:56] "GET /employee/me/ HTTP/1.1" 200 14696
+[01/Apr/2026 16:49:11] "GET /logout/ HTTP/1.1" 302 0
+[01/Apr/2026 16:49:12] "GET /login/ HTTP/1.1" 200 15676
+[01/Apr/2026 16:49:18] "POST /logout/ HTTP/1.1" 302 0
+[01/Apr/2026 16:49:19] "GET /login/ HTTP/1.1" 200 15676
+[01/Apr/2026 16:54:15] "POST /login/ HTTP/1.1" 302 0
+[01/Apr/2026 16:54:16] "GET /employee/me/ HTTP/1.1" 200 14696
+[01/Apr/2026 16:54:20] "GET /employee/me/update-status/ HTTP/1.1" 200 13878
+[01/Apr/2026 16:54:26] "POST /employee/me/update-status/ HTTP/1.1" 302 0
+[01/Apr/2026 16:54:27] "GET /employee/me/ HTTP/1.1" 200 15164
+[01/Apr/2026 16:56:34] code 400, message Bad request version ('\x19Nq')
+[01/Apr/2026 16:56:34] You're accessing the development server over HTTPS, but it only supports HTTP.
+[01/Apr/2026 16:56:34] code 400, message Bad request syntax ('MGLNDD_3.17.72.126_8000')
+[01/Apr/2026 16:56:34] "MGLNDD_3.17.72.126_8000" 400 -
+[01/Apr/2026 17:14:34] "POST /login/ HTTP/1.1" 302 0
+[01/Apr/2026 17:14:35] "GET /employee/ HTTP/1.1" 200 19217
+[01/Apr/2026 17:14:51] "GET /employee/me/update-status/ HTTP/1.1" 200 13875
+[01/Apr/2026 17:14:55] "POST /employee/me/update-status/ HTTP/1.1" 302 0
+[01/Apr/2026 17:14:56] "GET /employee/me/ HTTP/1.1" 200 15168
+[01/Apr/2026 17:15:02] "GET /employee/ HTTP/1.1" 200 19221
+[02/Apr/2026 00:43:50] "GET / HTTP/1.1" 302 0
+[02/Apr/2026 00:44:23] "GET / HTTP/1.1" 302 0
+[02/Apr/2026 00:44:23] "GET /login/?next=/ HTTP/1.1" 200 15676
+[02/Apr/2026 00:44:23,693] - Broken pipe from ('64.62.156.161', 5259)
+[02/Apr/2026 00:44:30] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00ò\x01\x00\x00î\x03\x03\x17Y\x18\x80ð\x95Äã¤¯eu\x95²æwüÀ\x86')
+[02/Apr/2026 00:44:30] You're accessing the development server over HTTPS, but it only supports HTTP.
+[02/Apr/2026 00:44:31] "GET /login/?next=/ HTTP/1.1" 200 15676
+Not Found: /favicon.ico
+[02/Apr/2026 00:44:54] "GET /favicon.ico HTTP/1.1" 404 2726
+Invalid HTTP_HOST header: 'api.ipify.org'. You may need to add 'api.ipify.org' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'api.ipify.org'. You may need to add 'api.ipify.org' to ALLOWED_HOSTS.
+Bad Request: /http:/api.ipify.org/
+[02/Apr/2026 00:45:37] "GET http://api.ipify.org/?format=json HTTP/1.1" 400 64176
+Not Found: /anthropic/v1/models
+[02/Apr/2026 01:35:52] "GET /anthropic/v1/models HTTP/1.1" 404 2750
+Not Found: /anthropic/v1/models
+[02/Apr/2026 01:35:52] "GET /anthropic/v1/models HTTP/1.1" 404 2750
+Not Found: /anthropic/v1/models
+[02/Apr/2026 01:35:52] "GET /anthropic/v1/models HTTP/1.1" 404 2750
+Not Found: /anthropic/v1/models
+[02/Apr/2026 01:35:52] "GET /anthropic/v1/models HTTP/1.1" 404 2750
+Not Found: /anthropic/v1/models
+[02/Apr/2026 01:35:52] "GET /anthropic/v1/models HTTP/1.1" 404 2750
+Not Found: /anthropic/v1/models
+[02/Apr/2026 01:35:52] "GET /anthropic/v1/models HTTP/1.1" 404 2750
+Not Found: /anthropic/v1/models
+[02/Apr/2026 01:35:52] "GET /anthropic/v1/models HTTP/1.1" 404 2750
+Not Found: /anthropic/v1/models
+[02/Apr/2026 01:35:52] "GET /anthropic/v1/models HTTP/1.1" 404 2750
+[02/Apr/2026 04:25:16] "GET /employee/list/ HTTP/1.1" 200 19333
+[02/Apr/2026 04:25:18] "GET /employee/add/ HTTP/1.1" 200 16432
+[02/Apr/2026 05:27:20] "GET / HTTP/1.1" 302 0
+[02/Apr/2026 05:27:20] "GET /login/?next=/ HTTP/1.1" 200 15676
+[02/Apr/2026 06:25:31] "GET /employee/ HTTP/1.1" 200 19221
+[02/Apr/2026 06:25:34] "GET /employee/add/ HTTP/1.1" 200 16432
+[02/Apr/2026 06:27:27] "GET /employee/list/ HTTP/1.1" 200 19333
+[02/Apr/2026 06:27:28] "GET /employee/add/ HTTP/1.1" 200 16432
+[02/Apr/2026 06:27:33] "GET /employee/list/ HTTP/1.1" 200 19333
+[02/Apr/2026 06:27:40] "GET /employee/edit/10/ HTTP/1.1" 200 16994
+[02/Apr/2026 06:27:55] "GET / HTTP/1.1" 302 0
+[02/Apr/2026 06:28:00] "GET /login/?next=/ HTTP/1.1" 200 15676
+[02/Apr/2026 06:28:00] code 400, message Bad request syntax ('MGLNDD_3.17.72.126_8000')
+[02/Apr/2026 06:28:00] "MGLNDD_3.17.72.126_8000" 400 -
+[02/Apr/2026 07:15:41] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03')
+[02/Apr/2026 07:15:41] You're accessing the development server over HTTPS, but it only supports HTTP.
+[02/Apr/2026 07:15:42] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03\x81ñÝ\x91mÖjä¯^=«êò\x9b\\\x03ÂG\\\x05\x05`$Þ^\x14*\x95\x9ag;\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+[02/Apr/2026 07:15:42] You're accessing the development server over HTTPS, but it only supports HTTP.
+[02/Apr/2026 07:15:42] "GET / HTTP/1.1" 302 0
+[02/Apr/2026 07:15:42] "GET /login/?next=/ HTTP/1.1" 200 15676
+[02/Apr/2026 07:15:42] "GET /login HTTP/1.1" 301 0
+[02/Apr/2026 07:15:43] "GET /login/ HTTP/1.1" 200 15676
+Not Found: /AGENTS.md
+[02/Apr/2026 07:15:43] "GET /AGENTS.md HTTP/1.1" 404 2720
+[02/Apr/2026 07:31:26] "GET / HTTP/1.1" 302 0
+[02/Apr/2026 07:31:26] "GET /login/?next=/ HTTP/1.1" 200 15676
+Invalid HTTP_HOST header: 'ip-172-31-42-223.us-east-2.compute.internal:8000'. You may need to add 'ip-172-31-42-223.us-east-2.compute.internal' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'ip-172-31-42-223.us-east-2.compute.internal:8000'. You may need to add 'ip-172-31-42-223.us-east-2.compute.internal' to ALLOWED_HOSTS.
+Bad Request: /
+[02/Apr/2026 07:32:39] "GET / HTTP/1.0" 400 63514
+[02/Apr/2026 07:32:39] "GET / HTTP/1.1" 302 0
+Not Found: /favicon.ico
+[02/Apr/2026 07:32:39] "GET /favicon.ico HTTP/1.1" 404 2726
+[02/Apr/2026 07:32:39] "GET /login/?next=%2F HTTP/1.1" 200 15676
+[02/Apr/2026 07:33:01] "GET / HTTP/1.1" 302 0
+[02/Apr/2026 07:34:37] code 400, message Bad request version ('À\x14À')
+[02/Apr/2026 07:34:37] You're accessing the development server over HTTPS, but it only supports HTTP.
+[02/Apr/2026 07:35:45] code 400, message Bad request syntax ('SSH-2.0-Go')
+[02/Apr/2026 07:35:45] "SSH-2.0-Go" 400 -
+[02/Apr/2026 07:37:53] code 400, message Bad request version ('À\x14À')
+[02/Apr/2026 07:37:53] You're accessing the development server over HTTPS, but it only supports HTTP.
+[02/Apr/2026 07:49:34] "GET /employee/ HTTP/1.1" 200 19221
+[02/Apr/2026 07:49:39] "GET /employee/add/ HTTP/1.1" 200 16432
+[02/Apr/2026 07:50:27] "POST /employee/add/ HTTP/1.1" 302 0
+[02/Apr/2026 07:50:28] "GET /employee/list/ HTTP/1.1" 200 20706
+[02/Apr/2026 07:50:36] "POST /logout/ HTTP/1.1" 302 0
+[02/Apr/2026 07:50:36] "GET /login/ HTTP/1.1" 200 15676
+[02/Apr/2026 07:50:51] "GET /employee/profile/11/ HTTP/1.1" 200 15703
+[02/Apr/2026 07:51:13] "POST /login/ HTTP/1.1" 302 0
+[02/Apr/2026 07:51:13] "GET /employee/me/ HTTP/1.1" 200 14678
+[02/Apr/2026 07:58:04] "GET /employee/edit/11/ HTTP/1.1" 200 16971
+[02/Apr/2026 07:58:08] "GET /employee/list/ HTTP/1.1" 200 20311
+[02/Apr/2026 07:58:13] "GET /employee/delete/11/ HTTP/1.1" 200 14479
+[02/Apr/2026 07:58:25] "GET /employee/list/ HTTP/1.1" 200 20311
+[02/Apr/2026 07:58:32] "GET /employee/delete/9/ HTTP/1.1" 200 14500
+[02/Apr/2026 07:58:34] "POST /employee/delete/9/ HTTP/1.1" 302 0
+[02/Apr/2026 07:58:35] "GET /employee/list/ HTTP/1.1" 200 20691
+[02/Apr/2026 07:58:39] "GET /employee/list/ HTTP/1.1" 200 20311
+[02/Apr/2026 07:58:42] "GET /employee/delete/9/ HTTP/1.1" 200 14500
+[02/Apr/2026 07:58:45] "POST /employee/delete/9/ HTTP/1.1" 302 0
+[02/Apr/2026 07:58:45] "GET /employee/list/ HTTP/1.1" 200 19703
+[02/Apr/2026 07:58:58] "GET /employee/delete/10/ HTTP/1.1" 200 14501
+[02/Apr/2026 07:59:02] "POST /employee/delete/10/ HTTP/1.1" 302 0
+[02/Apr/2026 07:59:02] "GET /employee/list/ HTTP/1.1" 200 19703
+[02/Apr/2026 07:59:09] "GET /employee/list/ HTTP/1.1" 200 19323
+[02/Apr/2026 07:59:13] "GET /employee/delete/10/ HTTP/1.1" 200 14501
+[02/Apr/2026 07:59:18] "GET /employee/delete/10/ HTTP/1.1" 200 14501
+[02/Apr/2026 07:59:20] "POST /employee/delete/10/ HTTP/1.1" 302 0
+[02/Apr/2026 07:59:21] "GET /employee/list/ HTTP/1.1" 200 18706
+[02/Apr/2026 08:01:04] "GET /employee/add/ HTTP/1.1" 200 16432
+[02/Apr/2026 08:01:12] "GET /employee/me/ HTTP/1.1" 200 14678
+[02/Apr/2026 08:01:22] "POST /logout/ HTTP/1.1" 302 0
+[02/Apr/2026 08:01:23] "GET /login/ HTTP/1.1" 200 15676
+[02/Apr/2026 08:01:45] "POST /login/ HTTP/1.1" 200 16008
+[02/Apr/2026 08:40:02] "GET /employee/list/ HTTP/1.1" 200 18326
+[02/Apr/2026 10:54:12] "GET /employee/add/ HTTP/1.1" 200 16432
+[02/Apr/2026 10:54:42] "GET /employee/list/ HTTP/1.1" 200 18326
+[02/Apr/2026 10:54:46] "GET /employee/profile/11/ HTTP/1.1" 200 15703
+[02/Apr/2026 10:54:53] "GET /employee/list/ HTTP/1.1" 200 18326
+Not Found: /c/
+[02/Apr/2026 11:10:19] "GET /c/ HTTP/1.1" 404 2699
+[02/Apr/2026 22:48:49] code 400, message Bad request syntax ('\x00\x00\x00TZ\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x04\x010I\x00\x00\x00\x00\x06\x00\x1f')
+[02/Apr/2026 22:48:49] "   TZ          0I     " 400 -
+[03/Apr/2026 00:16:36] code 400, message Bad request syntax ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03@I\x9b_,*¥#')
+[03/Apr/2026 00:16:36] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Apr/2026 00:16:36] code 400, message Bad request syntax ('MGLNDD_3.17.72.126_8000')
+[03/Apr/2026 00:16:36] "MGLNDD_3.17.72.126_8000" 400 -
+[03/Apr/2026 00:46:48] "GET / HTTP/1.1" 302 0
+[03/Apr/2026 00:46:49] "GET /login/?next=/ HTTP/1.1" 200 15676
+Not Found: /login/favicon.ico
+[03/Apr/2026 00:46:49] "GET /login/favicon.ico HTTP/1.1" 404 2739
+Invalid HTTP_HOST header: '112.124.42.80:63435'. You may need to add '112.124.42.80' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '112.124.42.80:63435'. You may need to add '112.124.42.80' to ALLOWED_HOSTS.
+Bad Request: /http:/112.124.42.80:63435/
+[03/Apr/2026 01:51:59] "HEAD http://112.124.42.80:63435/ HTTP/1.1" 400 0
+Not Found: /favicon.ico
+[03/Apr/2026 04:39:31] "GET /favicon.ico HTTP/1.1" 404 2726
+[03/Apr/2026 04:39:36] "GET /employee/list/ HTTP/1.1" 200 18326
+[03/Apr/2026 04:49:06] "GET /employee/profile/11/ HTTP/1.1" 200 15703
+[03/Apr/2026 05:09:40] "GET / HTTP/1.1" 302 0
+[03/Apr/2026 05:09:40] "GET /login/?next=/ HTTP/1.1" 200 15676
+[03/Apr/2026 05:11:51] "GET / HTTP/1.1" 302 0
+[03/Apr/2026 05:13:07] code 400, message Bad request version ('À\x14À')
+[03/Apr/2026 05:13:07] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Apr/2026 05:15:27] code 400, message Bad request syntax ('SSH-2.0-Go')
+[03/Apr/2026 05:15:27] "SSH-2.0-Go" 400 -
+[03/Apr/2026 05:16:16] code 400, message Bad request version ('À\x14À')
+[03/Apr/2026 05:16:16] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Apr/2026 05:25:30] "GET /employee/ HTTP/1.1" 200 18322
+[03/Apr/2026 05:38:49] "GET /employee/ HTTP/1.1" 200 18322
+[03/Apr/2026 05:38:52] "GET /employee/ HTTP/1.1" 200 18322
+[03/Apr/2026 05:39:18] "GET / HTTP/1.1" 302 0
+[03/Apr/2026 05:39:18] "GET /login/?next=/ HTTP/1.1" 200 15676
+[03/Apr/2026 05:39:26] "GET / HTTP/1.1" 302 0
+[03/Apr/2026 05:39:27] "GET /employee/ HTTP/1.1" 200 18322
+[03/Apr/2026 07:46:11] code 400, message Bad request version ('À#À¬À®À+À')
+[03/Apr/2026 07:46:11] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Apr/2026 08:23:11] "GET /employee/list/ HTTP/1.1" 200 18326
+[03/Apr/2026 08:31:14] "GET /employee/list/?search=&department=&status=Inactive&gender= HTTP/1.1" 200 17185
+[03/Apr/2026 08:46:35] "GET /employee/list/?search=&department=&status=Inactive&gender=Male HTTP/1.1" 200 17193
+[03/Apr/2026 08:46:40] "GET /employee/list/?search=&department=&status=&gender=Male HTTP/1.1" 200 18334
+[03/Apr/2026 08:46:49] "GET /employee/list/?search=&department=&status=Active&gender=Male HTTP/1.1" 200 18342
+[03/Apr/2026 08:46:54] "GET /employee/list/?search=&department=&status=Inactive&gender=Male HTTP/1.1" 200 17193
+[03/Apr/2026 08:47:06] "GET /employee/list/?search=&department=&status=Inactive&gender=Male HTTP/1.1" 200 17193
+[03/Apr/2026 08:47:35] "GET / HTTP/1.1" 302 0
+[03/Apr/2026 08:47:35] "GET /employee/ HTTP/1.1" 200 18322
+[03/Apr/2026 08:47:39] "POST /logout/ HTTP/1.1" 302 0
+[03/Apr/2026 08:47:39] "GET /login/ HTTP/1.1" 200 15676
+[03/Apr/2026 08:47:56] "GET /employee/ HTTP/1.1" 302 0
+[03/Apr/2026 08:47:57] "GET /login/?next=/employee/ HTTP/1.1" 200 15676
+[03/Apr/2026 09:04:39] code 400, message Bad request version ('À#À¬À®À+À')
+[03/Apr/2026 09:04:39] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Apr/2026 09:04:42] "GET / HTTP/1.1" 302 0
+[03/Apr/2026 09:07:12] "GET /login/?next=/ HTTP/1.1" 200 15676
+Not Found: /favicon.ico
+[03/Apr/2026 09:07:32] "GET /favicon.ico HTTP/1.1" 404 2726
+[03/Apr/2026 09:14:40] code 400, message Bad request version ('À\x14À')
+[03/Apr/2026 09:14:40] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Apr/2026 09:14:48] code 400, message Bad request syntax ('SSH-2.0-Go')
+[03/Apr/2026 09:14:48] "SSH-2.0-Go" 400 -
+[03/Apr/2026 09:15:09] code 400, message Bad request version ('À\x14À')
+[03/Apr/2026 09:15:09] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Apr/2026 10:21:28] "POST /login/ HTTP/1.1" 200 16008
+[03/Apr/2026 15:32:16] "GET / HTTP/1.1" 302 0
+[03/Apr/2026 15:32:16] "GET /login/?next=/ HTTP/1.1" 200 15676
+Invalid HTTP_HOST header: 'ip-172-31-42-223.us-east-2.compute.internal:8000'. You may need to add 'ip-172-31-42-223.us-east-2.compute.internal' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'ip-172-31-42-223.us-east-2.compute.internal:8000'. You may need to add 'ip-172-31-42-223.us-east-2.compute.internal' to ALLOWED_HOSTS.
+Bad Request: /
+[03/Apr/2026 15:32:32] "GET / HTTP/1.0" 400 63514
+Invalid HTTP_HOST header: 'ip-172-31-42-223.us-east-2.compute.internal:8000'. You may need to add 'ip-172-31-42-223.us-east-2.compute.internal' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'ip-172-31-42-223.us-east-2.compute.internal:8000'. You may need to add 'ip-172-31-42-223.us-east-2.compute.internal' to ALLOWED_HOSTS.
+Bad Request: /
+[03/Apr/2026 22:47:38] "GET / HTTP/1.0" 400 63512
+[03/Apr/2026 22:47:43] code 400, message Bad HTTP/0.9 request type ('l\x00')
+[03/Apr/2026 22:47:43] "l          " 400 -
+Invalid HTTP_HOST header: 'ip-172-31-42-223.us-east-2.compute.internal:8000'. You may need to add 'ip-172-31-42-223.us-east-2.compute.internal' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'ip-172-31-42-223.us-east-2.compute.internal:8000'. You may need to add 'ip-172-31-42-223.us-east-2.compute.internal' to ALLOWED_HOSTS.
+Bad Request: /nice ports,/Trinity.txt.bak
+[03/Apr/2026 22:47:44] "GET /nice%20ports%2C/Tri%6Eity.txt%2ebak HTTP/1.0" 400 63736
+[03/Apr/2026 22:47:44] code 400, message Bad request syntax ('\x05\x04\x00\x01\x02\x80\x05\x01\x00\x03')
+[03/Apr/2026 22:47:44] "  " 400 -
+[03/Apr/2026 22:47:49] code 400, message Bad request syntax ('\x04\x01\x00\x16\x7f\x00\x00\x01root\x00')
+[03/Apr/2026 22:47:49] "   root " 400 -
+Invalid HTTP_HOST header: 'ip-172-31-42-223.us-east-2.compute.internal:8000'. You may need to add 'ip-172-31-42-223.us-east-2.compute.internal' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'ip-172-31-42-223.us-east-2.compute.internal:8000'. You may need to add 'ip-172-31-42-223.us-east-2.compute.internal' to ALLOWED_HOSTS.
+Bad Request: /
+[03/Apr/2026 22:47:49] "OPTIONS / HTTP/1.0" 400 63540
+[03/Apr/2026 22:47:54] code 400, message Bad request version ('\x00\x01\x97|\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')
+[03/Apr/2026 22:47:54] "  (rþ          |                    " 400 -
+[03/Apr/2026 22:47:59] code 400, message Bad HTTP/0.9 request type ('\x00')
+[03/Apr/2026 22:47:59] "          versionbind   " 400 -
+[03/Apr/2026 22:47:59] code 400, message Bad request syntax ('HELP')
+[03/Apr/2026 22:47:59] "HELP" 400 -
+[03/Apr/2026 22:47:59] code 400, message Bad request syntax ('\x16\x03\x00\x00S\x01\x00\x00O\x03\x00?G×÷º,îê²`~ó\x00ý\x82{¹Õ\x96Èw\x9bæÄÛ<=Ûoï\x10n\x00\x00(\x00\x16\x00\x13\x00')
+[03/Apr/2026 22:47:59] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Apr/2026 22:47:59] code 400, message Bad request version ('\x00/\x00')
+[03/Apr/2026 22:47:59] You're accessing the development server over HTTPS, but it only supports HTTP.
+[03/Apr/2026 22:48:04] code 400, message Bad request version ('0.12\x00')
+[03/Apr/2026 22:48:04] "   ¤ÿSMBr    @              @     PC NETWORK PROGRAM 1.0 MICROSOFT NETWORKS 1.03 MICROSOFT NETWORKS 3.0 LANMAN1.0 LM1.2X002 Samba NT LANMAN 1.0 NT LM 0.12 " 400 -
+[03/Apr/2026 22:48:13] code 400, message Bad request version ('À\x14À')
+[03/Apr/2026 22:48:13] You're accessing the development server over HTTPS, but it only supports HTTP.
+[04/Apr/2026 05:50:34] "GET / HTTP/1.1" 302 0
+[04/Apr/2026 05:50:34] "GET /login/?next=/ HTTP/1.1" 200 15676
+[04/Apr/2026 05:51:51] "GET / HTTP/1.1" 302 0
+[04/Apr/2026 05:53:29] code 400, message Bad request version ('À\x14À')
+[04/Apr/2026 05:53:29] You're accessing the development server over HTTPS, but it only supports HTTP.
+[04/Apr/2026 05:54:51] code 400, message Bad request syntax ('SSH-2.0-Go')
+[04/Apr/2026 05:54:51] "SSH-2.0-Go" 400 -
+[04/Apr/2026 05:56:01] code 400, message Bad request syntax ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03\x89sI¤É"o\x9bÙjð<\x12#Å;à')
+[04/Apr/2026 05:56:01] You're accessing the development server over HTTPS, but it only supports HTTP.
+[04/Apr/2026 09:27:28] code 400, message Bad HTTP/0.9 request type ('\x00\x00\x00')
+[04/Apr/2026 09:27:28] "    c                           " 400 -
+[04/Apr/2026 09:27:29] code 400, message Bad HTTP/0.9 request type ('\x00\x00\x00')
+[04/Apr/2026 09:27:29] "    c                           " 400 -
+[04/Apr/2026 11:59:39] code 400, message Bad request version ('À\x14À')
+[04/Apr/2026 11:59:39] You're accessing the development server over HTTPS, but it only supports HTTP.
+[04/Apr/2026 18:18:02] "GET / HTTP/1.1" 302 0
+[04/Apr/2026 19:01:53] code 400, message Bad request version ('2ÒÑ\x9a')
+[04/Apr/2026 19:01:53] You're accessing the development server over HTTPS, but it only supports HTTP.
+[04/Apr/2026 19:01:56] "GET / HTTP/1.1" 302 0
+Not Found: /favicon.ico
+[04/Apr/2026 19:04:32] "GET /favicon.ico HTTP/1.1" 404 2726
+[05/Apr/2026 02:49:02] "GET / HTTP/1.1" 302 0
+[05/Apr/2026 02:49:03] "GET /login/?next=/ HTTP/1.1" 200 15676
+Not Found: /login/favicon.ico
+[05/Apr/2026 02:49:04] "GET /login/favicon.ico HTTP/1.1" 404 2739
+[05/Apr/2026 06:06:34] "GET / HTTP/1.1" 302 0
+[05/Apr/2026 06:06:34] "GET /login/?next=/ HTTP/1.1" 200 15676
+[05/Apr/2026 06:08:29] "GET / HTTP/1.1" 302 0
+[05/Apr/2026 06:09:48] code 400, message Bad request version ('À\x14À')
+[05/Apr/2026 06:09:48] You're accessing the development server over HTTPS, but it only supports HTTP.
+[05/Apr/2026 06:12:22] code 400, message Bad request version ('À\x14À')
+[05/Apr/2026 06:12:22] You're accessing the development server over HTTPS, but it only supports HTTP.
+[05/Apr/2026 10:51:10] code 400, message Bad request version ('À#À¬À®À+À')
+[05/Apr/2026 10:51:10] You're accessing the development server over HTTPS, but it only supports HTTP.
+Invalid HTTP_HOST header: 'proxy.proxiesfood.com:443'. You may need to add 'proxy.proxiesfood.com' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'proxy.proxiesfood.com:443'. You may need to add 'proxy.proxiesfood.com' to ALLOWED_HOSTS.
+Bad Request: /proxy.proxiesfood.com:443
+[05/Apr/2026 11:22:58] "CONNECT proxy.proxiesfood.com:443 HTTP/1.1" 400 63709
+Invalid HTTP_HOST header: 'proxy.proxiesfood.com:443'. You may need to add 'proxy.proxiesfood.com' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/utils/deprecation.py", line 133, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/college_project/venv/lib/python3.12/site-packages/django/http/request.py", line 150, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'proxy.proxiesfood.com:443'. You may need to add 'proxy.proxiesfood.com' to ALLOWED_HOSTS.
+Bad Request: /proxy.proxiesfood.com:443
+[05/Apr/2026 11:22:58] "CONNECT proxy.proxiesfood.com:443 HTTP/1.1" 400 63709
+[05/Apr/2026 11:23:05,967] - Broken pipe from ('185.93.89.191', 38589)
+[05/Apr/2026 11:23:13,967] - Broken pipe from ('185.93.89.191', 14269)
+[05/Apr/2026 13:01:44] code 400, message Bad request version ('À\x14À')
+[05/Apr/2026 13:01:44] You're accessing the development server over HTTPS, but it only supports HTTP.
+[05/Apr/2026 13:01:44] code 400, message Bad request syntax ('MGLNDD_3.17.72.126_8000')
+[05/Apr/2026 13:01:44] "MGLNDD_3.17.72.126_8000" 400 -
+[06/Apr/2026 04:15:14] "POST /login/ HTTP/1.1" 200 16008
+Not Found: /favicon.ico
+[06/Apr/2026 04:15:14] "GET /favicon.ico HTTP/1.1" 404 2726
+[06/Apr/2026 04:15:23] "POST /login/ HTTP/1.1" 302 0
+[06/Apr/2026 04:15:23] "GET /employee/ HTTP/1.1" 200 18322
+[06/Apr/2026 04:47:44] "GET / HTTP/1.1" 302 0
+[06/Apr/2026 04:47:44] "GET /login/?next=/ HTTP/1.1" 200 15676
+[06/Apr/2026 04:48:55] "GET / HTTP/1.1" 302 0
+[06/Apr/2026 04:49:50] code 400, message Bad HTTP/0.9 request type ("\x16\x03\x01\x00{\x01\x00\x00w\x03\x03²ï\x97ÂÞW_«'Ø\x9fYõ¤Ñè'¶-ª\x91¦©yO\x87Ô\x90úM\x94½\x00\x00\x1aÀ/À+À\x11À\x07À\x13À")
+[06/Apr/2026 04:49:50] You're accessing the development server over HTTPS, but it only supports HTTP.
+[06/Apr/2026 04:52:29] code 400, message Bad request version ('À\x14À')
+[06/Apr/2026 04:52:29] You're accessing the development server over HTTPS, but it only supports HTTP.
+/home/ubuntu/college_project/employee/models.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+April 01, 2026 - 13:50:01
+Django version 4.2.7, using settings 'college_project.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+Watching for file changes with StatReloader
+[2026-04-08 05:27:07 +0000] [45262] [INFO] Starting gunicorn 25.3.0
+[2026-04-08 05:27:07 +0000] [45262] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2026-04-08 05:27:07 +0000] [45262] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2026-04-08 05:27:08 +0000] [45262] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2026-04-08 05:27:08 +0000] [45262] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2026-04-08 05:27:09 +0000] [45262] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2026-04-08 05:27:09 +0000] [45262] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2026-04-08 05:27:10 +0000] [45262] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2026-04-08 05:27:10 +0000] [45262] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2026-04-08 05:27:11 +0000] [45262] [ERROR] Connection in use: ('127.0.0.1', 8000)
+[2026-04-08 05:27:11 +0000] [45262] [ERROR] connection to ('127.0.0.1', 8000) failed: [Errno 98] Address already in use
+[2026-04-08 05:27:12 +0000] [45262] [ERROR] Can't connect to ('127.0.0.1', 8000)
+[2026-04-08 05:46:17 +0000] [45367] [INFO] Starting gunicorn 25.3.0
+[2026-04-08 05:46:17 +0000] [45367] [INFO] Listening at: http://127.0.0.1:8000 (45367)
+[2026-04-08 05:46:17 +0000] [45367] [INFO] Using worker: sync
+[2026-04-08 05:46:17 +0000] [45368] [INFO] Booting worker with pid: 45368
+[2026-04-08 05:46:17 +0000] [45367] [INFO] Control socket listening at /run/user/1000/gunicorn.ctl
+Not Found: /favicon.ico
+[2026-04-08 06:12:54 +0000] [45367] [INFO] Handling signal: term
+[2026-04-08 06:12:54 +0000] [45368] [INFO] Worker exiting (pid: 45368)
+[2026-04-08 06:12:54 +0000] [45367] [INFO] Worker (pid:45368) was sent SIGTERM!
+[2026-04-08 06:12:54 +0000] [45367] [INFO] Shutting down: Master
