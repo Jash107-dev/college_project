@@ -45,22 +45,20 @@ class Employee(models.Model):
         return f'EMP{num:03d}'
 
     def _generate_password(self):
-       
-        phone_part  = (self.phone or '')[:3]
-        year_part   = str(self.date_of_joining.year) if self.date_of_joining else ''
+        phone_part = (self.phone or '')[:3]
+        year_part  = str(self.date_of_joining.year) if self.date_of_joining else ''
         if phone_part and year_part:
             return f'{phone_part}{year_part}'
         return self.employee_id  # fallback
 
     def create_user_account(self):
-        #Create a Django User account for this employee.
+        # create a django user linked to this employee record
         if self.user:
-            return  # already has an account
+            return
 
-        username = self.employee_id.lower()  # e.g. 'emp001'
+        username = self.employee_id.lower()
         password = self._generate_password()
 
-        # Make username unique if it already exists
         if User.objects.filter(username=username).exists():
             username = f'{username}_{self.id}'
 
@@ -76,17 +74,48 @@ class Employee(models.Model):
 
     def save(self, *args, **kwargs):
         is_new = not self.pk
-
-        # Auto-generate employee_id for new employees
         if not self.employee_id:
             self.employee_id = self._generate_employee_id()
-
         super().save(*args, **kwargs)
-
-        # Auto-create user account after first save (so employee_id exists)
         if is_new and not self.user:
             self.create_user_account()
 
     def __str__(self):
         return f'{self.employee_id} - {self.name}'
-    
+
+
+# ---- Leave Management ----
+
+class Leave(models.Model):
+
+    LEAVE_TYPE_CHOICES = [
+        ('Sick',   'Sick Leave'),
+        ('Casual', 'Casual Leave'),
+        ('Paid',   'Paid Leave'),
+    ]
+
+    STATUS_CHOICES = [
+        ('Pending',  'Pending'),
+        ('Approved', 'Approved'),
+        ('Rejected', 'Rejected'),
+    ]
+
+    # linked to the django user (not employee directly, keeps it flexible)
+    employee   = models.ForeignKey(User, on_delete=models.CASCADE, related_name='leaves')
+    leave_type = models.CharField(max_length=10, choices=LEAVE_TYPE_CHOICES)
+    start_date = models.DateField()
+    end_date   = models.DateField()
+    reason     = models.TextField()
+    status     = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
+    applied_on = models.DateTimeField(auto_now_add=True)  # auto set when record is created
+
+    class Meta:
+        ordering = ['-applied_on']  # newest first
+
+    def __str__(self):
+        return f'{self.employee.username} - {self.leave_type} ({self.status})'
+
+    @property
+    def total_days(self):
+        # calculate number of days including both start and end date
+        return (self.end_date - self.start_date).days + 1

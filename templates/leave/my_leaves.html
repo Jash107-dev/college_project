@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% block title %}My Leaves - EMS{% endblock %}
+{% block nav_myleave %}active{% endblock %}
+
+{% block extra_styles %}
+/* employee leave history page */
+.page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; flex-wrap: wrap; gap: 16px; }
+.page-title  { font-size: 24px; font-weight: 700; color: var(--text); letter-spacing: -0.4px; }
+.page-sub    { font-size: 13px; color: var(--text-secondary); margin-top: 3px; }
+
+/* apply leave button */
+.btn-apply {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 10px 22px; background: var(--accent); color: white;
+    border-radius: 10px; text-decoration: none; font-size: 13px; font-weight: 600;
+    transition: background 0.15s; box-shadow: 0 2px 10px rgba(99,102,241,0.3);
+}
+.btn-apply:hover { background: var(--accent-dark); }
+
+/* leave cards grid */
+.leave-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+}
+
+/* individual leave card */
+.leave-card {
+    background: var(--white); border: 2px solid var(--border);
+    border-radius: var(--radius); padding: 20px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s, transform 0.2s;
+    position: relative; overflow: hidden;
+}
+.leave-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+
+/* colored left border based on status */
+.leave-card::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+}
+.leave-card.pending::before  { background: var(--orange); }
+.leave-card.approved::before { background: var(--green); }
+.leave-card.rejected::before { background: var(--red); }
+
+/* leave type + status row */
+.card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.leave-type-tag {
+    font-size: 13px; font-weight: 700; color: var(--text);
+}
+.leave-type-tag span {
+    display: inline-block; background: var(--accent-light); color: var(--accent);
+    padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
+    border: 1px solid #c7d2fe;
+}
+
+/* status badges */
+.badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 11px; border-radius: 20px; font-size: 11px; font-weight: 600;
+    border: 1.5px solid transparent;
+}
+.badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; }
+.badge-pending  { background: var(--orange-light); color: #92400e; border-color: #fcd34d; }
+.badge-pending::before  { background: var(--orange); }
+.badge-approved { background: var(--green-light);  color: #065f46; border-color: #6ee7b7; }
+.badge-approved::before { background: var(--green); }
+.badge-rejected { background: var(--red-light);    color: #991b1b; border-color: #fca5a5; }
+.badge-rejected::before { background: var(--red); }
+
+/* date range row */
+.date-row {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--text-secondary); margin-bottom: 8px;
+}
+.date-row svg { color: var(--text-muted); flex-shrink: 0; }
+
+/* days count pill */
+.days-pill {
+    display: inline-block; background: var(--bg); border: 1px solid var(--border);
+    padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
+    color: var(--text-secondary); margin-left: auto;
+}
+
+/* reason text */
+.reason-text {
+    font-size: 12px; color: var(--text-secondary); line-height: 1.5;
+    background: var(--bg); border-radius: 8px; padding: 10px 12px;
+    border: 1px solid var(--border); margin-top: 10px;
+}
+
+/* applied on timestamp */
+.applied-on { font-size: 11px; color: var(--text-muted); margin-top: 10px; }
+
+/* empty state */
+.empty-state {
+    text-align: center; padding: 72px 24px;
+    background: var(--white); border: 2px solid var(--border);
+    border-radius: var(--radius); box-shadow: var(--shadow-sm);
+}
+.empty-icon {
+    width: 64px; height: 64px; border-radius: 16px;
+    background: var(--accent-light); border: 2px solid #c7d2fe;
+    margin: 0 auto 20px;
+    display: flex; align-items: center; justify-content: center;
+}
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <div class="page-title">My Leave Requests</div>
+        <div class="page-sub">Track all your submitted leave applications</div>
+    </div>
+    <a href="{% url 'apply_leave' %}" class="btn-apply">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+        </svg>
+        Apply Leave
+    </a>
+</div>
+
+{% if leaves %}
+<div class="leave-grid">
+    {% for leave in leaves %}
+    <!-- card class changes based on status for the colored left border -->
+    <div class="leave-card {{ leave.status|lower }}">
+        <div class="card-top">
+            <div class="leave-type-tag">
+                <span>{{ leave.get_leave_type_display }}</span>
+            </div>
+            <span class="badge badge-{{ leave.status|lower }}">{{ leave.status }}</span>
+        </div>
+
+        <!-- date range + total days -->
+        <div class="date-row">
+            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            {{ leave.start_date }} &rarr; {{ leave.end_date }}
+            <span class="days-pill">{{ leave.total_days }} day{{ leave.total_days|pluralize }}</span>
+        </div>
+
+        <!-- reason -->
+        <div class="reason-text">{{ leave.reason }}</div>
+
+        <div class="applied-on">Applied on {{ leave.applied_on|date:"d M Y, h:i A" }}</div>
+    </div>
+    {% endfor %}
+</div>
+
+{% else %}
+<!-- empty state when no leaves found -->
+<div class="empty-state">
+    <div class="empty-icon">
+        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#6366f1" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+    </div>
+    <p style="font-size:16px; font-weight:700; color:var(--text); margin-bottom:6px;">No leave requests yet</p>
+    <p style="font-size:13px; color:var(--text-secondary); margin-bottom:20px;">You haven't applied for any leave.</p>
+    <a href="{% url 'apply_leave' %}" class="btn-apply" style="display:inline-flex;">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+        </svg>
+        Apply for Leave
+    </a>
+</div>
+{% endif %}
+
+{% endblock %}

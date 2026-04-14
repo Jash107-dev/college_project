@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% block title %}Apply Leave - EMS{% endblock %}
+{% block nav_leave %}active{% endblock %}
+
+{% block extra_styles %}
+/* apply leave form page */
+.form-page  { max-width: 620px; }
+.page-title { font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 2px; letter-spacing: -0.3px; }
+.page-sub   { font-size: 13px; color: var(--text-secondary); margin-bottom: 24px; }
+
+/* white card wrapping the form */
+.form-card { background: var(--white); border: 2px solid var(--border); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow-sm); }
+
+/* section heading */
+.form-section-title {
+    font-size: 11px; font-weight: 700; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.8px;
+    margin-bottom: 16px; padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 8px;
+}
+
+/* 2-column grid for date fields */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label { font-size: 12px; font-weight: 600; color: var(--text); }
+
+/* all inputs and selects */
+.form-group input, .form-group select, .form-group textarea,
+input.form-input, select.form-input, textarea.form-input {
+    padding: 10px 13px; border: 2px solid var(--border); border-radius: 10px;
+    font-size: 13px; font-family: 'Inter', sans-serif;
+    outline: none; background: var(--bg); color: var(--text); transition: all 0.15s;
+    width: 100%; box-sizing: border-box;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus,
+input.form-input:focus, select.form-input:focus, textarea.form-input:focus {
+    border-color: var(--accent); background: white;
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+}
+textarea.form-input { resize: vertical; min-height: 100px; }
+
+/* validation error */
+.err-msg { color: var(--red); font-size: 11px; margin-top: 2px; }
+
+/* non-field errors (like overlap error) */
+.form-errors {
+    background: var(--red-light); border: 1px solid #fca5a5;
+    border-radius: 10px; padding: 12px 16px; margin-bottom: 16px;
+    font-size: 13px; color: #991b1b;
+    display: flex; align-items: flex-start; gap: 8px;
+}
+
+/* bottom action buttons */
+.form-actions { display: flex; gap: 10px; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); }
+.btn-save {
+    padding: 11px 32px; background: var(--accent); color: white; border: none;
+    border-radius: 10px; font-size: 13px; font-weight: 600;
+    font-family: 'Inter', sans-serif; cursor: pointer; transition: background 0.15s;
+    box-shadow: 0 2px 8px rgba(99,102,241,0.25);
+}
+.btn-save:hover { background: var(--accent-dark); }
+.btn-cancel {
+    padding: 11px 24px; background: var(--white); color: var(--text-secondary);
+    border: 2px solid var(--border); border-radius: 10px; font-size: 13px;
+    text-decoration: none; font-weight: 500; transition: background 0.15s;
+}
+.btn-cancel:hover { background: var(--bg); }
+{% endblock %}
+
+{% block content %}
+<div class="form-page">
+    <div class="page-title">Apply for Leave</div>
+    <div class="page-sub">Fill in the details below to submit your leave request.</div>
+
+    <div class="form-card">
+
+        <!-- show non-field errors like overlap validation -->
+        {% if form.non_field_errors %}
+        <div class="form-errors">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+            <div>{% for err in form.non_field_errors %}{{ err }}{% endfor %}</div>
+        </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-section-title">
+                <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                Leave Details
+            </div>
+
+            <!-- leave type - full width -->
+            <div class="form-group" style="margin-bottom:16px;">
+                <label>Leave Type *</label>
+                {{ form.leave_type }}
+                {% for err in form.leave_type.errors %}<div class="err-msg">{{ err }}</div>{% endfor %}
+            </div>
+
+            <!-- start and end date side by side -->
+            <div class="form-grid" style="margin-bottom:16px;">
+                <div class="form-group">
+                    <label>Start Date *</label>
+                    {{ form.start_date }}
+                    {% for err in form.start_date.errors %}<div class="err-msg">{{ err }}</div>{% endfor %}
+                </div>
+                <div class="form-group">
+                    <label>End Date *</label>
+                    {{ form.end_date }}
+                    {% for err in form.end_date.errors %}<div class="err-msg">{{ err }}</div>{% endfor %}
+                </div>
+            </div>
+
+            <!-- reason textarea -->
+            <div class="form-group" style="margin-bottom:8px;">
+                <label>Reason *</label>
+                {{ form.reason }}
+                {% for err in form.reason.errors %}<div class="err-msg">{{ err }}</div>{% endfor %}
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-save">Submit Application</button>
+                {% if request.user.is_staff %}
+                    <a href="{% url 'admin_leave_list' %}" class="btn-cancel">Cancel</a>
+                {% else %}
+                    <a href="{% url 'my_leaves' %}" class="btn-cancel">Cancel</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

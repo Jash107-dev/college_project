@@ -1,0 +1,222 @@
+{% extends 'base.html' %}
+{% block title %}Leave Requests - EMS{% endblock %}
+{% block nav_adminleave %}active{% endblock %}
+
+{% block extra_styles %}
+/* admin leave management dashboard */
+.page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; flex-wrap: wrap; gap: 16px; }
+.page-title  { font-size: 24px; font-weight: 700; color: var(--text); letter-spacing: -0.4px; }
+.page-sub    { font-size: 13px; color: var(--text-secondary); margin-top: 3px; }
+
+/* summary stat cards row */
+.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.stat-card {
+    background: var(--white); border: 2px solid var(--border);
+    border-radius: var(--radius); padding: 18px 20px;
+    display: flex; align-items: center; gap: 14px;
+    box-shadow: var(--shadow-sm);
+}
+.stat-icon {
+    width: 44px; height: 44px; border-radius: 11px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.stat-label  { font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+.stat-number { font-size: 26px; font-weight: 700; color: var(--text); line-height: 1; letter-spacing: -0.5px; }
+
+/* filter tabs */
+.filter-tabs { display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
+.filter-tab {
+    padding: 7px 18px; border-radius: 20px; font-size: 13px; font-weight: 500;
+    text-decoration: none; border: 2px solid var(--border);
+    color: var(--text-secondary); background: var(--white); transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+.filter-tab.active { background: var(--accent); color: white; border-color: var(--accent); font-weight: 600; }
+
+/* leave table card */
+.table-card {
+    background: var(--white); border: 2px solid var(--border);
+    border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm);
+}
+table { width: 100%; border-collapse: collapse; }
+thead { background: var(--bg); }
+thead th {
+    padding: 12px 16px; text-align: left;
+    font-size: 11px; font-weight: 700; color: var(--text-muted);
+    letter-spacing: 0.7px; text-transform: uppercase;
+    border-bottom: 2px solid var(--border);
+}
+tbody tr { border-bottom: 1px solid var(--border-light); transition: background 0.1s; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--accent-light); }
+tbody td { padding: 13px 16px; font-size: 13px; color: var(--text); }
+
+/* employee cell with avatar */
+.emp-cell { display: flex; align-items: center; gap: 10px; }
+.emp-avatar {
+    width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--accent), #8b5cf6);
+    color: white; font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--accent-light);
+}
+.emp-name { font-weight: 600; font-size: 13px; }
+.emp-meta { font-size: 11px; color: var(--text-muted); }
+
+/* leave type badge */
+.type-badge {
+    background: var(--accent-light); color: var(--accent);
+    padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
+    border: 1px solid #c7d2fe;
+}
+
+/* status badges */
+.badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 11px; border-radius: 20px; font-size: 11px; font-weight: 600;
+    border: 1.5px solid transparent;
+}
+.badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; }
+.badge-pending  { background: var(--orange-light); color: #92400e; border-color: #fcd34d; }
+.badge-pending::before  { background: var(--orange); }
+.badge-approved { background: var(--green-light);  color: #065f46; border-color: #6ee7b7; }
+.badge-approved::before { background: var(--green); }
+.badge-rejected { background: var(--red-light);    color: #991b1b; border-color: #fca5a5; }
+.badge-rejected::before { background: var(--red); }
+
+/* approve / reject action buttons */
+.btn-approve {
+    padding: 5px 13px; background: var(--green-light); color: #065f46;
+    border: 1.5px solid #6ee7b7; border-radius: 7px;
+    text-decoration: none; font-size: 11px; font-weight: 600; transition: all 0.15s;
+}
+.btn-approve:hover { background: #a7f3d0; }
+.btn-reject {
+    padding: 5px 13px; background: var(--red-light); color: #991b1b;
+    border: 1.5px solid #fca5a5; border-radius: 7px;
+    text-decoration: none; font-size: 11px; font-weight: 600; transition: all 0.15s;
+}
+.btn-reject:hover { background: #fecaca; }
+
+/* empty state */
+.empty-state {
+    text-align: center; padding: 56px 24px; color: var(--text-muted);
+}
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <div class="page-title">Leave Requests</div>
+        <div class="page-sub">Review and manage all employee leave applications</div>
+    </div>
+    <a href="{% url 'apply_leave' %}" style="display:inline-flex;align-items:center;gap:7px;padding:10px 22px;background:var(--accent);color:white;border-radius:10px;text-decoration:none;font-size:13px;font-weight:600;box-shadow:0 2px 10px rgba(99,102,241,0.3);">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+        Apply Leave
+    </a>
+</div>
+
+<!-- summary stat cards -->
+<div class="stats-row">
+    <div class="stat-card">
+        <div class="stat-icon" style="background:var(--orange-light);">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#f59e0b" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div>
+            <div class="stat-label">Pending</div>
+            <div class="stat-number">{{ pending_count }}</div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon" style="background:var(--green-light);">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#10b981" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div>
+            <div class="stat-label">Approved</div>
+            <div class="stat-number">{{ approved_count }}</div>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon" style="background:var(--red-light);">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#ef4444" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div>
+            <div class="stat-label">Rejected</div>
+            <div class="stat-number">{{ rejected_count }}</div>
+        </div>
+    </div>
+</div>
+
+<!-- filter tabs -->
+<div class="filter-tabs">
+    <a href="{% url 'admin_leave_list' %}" class="filter-tab {% if not status_filter %}active{% endif %}">All</a>
+    <a href="{% url 'admin_leave_list' %}?status=Pending"  class="filter-tab {% if status_filter == 'Pending' %}active{% endif %}">Pending</a>
+    <a href="{% url 'admin_leave_list' %}?status=Approved" class="filter-tab {% if status_filter == 'Approved' %}active{% endif %}">Approved</a>
+    <a href="{% url 'admin_leave_list' %}?status=Rejected" class="filter-tab {% if status_filter == 'Rejected' %}active{% endif %}">Rejected</a>
+</div>
+
+<!-- leave requests table -->
+<div class="table-card">
+    {% if leaves %}
+    <table>
+        <thead>
+            <tr>
+                <th>Employee</th>
+                <th>Leave Type</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Days</th>
+                <th>Reason</th>
+                <th>Applied On</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for leave in leaves %}
+            <tr>
+                <td>
+                    <div class="emp-cell">
+                        <div class="emp-avatar">{{ leave.employee.username|first|upper }}</div>
+                        <div>
+                            <div class="emp-name">{{ leave.employee.get_full_name|default:leave.employee.username }}</div>
+                            <div class="emp-meta">{{ leave.employee.username }}</div>
+                        </div>
+                    </div>
+                </td>
+                <td><span class="type-badge">{{ leave.get_leave_type_display }}</span></td>
+                <td>{{ leave.start_date }}</td>
+                <td>{{ leave.end_date }}</td>
+                <td style="font-weight:600; color:var(--accent);">{{ leave.total_days }}</td>
+                <td style="max-width:180px; color:var(--text-secondary); font-size:12px;">
+                    <!-- truncate long reasons in the table -->
+                    {{ leave.reason|truncatechars:60 }}
+                </td>
+                <td style="color:var(--text-muted); font-size:12px;">{{ leave.applied_on|date:"d M Y" }}</td>
+                <td>
+                    <span class="badge badge-{{ leave.status|lower }}">{{ leave.status }}</span>
+                </td>
+                <td>
+                    {% if leave.status == 'Pending' %}
+                    <!-- approve and reject are GET links that trigger the view -->
+                    <div style="display:flex; gap:5px;">
+                        <a href="{% url 'approve_leave' leave.id %}" class="btn-approve">Approve</a>
+                        <a href="{% url 'reject_leave'  leave.id %}" class="btn-reject">Reject</a>
+                    </div>
+                    {% else %}
+                    <span style="font-size:12px; color:var(--text-muted);">—</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">
+        <p style="font-size:15px; font-weight:600; color:var(--text-secondary); margin-bottom:4px;">No leave requests found</p>
+        <p style="font-size:13px;">No requests match the selected filter.</p>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

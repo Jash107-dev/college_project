@@ -1,7 +1,7 @@
 import re
 from django import forms
 from django.utils import timezone
-from .models import Employee
+from .models import Employee, Leave
 
 
 class EmployeeForm(forms.ModelForm):
@@ -21,8 +21,8 @@ class EmployeeForm(forms.ModelForm):
             'status':          forms.Select(attrs={'class': 'form-input'}),
         }
 
-    def clean_name(self):   #clean is used for self validation .
-        name = self.cleaned_data.get('name', '').strip() 
+    def clean_name(self):
+        name = self.cleaned_data.get('name', '').strip()
         if not name:
             raise forms.ValidationError("Name is required.")
         if len(name) < 2:
@@ -119,13 +119,9 @@ class EmployeeForm(forms.ModelForm):
         return department
 
 
-#  Employee self-service: status update only
-
+# employee can only update their own status
 class EmployeeStatusForm(forms.ModelForm):
-    
-    #Limited form — employee can ONLY update their own status.
-    #Nothing else is editable through this form.
-    
+
     class Meta:
         model  = Employee
         fields = ['status']
@@ -138,6 +134,54 @@ class EmployeeStatusForm(forms.ModelForm):
         valid  = [c[0] for c in Employee.STATUS_CHOICES]
         if status not in valid:
             raise forms.ValidationError("Please select a valid status.")
-        return status          
-    
-    
+        return status
+
+
+# ---- Leave Application Form ----
+
+class LeaveForm(forms.ModelForm):
+
+    class Meta:
+        model  = Leave
+        # employee and status are set by the view, not the user
+        fields = ['leave_type', 'start_date', 'end_date', 'reason']
+        widgets = {
+            'leave_type': forms.Select(attrs={'class': 'form-input'}),
+            'start_date': forms.DateInput(attrs={'class': 'form-input', 'type': 'date'}),
+            'end_date':   forms.DateInput(attrs={'class': 'form-input', 'type': 'date'}),
+            'reason':     forms.Textarea(attrs={'class': 'form-input', 'rows': 4, 'placeholder': 'Briefly explain the reason for your leave...'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        # we pass the current user from the view so we can check overlaps
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+
+    def clean(self):
+        cleaned = super().clean()
+        start   = cleaned.get('start_date')
+        end     = cleaned.get('end_date')
+
+        if start and end:
+            # end date must not be before start date
+            if end < start:
+                raise forms.ValidationError("End date cannot be before the start date.")
+
+            # check for overlapping leave requests for the same user
+            if self.user:
+                overlapping = Leave.objects.filter(
+                    employee=self.user,
+                    status__in=['Pending', 'Approved'],
+                    start_date__lte=end,
+                    end_date__gte=start,
+                )
+                # exclude current instance when editing
+                if self.instance and self.instance.pk:
+                    overlapping = overlapping.exclude(pk=self.instance.pk)
+
+                if overlapping.exists():
+                    raise forms.ValidationError(
+                        "You already have a leave request that overlaps with these dates."
+                    )
+
+        return cleaned
