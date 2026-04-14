@@ -115,11 +115,15 @@ def delete_employee(request, id):
     emp = get_object_or_404(Employee, id=id)
     if request.method == 'POST':
         name = emp.name
-        if emp.user:
-            emp.user.delete()
-        else:
-            emp.delete()
-        messages.success(request, f'{name} has been deleted.')
+        user = emp.user  # grab the user reference before deleting employee
+
+        # delete employee record first, then the linked user account
+        # doing it this way avoids the SET_NULL cascade leaving an orphan employee
+        emp.delete()
+        if user:
+            user.delete()
+
+        messages.success(request, f'{name} has been deleted successfully.')
         return redirect('employee_list')
     return render(request, 'employee/delete_employee.html', {'emp': emp})
 
