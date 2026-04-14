@@ -1,9 +1,9 @@
-﻿{% extends 'base.html' %}
+{% extends 'base.html' %}
 {% block title %}All Employees - EMS{% endblock %}
 {% block nav_list %}active{% endblock %}
 
 {% block extra_styles %}
-/* ---- page header ---- */
+/* page header row with title and action buttons */
 .page-header {
     display: flex; justify-content: space-between; align-items: flex-start;
     margin-bottom: 28px; gap: 16px; flex-wrap: wrap;
@@ -11,33 +11,14 @@
 .page-title { font-size: 26px; font-weight: 700; color: var(--text); letter-spacing: -0.4px; }
 .page-sub   { font-size: 13px; color: var(--text-secondary); margin-top: 3px; }
 
-/* ---- top action buttons ---- */
-.btn-add {
-    display: inline-flex; align-items: center; gap: 7px;
-    padding: 10px 22px; background: var(--accent); color: white;
-    border-radius: 10px; text-decoration: none; font-size: 13px; font-weight: 600;
-    transition: all 0.2s; box-shadow: 0 2px 10px rgba(99,102,241,0.35);
-    border: 2px solid transparent;
-}
-.btn-add:hover { background: var(--accent-dark); box-shadow: 0 4px 16px rgba(99,102,241,0.45); }
-.btn-export {
-    display: inline-flex; align-items: center; gap: 7px;
-    padding: 10px 18px; background: var(--white); color: var(--text-secondary);
-    border-radius: 10px; text-decoration: none; font-size: 13px; font-weight: 500;
-    border: 2px solid var(--border); transition: all 0.2s;
-}
-.btn-export:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
-
-/* ---- filter bar ---- */
+/* filter bar - white card with search + dropdowns */
 .filter-bar {
-    background: var(--white);
-    border: 2px solid var(--border);
-    border-radius: var(--radius); padding: 16px 20px;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px 20px;
     margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
-    box-shadow: var(--shadow-sm);
 }
 .filter-bar input, .filter-bar select {
-    padding: 9px 13px; border: 2px solid var(--border); border-radius: 10px;
+    padding: 9px 13px; border: 1.5px solid var(--border); border-radius: 10px;
     font-size: 13px; font-family: 'Inter', sans-serif;
     outline: none; color: var(--text); background: var(--bg);
     transition: all 0.15s; flex: 1; min-width: 140px;
@@ -45,24 +26,40 @@
 .filter-bar input { min-width: 220px; }
 .filter-bar input:focus, .filter-bar select:focus {
     border-color: var(--accent); background: white;
-    box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
 }
 .btn-search {
     padding: 9px 22px; background: var(--accent); color: white;
-    border: 2px solid var(--accent); border-radius: 10px; cursor: pointer;
+    border: none; border-radius: 10px; cursor: pointer;
     font-size: 13px; font-weight: 600; font-family: 'Inter', sans-serif;
-    transition: all 0.15s; white-space: nowrap;
+    transition: background 0.15s; white-space: nowrap;
 }
-.btn-search:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+.btn-search:hover { background: var(--accent-dark); }
 .btn-clear {
     padding: 9px 16px; background: var(--white); color: var(--text-secondary);
-    border: 2px solid var(--border); border-radius: 10px;
+    border: 1.5px solid var(--border); border-radius: 10px;
     font-size: 13px; text-decoration: none; font-family: 'Inter', sans-serif;
-    transition: all 0.15s; white-space: nowrap;
+    transition: background 0.15s; white-space: nowrap;
 }
-.btn-clear:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
+.btn-clear:hover { background: var(--bg); }
 
-/* ---- result count + view toggle ---- */
+/* top right action buttons */
+.btn-add {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 10px 22px; background: var(--accent); color: white;
+    border-radius: 10px; text-decoration: none; font-size: 13px; font-weight: 600;
+    transition: background 0.15s; box-shadow: 0 2px 10px rgba(99,102,241,0.3);
+}
+.btn-add:hover { background: var(--accent-dark); }
+.btn-export {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 10px 18px; background: var(--white); color: var(--text-secondary);
+    border-radius: 10px; text-decoration: none; font-size: 13px; font-weight: 500;
+    border: 1.5px solid var(--border); transition: all 0.15s;
+}
+.btn-export:hover { background: var(--bg); color: var(--text); }
+
+/* result count + view toggle row */
 .result-meta {
     display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 16px; flex-wrap: wrap; gap: 8px;
@@ -70,178 +67,173 @@
 .result-count { font-size: 13px; color: var(--text-secondary); }
 .result-count strong { color: var(--accent); font-weight: 700; }
 
+/* grid / table toggle buttons */
 .view-toggle { display: flex; gap: 4px; }
 .view-btn {
-    width: 36px; height: 36px; border-radius: 9px;
-    border: 2px solid var(--border); background: var(--white);
+    width: 34px; height: 34px; border-radius: 8px;
+    border: 1.5px solid var(--border); background: var(--white);
     cursor: pointer; display: flex; align-items: center; justify-content: center;
     color: var(--text-muted); transition: all 0.15s;
 }
-.view-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
-.view-btn:not(.active):hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
-
-/* ---- employee card grid ---- */
-.emp-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-    gap: 18px; margin-bottom: 24px;
+.view-btn.active, .view-btn:hover {
+    background: var(--accent-light); border-color: var(--accent); color: var(--accent);
 }
 
+/* employee card grid - auto fills columns based on available width */
+.emp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px; margin-bottom: 24px;
+}
+
+/* individual employee card */
 .emp-card {
-    background: var(--white);
-    border: 2px solid var(--border);
+    background: var(--white); border: 1px solid var(--border);
     border-radius: var(--radius); padding: 22px;
     transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
     position: relative; overflow: hidden;
     display: flex; flex-direction: column; gap: 14px;
-    box-shadow: var(--shadow-sm);
 }
 .emp-card:hover {
-    box-shadow: 0 8px 28px rgba(99,102,241,0.14);
-    transform: translateY(-3px);
-    border-color: #a5b4fc;
+    box-shadow: var(--shadow); transform: translateY(-2px); border-color: #c7d2fe;
 }
-/* gradient top accent bar */
+/* colored top accent line on each card */
 .emp-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
     background: linear-gradient(90deg, var(--accent), #8b5cf6);
     border-radius: var(--radius) var(--radius) 0 0;
 }
 
-/* avatar + name + id */
+/* avatar + name + id section at top of card */
 .card-top { display: flex; align-items: flex-start; gap: 13px; }
 .emp-avatar {
-    width: 50px; height: 50px; border-radius: 50%; flex-shrink: 0;
+    width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
-    font-size: 19px; font-weight: 700; color: white;
+    font-size: 18px; font-weight: 700; color: white;
     background: linear-gradient(135deg, var(--accent), #8b5cf6);
-    box-shadow: 0 3px 10px rgba(99,102,241,0.35);
-    border: 3px solid var(--accent-light);
+    box-shadow: 0 2px 8px rgba(99,102,241,0.3);
 }
 .emp-info { flex: 1; min-width: 0; }
 .emp-name { font-size: 15px; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .emp-role { font-size: 12px; color: var(--text-secondary); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .emp-id-tag {
     display: inline-block; background: var(--accent-light); color: var(--accent);
-    padding: 2px 9px; border-radius: 6px; font-size: 10px; font-weight: 700;
-    margin-top: 5px; letter-spacing: 0.3px; border: 1px solid #c7d2fe;
+    padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 700;
+    margin-top: 5px; letter-spacing: 0.3px;
 }
 
-/* divider line */
-.card-divider { height: 1px; background: var(--border); }
+/* thin divider line between sections */
+.card-divider { height: 1px; background: var(--border-light); }
 
-/* detail rows inside card */
-.card-details { display: flex; flex-direction: column; gap: 8px; }
-.card-detail-row { display: flex; align-items: center; gap: 9px; font-size: 12px; }
+/* department, email, salary rows */
+.card-details { display: flex; flex-direction: column; gap: 7px; }
+.card-detail-row { display: flex; align-items: center; gap: 8px; font-size: 12px; }
 .detail-icon { color: var(--text-muted); flex-shrink: 0; }
 .detail-text { color: var(--text-secondary); flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.detail-text strong { color: var(--text); font-weight: 700; }
+.detail-text strong { color: var(--text); font-weight: 600; }
 
-/* card footer: status badge + icon buttons */
+/* bottom row: status badge + action icon buttons */
 .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 2px; }
 
-/* status badges with dot */
+/* status badges with colored dot */
 .badge {
     display: inline-flex; align-items: center; gap: 5px;
-    padding: 4px 11px; border-radius: 20px; font-size: 11px; font-weight: 600;
-    border: 1.5px solid transparent;
+    padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
 }
 .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; }
-.badge-active   { background: var(--green-light);  color: #065f46; border-color: #6ee7b7; }
+.badge-active   { background: var(--green-light);  color: #065f46; }
 .badge-active::before   { background: var(--green); }
-.badge-inactive { background: var(--red-light);    color: #991b1b; border-color: #fca5a5; }
+.badge-inactive { background: var(--red-light);    color: #991b1b; }
 .badge-inactive::before { background: var(--red); }
-.badge-leave    { background: var(--orange-light); color: #92400e; border-color: #fcd34d; }
+.badge-leave    { background: var(--orange-light); color: #92400e; }
 .badge-leave::before    { background: var(--orange); }
 
-/* icon action buttons */
+/* small icon buttons for view/edit/delete */
 .card-actions { display: flex; gap: 5px; }
 .btn-icon {
-    width: 32px; height: 32px; border-radius: 9px;
-    border: 2px solid var(--border); background: var(--white);
+    width: 30px; height: 30px; border-radius: 8px;
+    border: 1.5px solid var(--border); background: var(--white);
     display: flex; align-items: center; justify-content: center;
     text-decoration: none; color: var(--text-secondary); transition: all 0.15s;
 }
-.btn-icon:hover        { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
-.btn-icon.danger:hover { background: var(--red-light);    border-color: #fca5a5;       color: var(--red); }
+.btn-icon:hover       { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+.btn-icon.danger:hover { background: var(--red-light);   border-color: #fca5a5;       color: var(--red); }
 
-/* ---- table view (hidden by default) ---- */
-.table-view      { display: none; }
+/* table view (hidden by default, shown when user clicks table toggle) */
+.table-view { display: none; }
 .table-view.show { display: block; }
 .emp-grid.hide   { display: none; }
 
+/* table card wrapper */
 .table-card {
-    background: var(--white); border: 2px solid var(--border);
+    background: var(--white); border: 1px solid var(--border);
     border-radius: var(--radius); overflow: hidden; margin-bottom: 24px;
-    box-shadow: var(--shadow-sm);
 }
 table { width: 100%; border-collapse: collapse; }
 thead { background: var(--bg); }
 thead th {
     padding: 12px 16px; text-align: left;
-    font-size: 11px; font-weight: 700; color: var(--text-muted);
-    letter-spacing: 0.7px; text-transform: uppercase;
-    border-bottom: 2px solid var(--border);
+    font-size: 11px; font-weight: 600; color: var(--text-muted);
+    letter-spacing: 0.6px; text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
 }
 tbody tr { border-bottom: 1px solid var(--border-light); transition: background 0.1s; }
 tbody tr:last-child { border-bottom: none; }
 tbody tr:hover { background: var(--accent-light); }
 tbody td { padding: 13px 16px; font-size: 13px; color: var(--text); }
 
+/* employee cell in table - avatar + name + meta */
 .t-emp-cell { display: flex; align-items: center; gap: 10px; }
 .t-avatar {
-    width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+    width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
     background: linear-gradient(135deg, var(--accent), #8b5cf6);
-    color: white; font-size: 13px; font-weight: 700;
+    color: white; font-size: 12px; font-weight: 700;
     display: flex; align-items: center; justify-content: center;
-    border: 2px solid var(--accent-light);
 }
 .t-name { font-weight: 600; font-size: 13px; }
 .t-meta { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
-.badge-dept {
-    background: var(--accent-light); color: var(--accent);
-    padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
-    border: 1px solid #c7d2fe;
-}
+.badge-dept { background: var(--accent-light); color: var(--accent); padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; }
 .t-salary { font-weight: 700; color: var(--green); }
+
+/* table action buttons */
 .t-actions { display: flex; gap: 5px; }
-.t-btn { padding: 5px 12px; border-radius: 7px; text-decoration: none; font-size: 11px; font-weight: 600; transition: all 0.15s; border: 1.5px solid transparent; }
-.t-btn-view   { background: var(--accent-light); color: var(--accent);  border-color: #c7d2fe; }
-.t-btn-edit   { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
-.t-btn-delete { background: var(--red-light); color: var(--red); border-color: #fca5a5; }
+.t-btn { padding: 5px 11px; border-radius: 7px; text-decoration: none; font-size: 11px; font-weight: 600; transition: background 0.15s; }
+.t-btn-view   { background: var(--accent-light); color: var(--accent); }
+.t-btn-edit   { background: #eff6ff; color: #1d4ed8; }
+.t-btn-delete { background: var(--red-light); color: var(--red); }
 .t-btn-view:hover   { background: #e0e7ff; }
 .t-btn-edit:hover   { background: #dbeafe; }
 .t-btn-delete:hover { background: #fecaca; }
 
-/* ---- pagination ---- */
+/* pagination row */
 .pagination {
     display: flex; justify-content: center; align-items: center;
-    gap: 5px; padding: 20px 0;
+    gap: 4px; padding: 20px 0;
 }
 .pagination a, .pagination span {
-    padding: 7px 14px; border-radius: 9px; font-size: 13px;
+    padding: 7px 13px; border-radius: 9px; font-size: 13px;
     text-decoration: none; color: var(--accent);
-    border: 2px solid var(--border); font-weight: 500; transition: all 0.15s;
+    border: 1.5px solid var(--border); font-weight: 500; transition: all 0.15s;
 }
 .pagination a:hover { background: var(--accent-light); border-color: var(--accent); }
 .pagination .current { background: var(--accent); color: white; border-color: var(--accent); font-weight: 700; }
 
-/* ---- empty state ---- */
+/* empty state when no employees match the filter */
 .empty-state {
     text-align: center; padding: 72px 24px;
-    background: var(--white); border: 2px solid var(--border);
-    border-radius: var(--radius); box-shadow: var(--shadow-sm);
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius);
 }
 .empty-icon {
-    width: 68px; height: 68px; border-radius: 18px;
-    background: var(--accent-light); border: 2px solid #c7d2fe;
-    margin: 0 auto 20px;
+    width: 64px; height: 64px; border-radius: 16px;
+    background: var(--accent-light); margin: 0 auto 20px;
     display: flex; align-items: center; justify-content: center;
 }
 {% endblock %}
 
 {% block content %}
 
+<!-- page title + export/add buttons -->
 <div class="page-header">
     <div>
         <div class="page-title">All Employees</div>
@@ -249,16 +241,21 @@ tbody td { padding: 13px 16px; font-size: 13px; color: var(--text); }
     </div>
     <div style="display:flex; gap:10px; align-items:center;">
         <a href="{% url 'export_csv' %}" class="btn-export">
-            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+            </svg>
             Export CSV
         </a>
         <a href="{% url 'add_employee' %}" class="btn-add">
-            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+            </svg>
             Add Employee
         </a>
     </div>
 </div>
 
+<!-- search + filter bar -->
 <div class="filter-bar">
     <form method="get" style="display:contents;">
         <input type="text" name="search" placeholder="Search by name, email or ID..." value="{{ search }}">
@@ -285,15 +282,20 @@ tbody td { padding: 13px 16px; font-size: 13px; color: var(--text); }
     </form>
 </div>
 
+<!-- result count + grid/table toggle -->
 <div class="result-meta">
     <span class="result-count">Showing <strong>{{ total }}</strong> employee{{ total|pluralize }}</span>
     <div class="view-toggle">
+        <!-- grid view button -->
         <button class="view-btn active" id="btn-grid" onclick="setView('grid')" title="Card view">
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-                <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+                <rect x="3" y="3" width="7" height="7" rx="1"/>
+                <rect x="14" y="3" width="7" height="7" rx="1"/>
+                <rect x="3" y="14" width="7" height="7" rx="1"/>
+                <rect x="14" y="14" width="7" height="7" rx="1"/>
             </svg>
         </button>
+        <!-- table view button -->
         <button class="view-btn" id="btn-table" onclick="setView('table')" title="Table view">
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
@@ -304,9 +306,12 @@ tbody td { padding: 13px 16px; font-size: 13px; color: var(--text); }
 
 {% if page_obj %}
 
+<!-- CARD GRID VIEW -->
 <div class="emp-grid" id="grid-view">
     {% for emp in page_obj %}
     <div class="emp-card">
+
+        <!-- avatar + name + role + id tag -->
         <div class="card-top">
             <div class="emp-avatar">{{ emp.name|first|upper }}</div>
             <div class="emp-info">
@@ -315,46 +320,73 @@ tbody td { padding: 13px 16px; font-size: 13px; color: var(--text); }
                 <span class="emp-id-tag">{{ emp.employee_id }}</span>
             </div>
         </div>
+
         <div class="card-divider"></div>
+
+        <!-- department, email, salary details -->
         <div class="card-details">
             <div class="card-detail-row">
-                <svg class="detail-icon" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                <svg class="detail-icon" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                </svg>
                 <span class="detail-text">{{ emp.department|default:"No department" }}</span>
             </div>
             <div class="card-detail-row">
-                <svg class="detail-icon" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                <svg class="detail-icon" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
                 <span class="detail-text">{{ emp.email }}</span>
             </div>
             <div class="card-detail-row">
-                <svg class="detail-icon" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                <span class="detail-text"><strong>&#8377;{{ emp.salary }}</strong> / month</span>
+                <svg class="detail-icon" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span class="detail-text"><strong>₹{{ emp.salary }}</strong> / month</span>
             </div>
         </div>
+
+        <!-- status badge + action buttons at the bottom -->
         <div class="card-footer">
-            <span class="badge {% if emp.status == 'Active' %}badge-active{% elif emp.status == 'Inactive' %}badge-inactive{% else %}badge-leave{% endif %}">{{ emp.status }}</span>
+            <span class="badge {% if emp.status == 'Active' %}badge-active{% elif emp.status == 'Inactive' %}badge-inactive{% else %}badge-leave{% endif %}">
+                {{ emp.status }}
+            </span>
             <div class="card-actions">
-                <a href="{% url 'employee_profile' emp.id %}" class="btn-icon" title="View">
-                    <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                <a href="{% url 'employee_profile' emp.id %}" class="btn-icon" title="View profile">
+                    <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                    </svg>
                 </a>
-                <a href="{% url 'edit_employee' emp.id %}" class="btn-icon" title="Edit">
-                    <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                <a href="{% url 'edit_employee' emp.id %}" class="btn-icon" title="Edit employee">
+                    <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                    </svg>
                 </a>
-                <a href="{% url 'delete_employee' emp.id %}" class="btn-icon danger" title="Delete">
-                    <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                <a href="{% url 'delete_employee' emp.id %}" class="btn-icon danger" title="Delete employee">
+                    <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                    </svg>
                 </a>
             </div>
         </div>
+
     </div>
     {% endfor %}
 </div>
 
+<!-- TABLE VIEW (hidden by default) -->
 <div class="table-view" id="table-view">
     <div class="table-card">
         <table>
             <thead>
                 <tr>
-                    <th>Employee</th><th>Department</th><th>Designation</th>
-                    <th>Phone</th><th>Salary</th><th>Status</th><th>Actions</th>
+                    <th>Employee</th>
+                    <th>Department</th>
+                    <th>Designation</th>
+                    <th>Phone</th>
+                    <th>Salary</th>
+                    <th>Status</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -372,9 +404,11 @@ tbody td { padding: 13px 16px; font-size: 13px; color: var(--text); }
                     <td><span class="badge-dept">{{ emp.department|default:"-" }}</span></td>
                     <td style="color:var(--text-secondary);">{{ emp.designation|default:"-" }}</td>
                     <td style="color:var(--text-secondary);">{{ emp.phone|default:"-" }}</td>
-                    <td class="t-salary">&#8377;{{ emp.salary }}</td>
+                    <td class="t-salary">₹{{ emp.salary }}</td>
                     <td>
-                        <span class="badge {% if emp.status == 'Active' %}badge-active{% elif emp.status == 'Inactive' %}badge-inactive{% else %}badge-leave{% endif %}">{{ emp.status }}</span>
+                        <span class="badge {% if emp.status == 'Active' %}badge-active{% elif emp.status == 'Inactive' %}badge-inactive{% else %}badge-leave{% endif %}">
+                            {{ emp.status }}
+                        </span>
                     </td>
                     <td>
                         <div class="t-actions">
@@ -390,6 +424,7 @@ tbody td { padding: 13px 16px; font-size: 13px; color: var(--text); }
     </div>
 </div>
 
+<!-- pagination - only shows if there are multiple pages -->
 <div class="pagination">
     {% if page_obj.has_previous %}
         <a href="?page=1&search={{ search }}&department={{ department }}&status={{ status }}&gender={{ gender }}">&laquo; First</a>
@@ -403,34 +438,49 @@ tbody td { padding: 13px 16px; font-size: 13px; color: var(--text); }
 </div>
 
 {% else %}
+
+<!-- empty state when no results found -->
 <div class="empty-state">
     <div class="empty-icon">
-        <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="#6366f1" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#6366f1" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
     </div>
     <p style="font-size:16px; font-weight:700; color:var(--text); margin-bottom:6px;">No employees found</p>
     <p style="font-size:13px; color:var(--text-secondary); margin-bottom:20px;">Try adjusting your filters or add a new employee.</p>
     <a href="{% url 'add_employee' %}" class="btn-add" style="display:inline-flex;">
-        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+        </svg>
         Add Employee
     </a>
 </div>
+
 {% endif %}
 
+<!-- view toggle script - saves preference to localStorage -->
 <script>
     function setView(v) {
         var grid  = document.getElementById('grid-view');
         var table = document.getElementById('table-view');
         var btnG  = document.getElementById('btn-grid');
         var btnT  = document.getElementById('btn-table');
+
         if (v === 'grid') {
-            grid.classList.remove('hide'); table.classList.remove('show');
-            btnG.classList.add('active');  btnT.classList.remove('active');
+            grid.classList.remove('hide');
+            table.classList.remove('show');
+            btnG.classList.add('active');
+            btnT.classList.remove('active');
         } else {
-            grid.classList.add('hide');    table.classList.add('show');
-            btnT.classList.add('active');  btnG.classList.remove('active');
+            grid.classList.add('hide');
+            table.classList.add('show');
+            btnT.classList.add('active');
+            btnG.classList.remove('active');
         }
         localStorage.setItem('empView', v);
     }
+
+    /* restore last used view when page loads */
     var saved = localStorage.getItem('empView');
     if (saved === 'table') setView('table');
 </script>
