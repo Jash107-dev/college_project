@@ -173,16 +173,18 @@ def employee_update_status(request):
 
 @login_required
 def apply_leave(request):
-    # both employees and admins can apply for leave
+    # admin/superuser should NOT apply leave - they only manage it
+    if request.user.is_staff or request.user.is_superuser:
+        messages.error(request, 'Admins cannot apply for leave. Use the Leave Requests panel to manage employee leaves.')
+        return redirect('admin_leave_list')
+
     form = LeaveForm(request.POST or None, user=request.user)
     if request.method == 'POST' and form.is_valid():
         leave = form.save(commit=False)
-        leave.employee = request.user   # link to logged-in user
-        leave.status   = 'Pending'      # always starts as pending
+        leave.employee = request.user
+        leave.status   = 'Pending'
         leave.save()
         messages.success(request, 'Leave application submitted successfully.')
-        if request.user.is_staff or request.user.is_superuser:
-            return redirect('admin_leave_list')
         return redirect('my_leaves')
     return render(request, 'leave/apply_leave.html', {'form': form})
 
@@ -225,7 +227,16 @@ def approve_leave(request, leave_id):
     if leave.status == 'Pending':
         leave.status = 'Approved'
         leave.save()
-        messages.success(request, f'Leave approved for {leave.employee.get_full_name() or leave.employee.username}.')
+
+        # auto-update the linked employee's status to "On Leave"
+        try:
+            emp = leave.employee.employee_profile
+            emp.status = 'On Leave'
+            emp.save()
+        except Employee.DoesNotExist:
+            pass  # user has no employee record, skip silently
+
+        messages.success(request, f'Leave approved for {leave.employee.get_full_name() or leave.employee.username}. Employee status updated to On Leave.')
     return redirect('admin_leave_list')
 
 
@@ -235,5 +246,21 @@ def reject_leave(request, leave_id):
     if leave.status == 'Pending':
         leave.status = 'Rejected'
         leave.save()
+
+        # if employee was set to On Leave due to this request, revert them to Active
+        # only revert if they have no other approved leaves still active
+        try:
+            emp = leave.employee.employee_profile
+            has_other_approved = Leave.objects.filter(
+                employee=leave.employee,
+                status='Approved'
+            ).exclude(id=leave.id).exists()
+
+            if not has_other_approved and emp.status == 'On Leave':
+                emp.status = 'Active'
+                emp.save()
+        except Employee.DoesNotExist:
+            pass
+
         messages.error(request, f'Leave rejected for {leave.employee.get_full_name() or leave.employee.username}.')
     return redirect('admin_leave_list')
