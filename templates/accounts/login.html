@@ -1,138 +1,268 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 {% block title %}Sign In - EMS{% endblock %}
 
 {% block login_content %}
-<!-- login page - centered on screen, no sidebar since user isn't logged in yet -->
-<div style="width:100%; max-width:420px; padding:16px;">
 
-    <!-- logo + title above the card -->
-    <div style="text-align:center;margin-bottom:32px;">
-        <div style="width:48px;height:48px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:22px;font-weight:700;color:white;font-family:'Inter',sans-serif;box-shadow:0 4px 16px rgba(99,102,241,0.35);" id="logo-icon">E</div>
-        <h1 id="login-title" style="font-size:22px;font-weight:700;color:#1a1a2e;margin-bottom:4px;font-family:'Inter',sans-serif;letter-spacing:-0.3px;">Welcome back</h1>
-        <p id="login-subtitle" style="font-size:13px;color:#6b7280;font-family:'Inter',sans-serif;">Sign in to Employee Management System</p>
-    </div>
+<div class="login-wrapper">
+    <div class="login-container" id="login-container">
 
-    <!-- white card with tab switcher + forms -->
-    <div style="background:white; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.08),0 1px 4px rgba(0,0,0,0.04); overflow:hidden;">
+        <!-- left panel: admin login form -->
+        <div class="form-panel left-panel">
+            <form method="post" class="login-form">
+                {% csrf_token %}
+                <input type="hidden" name="login_type" value="admin">
 
-        <!-- admin / employee tab switcher -->
-        <div style="display:flex; border-bottom:1px solid #e8eaed;">
-            <button id="tab-admin" onclick="switchTab('admin')"
-                style="flex:1;padding:14px;font-size:13px;font-weight:600;font-family:'Inter',sans-serif;border:none;cursor:pointer;transition:all 0.2s;background:white;color:#6366f1;border-bottom:2px solid #6366f1;">
-                Admin
-            </button>
-            <button id="tab-employee" onclick="switchTab('employee')"
-                style="flex:1;padding:14px;font-size:13px;font-weight:600;font-family:'Inter',sans-serif;border:none;cursor:pointer;transition:all 0.2s;background:white;color:#9ca3af;border-bottom:2px solid transparent;">
-                Employee
-            </button>
+                <h2 class="form-title">Admin Login</h2>
+                <p class="form-subtitle">Sign in with your admin credentials</p>
+
+                {% if error and login_type != 'employee' %}
+                <div class="error-box">
+                    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M12 8v4m0 4h.01"/></svg>
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <div class="input-group">
+                    <svg class="input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                    <input type="text" name="username" placeholder="Username" required autocomplete="username">
+                </div>
+
+                <div class="input-group">
+                    <svg class="input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    <input type="password" name="password" placeholder="Password" required autocomplete="current-password">
+                </div>
+
+                <button type="submit" class="btn-submit">Sign In</button>
+            </form>
         </div>
 
-        <div style="padding:28px 32px 32px;">
+        <!-- right panel: employee login form -->
+        <div class="form-panel right-panel">
+            <form method="post" class="login-form">
+                {% csrf_token %}
+                <input type="hidden" name="login_type" value="employee">
 
-            <!-- show error if login failed -->
-            {% if error %}
-            <div style="background:#fee2e2;color:#991b1b;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;font-size:13px;margin-bottom:20px;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:8px;">
-                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M12 8v4m0 4h.01"/></svg>
-                {{ error }}
-            </div>
-            {% endif %}
+                <h2 class="form-title">Employee Login</h2>
+                <p class="form-subtitle">Sign in with your Employee ID</p>
 
-            <!-- Admin login form (shown by default) -->
-            <div id="admin-form">
-                <form method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="login_type" value="admin">
-                    <div style="margin-bottom:16px;">
-                        <label style="display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:6px;font-family:'Inter',sans-serif;">Username</label>
-                        <input type="text" name="username" placeholder="Enter your username" autofocus required
-                            style="width:100%;padding:11px 14px;border:1.5px solid #e8eaed;border-radius:10px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:#1a1a2e;background:#f7f8fa;transition:all 0.15s;"
-                            onfocus="this.style.borderColor='#6366f1';this.style.background='white';this.style.boxShadow='0 0 0 3px rgba(99,102,241,0.12)'"
-                            onblur="this.style.borderColor='#e8eaed';this.style.background='#f7f8fa';this.style.boxShadow='none'">
-                    </div>
-                    <div style="margin-bottom:24px;">
-                        <label style="display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:6px;font-family:'Inter',sans-serif;">Password</label>
-                        <input type="password" name="password" placeholder="Enter your password" required
-                            style="width:100%;padding:11px 14px;border:1.5px solid #e8eaed;border-radius:10px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:#1a1a2e;background:#f7f8fa;transition:all 0.15s;"
-                            onfocus="this.style.borderColor='#6366f1';this.style.background='white';this.style.boxShadow='0 0 0 3px rgba(99,102,241,0.12)'"
-                            onblur="this.style.borderColor='#e8eaed';this.style.background='#f7f8fa';this.style.boxShadow='none'">
-                    </div>
-                    <button type="submit"
-                        style="width:100%;padding:12px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 4px 12px rgba(99,102,241,0.3);transition:opacity 0.15s;"
-                        onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-                        Sign in
-                    </button>
-                </form>
-            </div>
+                {% if error and login_type == 'employee' %}
+                <div class="error-box">
+                    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M12 8v4m0 4h.01"/></svg>
+                    {{ error }}
+                </div>
+                {% endif %}
 
-            <!-- Employee login form (hidden until tab is clicked) -->
-            <div id="employee-form" style="display:none;">
-                <form method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="login_type" value="employee">
-                    <div style="margin-bottom:16px;">
-                        <label style="display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:6px;font-family:'Inter',sans-serif;">Employee ID</label>
-                        <input type="text" name="employee_id" placeholder="e.g. EMP001" required
-                            style="width:100%;padding:11px 14px;border:1.5px solid #e8eaed;border-radius:10px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:#1a1a2e;background:#f7f8fa;text-transform:uppercase;transition:all 0.15s;"
-                            onfocus="this.style.borderColor='#10b981';this.style.background='white';this.style.boxShadow='0 0 0 3px rgba(16,185,129,0.12)'"
-                            onblur="this.style.borderColor='#e8eaed';this.style.background='#f7f8fa';this.style.boxShadow='none'">
-                    </div>
-                    <div style="margin-bottom:8px;">
-                        <label style="display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:6px;font-family:'Inter',sans-serif;">Password</label>
-                        <input type="password" name="emp_password" placeholder="First 3 digits of phone + year joined" required
-                            style="width:100%;padding:11px 14px;border:1.5px solid #e8eaed;border-radius:10px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:#1a1a2e;background:#f7f8fa;transition:all 0.15s;"
-                            onfocus="this.style.borderColor='#10b981';this.style.background='white';this.style.boxShadow='0 0 0 3px rgba(16,185,129,0.12)'"
-                            onblur="this.style.borderColor='#e8eaed';this.style.background='#f7f8fa';this.style.boxShadow='none'">
-                        <p style="font-size:11px;color:#9ca3af;margin-top:6px;font-family:'Inter',sans-serif;">e.g. phone 9876543210, joined 2024 → <strong style="color:#6b7280;">9872024</strong></p>
-                    </div>
-                    <div style="margin-bottom:24px;"></div>
-                    <button type="submit"
-                        style="width:100%;padding:12px;background:linear-gradient(135deg,#10b981,#059669);color:white;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:0 4px 12px rgba(16,185,129,0.3);transition:opacity 0.15s;"
-                        onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-                        Sign in as Employee
-                    </button>
-                </form>
-            </div>
+                <div class="input-group">
+                    <svg class="input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2"/></svg>
+                    <input type="text" name="employee_id" placeholder="Employee ID (e.g. EMP001)" required style="text-transform:uppercase;" autocomplete="off">
+                </div>
 
+                <div class="input-group">
+                    <svg class="input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    <input type="password" name="emp_password" placeholder="First 3 digits of phone + year joined" required>
+                </div>
+
+                <p class="hint-text">e.g. phone 9876543210, joined 2024 &rarr; <strong>9872024</strong></p>
+
+                <button type="submit" class="btn-submit emp-btn">Sign In</button>
+            </form>
         </div>
-    </div>
 
-    <p style="text-align:center;margin-top:20px;font-size:12px;color:#9ca3af;font-family:'Inter',sans-serif;">
-        Employee Management System &copy; 2026
-    </p>
+        <!-- sliding overlay panel in the middle -->
+        <div class="overlay-container">
+            <div class="overlay">
+
+                <!-- shown when employee panel is active (slide left reveals this) -->
+                <div class="overlay-panel overlay-left">
+                    <div class="overlay-logo">E</div>
+                    <h2>Welcome Back!</h2>
+                    <p>Already have an admin account?</p>
+                    <button class="btn-ghost" onclick="switchToAdmin()">Admin Login</button>
+                </div>
+
+                <!-- shown by default (admin panel active) -->
+                <div class="overlay-panel overlay-right">
+                    <div class="overlay-logo">E</div>
+                    <h2>Hello, Employee!</h2>
+                    <p>Login with your Employee ID</p>
+                    <button class="btn-ghost" onclick="switchToEmployee()">Employee Login</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 </div>
 
-<script>
-/* check if server sent back login_type=employee (means employee login failed) */
-var currentTab = '{% if login_type == "employee" %}employee{% else %}admin{% endif %}';
-
-/* switches between admin and employee tab */
-function switchTab(tab) {
-    currentTab = tab;
-    var adminForm = document.getElementById('admin-form');
-    var empForm   = document.getElementById('employee-form');
-    var tabAdmin  = document.getElementById('tab-admin');
-    var tabEmp    = document.getElementById('tab-employee');
-
-    if (tab === 'admin') {
-        adminForm.style.display = 'block';
-        empForm.style.display   = 'none';
-        tabAdmin.style.color    = '#6366f1';
-        tabAdmin.style.borderBottom = '2px solid #6366f1';
-        tabEmp.style.color      = '#9ca3af';
-        tabEmp.style.borderBottom = '2px solid transparent';
-        adminForm.querySelector('input[name="username"]').focus();
-    } else {
-        empForm.style.display   = 'block';
-        adminForm.style.display = 'none';
-        tabEmp.style.color      = '#10b981';
-        tabEmp.style.borderBottom = '2px solid #10b981';
-        tabAdmin.style.color    = '#9ca3af';
-        tabAdmin.style.borderBottom = '2px solid transparent';
-        empForm.querySelector('input[name="employee_id"]').focus();
-    }
+<style>
+/* full viewport background - very light blue-green tint */
+.login-wrapper {
+    position: fixed; top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #e8f4fd 0%, #edfaf4 100%);
+    font-family: 'Inter', sans-serif;
+    margin: 0; padding: 20px; box-sizing: border-box;
 }
 
-/* if server returned employee error, auto-switch to employee tab on load */
-if (currentTab === 'employee') { switchTab('employee'); }
+/* main card */
+.login-container {
+    position: relative;
+    width: 820px; max-width: 100%;
+    min-height: 500px;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(99,102,241,0.15), 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* both form panels */
+.form-panel {
+    position: absolute; top: 0;
+    width: 50%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    padding: 40px 36px; box-sizing: border-box;
+    transition: all 0.6s ease-in-out;
+}
+.left-panel  { left: 0;  z-index: 2; opacity: 1; }
+.right-panel { right: 0; z-index: 1; opacity: 0; }
+
+/* swap panels when employee mode is active */
+.login-container.employee-active .left-panel  { opacity: 0; z-index: 1; }
+.login-container.employee-active .right-panel { opacity: 1; z-index: 2; }
+
+/* form layout */
+.login-form {
+    width: 100%; display: flex; flex-direction: column;
+    align-items: center; gap: 14px;
+}
+.form-title    { font-size: 22px; font-weight: 700; color: #1a1a2e; margin-bottom: 2px; letter-spacing: -0.3px; text-align: center; }
+.form-subtitle { font-size: 12px; color: #9ca3af; text-align: center; margin-bottom: 4px; }
+
+/* error box */
+.error-box {
+    width: 100%; background: #fee2e2; color: #991b1b;
+    border: 1px solid #fca5a5; border-radius: 10px;
+    padding: 10px 14px; font-size: 12px;
+    display: flex; align-items: center; gap: 8px;
+}
+
+/* input with icon */
+.input-group { position: relative; width: 100%; }
+.input-group input {
+    width: 100%; padding: 12px 14px 12px 42px;
+    border: 2px solid #e5e7eb; border-radius: 10px;
+    font-size: 13px; font-family: 'Inter', sans-serif;
+    outline: none; background: #f9fafb; color: #111827;
+    transition: all 0.2s; box-sizing: border-box;
+}
+.input-group input:focus {
+    border-color: #6366f1; background: #fff;
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+}
+.input-icon {
+    position: absolute; left: 13px; top: 50%;
+    transform: translateY(-50%); color: #9ca3af; pointer-events: none;
+}
+
+.hint-text { font-size: 11px; color: #9ca3af; text-align: center; margin-top: -6px; }
+
+/* submit buttons */
+.btn-submit {
+    width: 100%; padding: 12px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white; border: none; border-radius: 10px;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 4px 14px rgba(99,102,241,0.35);
+    transition: opacity 0.2s, transform 0.2s; margin-top: 4px;
+}
+.btn-submit:hover { opacity: 0.92; transform: translateY(-1px); }
+.emp-btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    box-shadow: 0 4px 14px rgba(16,185,129,0.35);
+}
+
+/* sliding overlay */
+.overlay-container {
+    position: absolute; top: 0; left: 50%;
+    width: 50%; height: 100%; overflow: hidden;
+    z-index: 100; transition: transform 0.6s ease-in-out;
+    border-radius: 0 20px 20px 0;
+}
+.login-container.employee-active .overlay-container {
+    transform: translateX(-100%);
+    border-radius: 20px 0 0 20px;
+}
+
+.overlay {
+    position: relative;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%);
+    color: white; height: 100%; width: 200%;
+    left: -100%; transition: transform 0.6s ease-in-out;
+}
+.login-container.employee-active .overlay { transform: translateX(50%); }
+
+.overlay-panel {
+    position: absolute; top: 0; width: 50%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 14px; padding: 40px 30px;
+    text-align: center; box-sizing: border-box;
+}
+.overlay-left  { left: 0; }
+.overlay-right { right: 0; }
+
+.overlay-logo {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: rgba(255,255,255,0.2);
+    border: 2px solid rgba(255,255,255,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; font-weight: 700; color: white; margin-bottom: 4px;
+}
+.overlay-panel h2 { font-size: 22px; font-weight: 700; color: white; margin: 0; letter-spacing: -0.3px; }
+.overlay-panel p  { font-size: 13px; color: rgba(255,255,255,0.8); margin: 0; }
+
+.btn-ghost {
+    padding: 10px 28px; background: transparent; color: white;
+    border: 2px solid rgba(255,255,255,0.7); border-radius: 24px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    font-family: 'Inter', sans-serif; transition: all 0.2s;
+    margin-top: 4px; letter-spacing: 0.3px;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.15); border-color: white; }
+
+/* mobile fallback */
+@media (max-width: 640px) {
+    .login-container { min-height: auto; }
+    .form-panel { position: relative; width: 100%; height: auto; opacity: 1 !important; z-index: 2 !important; }
+    .right-panel { display: none; }
+    .login-container.employee-active .left-panel  { display: none; }
+    .login-container.employee-active .right-panel { display: flex; }
+    .overlay-container { display: none; }
+}
+</style>
+
+<script>
+var isEmployee = {% if login_type == 'employee' %}true{% else %}false{% endif %};
+
+function switchToEmployee() {
+    document.getElementById('login-container').classList.add('employee-active');
+    setTimeout(function() {
+        var f = document.querySelector('input[name="employee_id"]');
+        if (f) f.focus();
+    }, 400);
+}
+
+function switchToAdmin() {
+    document.getElementById('login-container').classList.remove('employee-active');
+    setTimeout(function() {
+        var f = document.querySelector('input[name="username"]');
+        if (f) f.focus();
+    }, 400);
+}
+
+if (isEmployee) switchToEmployee();
 </script>
+
 {% endblock %}

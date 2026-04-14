@@ -44,6 +44,7 @@
             color: var(--text);
             font-size: 14px;
             line-height: 1.6;
+            margin: 0; padding: 0;
         }
 
         /* ---- top navigation bar ---- */
@@ -288,8 +289,8 @@
 
 {% else %}
 
-<!-- not logged in - show centered login page -->
-<div style="min-height:100vh; display:flex; align-items:center; justify-content:center; background:var(--bg);">
+<!-- not logged in - login page handles its own full-screen background -->
+<div style="margin:0; padding:0;">
     {% block login_content %}{% endblock %}
 </div>
 

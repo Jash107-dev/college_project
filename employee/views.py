@@ -12,7 +12,7 @@ from .forms import EmployeeForm, EmployeeStatusForm
 
  
 
-def admin_required(view_func):#decoraters.
+def admin_required(view_func):
     
     @login_required
     def wrapper(request, *args, **kwargs):
@@ -53,7 +53,7 @@ def dashboard(request):
     return render(request, 'employee/dashboard.html', context)
 
 
-@admin_required#list of employees .
+@admin_required
 def employee_list(request):
     search     = request.GET.get('search', '')
     department = request.GET.get('department', '')
