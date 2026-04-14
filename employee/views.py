@@ -228,15 +228,14 @@ def approve_leave(request, leave_id):
         leave.status = 'Approved'
         leave.save()
 
-        # auto-update the linked employee's status to "On Leave"
-        try:
-            emp = leave.employee.employee_profile
-            emp.status = 'On Leave'
-            emp.save()
-        except Employee.DoesNotExist:
-            pass  # user has no employee record, skip silently
+        # directly update the Employee record linked to this user - using filter+update
+        # is safer than accessing the reverse relation which can raise exceptions
+        updated = Employee.objects.filter(user=leave.employee).update(status='On Leave')
 
-        messages.success(request, f'Leave approved for {leave.employee.get_full_name() or leave.employee.username}. Employee status updated to On Leave.')
+        if updated:
+            messages.success(request, f'Leave approved for {leave.employee.get_full_name() or leave.employee.username}. Status updated to On Leave.')
+        else:
+            messages.success(request, f'Leave approved for {leave.employee.get_full_name() or leave.employee.username}.')
     return redirect('admin_leave_list')
 
 
@@ -247,20 +246,15 @@ def reject_leave(request, leave_id):
         leave.status = 'Rejected'
         leave.save()
 
-        # if employee was set to On Leave due to this request, revert them to Active
-        # only revert if they have no other approved leaves still active
-        try:
-            emp = leave.employee.employee_profile
-            has_other_approved = Leave.objects.filter(
-                employee=leave.employee,
-                status='Approved'
-            ).exclude(id=leave.id).exists()
+        # check if this employee has any other approved leaves before reverting status
+        has_other_approved = Leave.objects.filter(
+            employee=leave.employee,
+            status='Approved'
+        ).exclude(id=leave.id).exists()
 
-            if not has_other_approved and emp.status == 'On Leave':
-                emp.status = 'Active'
-                emp.save()
-        except Employee.DoesNotExist:
-            pass
+        # only revert to Active if no other approved leaves exist
+        if not has_other_approved:
+            Employee.objects.filter(user=leave.employee, status='On Leave').update(status='Active')
 
         messages.error(request, f'Leave rejected for {leave.employee.get_full_name() or leave.employee.username}.')
     return redirect('admin_leave_list')
