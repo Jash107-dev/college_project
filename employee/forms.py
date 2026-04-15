@@ -4,12 +4,15 @@ from django.utils import timezone
 from .models import Employee, Leave
 
 
+# this form is used when admin adds or edits an employee
+# employee_id and user are excluded bcoz they are auto generated
 class EmployeeForm(forms.ModelForm):
 
     class Meta:
         model = Employee
         exclude = ['employee_id', 'user']
         widgets = {
+            # adding form-input class so css styles apply to all fields
             'name':            forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Enter full name'}),
             'email':           forms.EmailInput(attrs={'class': 'form-input', 'placeholder': 'Enter email address'}),
             'phone':           forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'e.g. 6301986139'}),
@@ -22,6 +25,7 @@ class EmployeeForm(forms.ModelForm):
         }
 
     def clean_name(self):
+            # name validation - cant be empty or too short
         name = self.cleaned_data.get('name', '').strip()
         if not name:
             raise forms.ValidationError("Name is required.")
@@ -29,22 +33,25 @@ class EmployeeForm(forms.ModelForm):
             raise forms.ValidationError("Name must be at least 2 characters long.")
         if len(name) > 100:
             raise forms.ValidationError("Name cannot exceed 100 characters.")
+        # only letters spaces dots hyphens allowed
         if not re.match(r"^[A-Za-z\s.\-']+$", name):
             raise forms.ValidationError("Name can only contain letters, spaces, dots, hyphens, and apostrophes.")
         return name
 
     def clean_email(self):
+            # check email is unique - cant have 2 employees with same email
         email = self.cleaned_data.get('email', '').strip().lower()
         if not email:
             raise forms.ValidationError("Email is required.")
         qs = Employee.objects.filter(email=email)
         if self.instance and self.instance.pk:
-            qs = qs.exclude(pk=self.instance.pk)
+            qs = qs.exclude(pk=self.instance.pk)  # exclude current emp when editing
         if qs.exists():
             raise forms.ValidationError("An employee with this email already exists.")
         return email
 
     def clean_phone(self):
+            # phone is optional but if given it should be valid
         phone = self.cleaned_data.get('phone', '')
         if not phone:
             return phone
@@ -54,6 +61,7 @@ class EmployeeForm(forms.ModelForm):
         digits_only = re.sub(r'\D', '', phone)
         if len(digits_only) < 7 or len(digits_only) > 15:
             raise forms.ValidationError("Phone number must have between 7 and 15 digits.")
+        # phone also should be unique
         qs = Employee.objects.filter(phone=phone)
         if self.instance and self.instance.pk:
             qs = qs.exclude(pk=self.instance.pk)
@@ -62,6 +70,7 @@ class EmployeeForm(forms.ModelForm):
         return phone
 
     def clean_salary(self):
+            # salary cant be negative or unrealistically high
         salary = self.cleaned_data.get('salary')
         if salary is None:
             raise forms.ValidationError("Salary is required.")
@@ -85,6 +94,7 @@ class EmployeeForm(forms.ModelForm):
         return designation
 
     def clean_date_of_joining(self):
+            # joining date cant be in future and shouldnt be too old
         doj = self.cleaned_data.get('date_of_joining')
         if not doj:
             return doj
@@ -119,7 +129,8 @@ class EmployeeForm(forms.ModelForm):
         return department
 
 
-# employee can only update their own status
+# this form is only for employee to update their own status
+# they cant change anything else only status field
 class EmployeeStatusForm(forms.ModelForm):
 
     class Meta:
@@ -137,13 +148,12 @@ class EmployeeStatusForm(forms.ModelForm):
         return status
 
 
-# ---- Leave Application Form ----
-
+# leave application form - employee fills this to apply for leave
 class LeaveForm(forms.ModelForm):
 
     class Meta:
         model  = Leave
-        # employee and status are set by the view, not the user
+        # employee and status are set in the view not by user
         fields = ['leave_type', 'start_date', 'end_date', 'reason']
         widgets = {
             'leave_type': forms.Select(attrs={'class': 'form-input'}),
@@ -153,7 +163,7 @@ class LeaveForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        # we pass the current user from the view so we can check overlaps
+            # getting user from view so we can check overlapping leaves
         self.user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
 
@@ -163,11 +173,12 @@ class LeaveForm(forms.ModelForm):
         end     = cleaned.get('end_date')
 
         if start and end:
-            # end date must not be before start date
+            # end date cant be before start date - basic validation
             if end < start:
                 raise forms.ValidationError("End date cannot be before the start date.")
 
-            # check for overlapping leave requests for the same user
+            # check if employee already has leave on these dates
+            # cant apply twice for same dates
             if self.user:
                 overlapping = Leave.objects.filter(
                     employee=self.user,
@@ -175,7 +186,7 @@ class LeaveForm(forms.ModelForm):
                     start_date__lte=end,
                     end_date__gte=start,
                 )
-                # exclude current instance when editing
+                # when editing exclude the current leave from overlap check
                 if self.instance and self.instance.pk:
                     overlapping = overlapping.exclude(pk=self.instance.pk)
 
