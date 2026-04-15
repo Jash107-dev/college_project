@@ -10,40 +10,31 @@ from .models import Employee, Leave
 from .forms import EmployeeForm, EmployeeStatusForm, LeaveForm
 
 
-# this is a custom decorator i made
-# it checks if the user is admin before allowing access
-# if not admin it redirects to employee dashboard
+# custom decorator - checks if user is admin before running the view
 def admin_required(view_func):
     @login_required
     def wrapper(request, *args, **kwargs):
-            # is_staff and is_superuser both are admin type users
-        if not request.user.is_staff and not request.user.is_superuser:
+        if not request.user.is_staff and not request.user.is_superuser:  # both staff and superuser are admins
             messages.error(request, 'You do not have permission to access this page.')
             return redirect('employee_self_dashboard')
         return view_func(request, *args, **kwargs)
     return wrapper
 
 
-# main dashboard view - only admin can see this
+# admin dashboard - shows stats and recent employees
 @admin_required
 def dashboard(request):
-        # getting all the counts for the stat cards
     total    = Employee.objects.count()
     active   = Employee.objects.filter(status='Active').count()
     inactive = Employee.objects.filter(status='Inactive').count()
     on_leave = Employee.objects.filter(status='On Leave').count()
-
-    # salary stats using aggregate functions
     avg_salary = Employee.objects.aggregate(avg=Avg('salary'))['avg'] or 0
     max_salary = Employee.objects.aggregate(max=Max('salary'))['max'] or 0
     min_salary = Employee.objects.aggregate(min=Min('salary'))['min'] or 0
-
-    # department wise count for the bar chart
     dept_data        = Employee.objects.values('department').annotate(count=Count('id')).order_by('-count')
     gender_data      = Employee.objects.values('gender').annotate(count=Count('id'))
     recent_employees = Employee.objects.order_by('-id')[:5]  # last 5 added
-    pending_leaves   = Leave.objects.filter(status='Pending').count()  # for badge in sidebar
-
+    pending_leaves   = Leave.objects.filter(status='Pending').count()  # badge count for sidebar
     context = {
         'total': total, 'active': active, 'inactive': inactive, 'on_leave': on_leave,
         'avg_salary': int(avg_salary), 'max_salary': max_salary, 'min_salary': min_salary,
@@ -53,20 +44,15 @@ def dashboard(request):
     return render(request, 'employee/dashboard.html', context)
 
 
-# shows list of all employees with search and filter
+# list all employees with search and filter support
 @admin_required
 def employee_list(request):
-        # getting filter values from url params
-    search = request.GET.get('search', '')
+    search     = request.GET.get('search', '')
     department = request.GET.get('department', '')
-    status = request.GET.get('status', '')
-    gender = request.GET.get('gender', '')
-
-    employees = Employee.objects.all().order_by('-id')
-
-    # applying filters only if value is given
-    if search:
-            # searching in name email and emp id
+    status     = request.GET.get('status', '')
+    gender     = request.GET.get('gender', '')
+    employees  = Employee.objects.all().order_by('-id')
+    if search:  # search across name email and emp id
         employees = (employees.filter(name__icontains=search) |
                      employees.filter(email__icontains=search) |
                      employees.filter(employee_id__icontains=search))
@@ -76,12 +62,9 @@ def employee_list(request):
         employees = employees.filter(status=status)
     if gender:
         employees = employees.filter(gender=gender)
-
-    total = employees.count()
-    # showing 8 employees per page
-    paginator = Paginator(employees, 8)
-    page_obj = paginator.get_page(request.GET.get('page'))
-
+    total    = employees.count()
+    paginator = Paginator(employees, 8)  # 8 per page
+    page_obj  = paginator.get_page(request.GET.get('page'))
     context = {
         'page_obj': page_obj, 'search': search, 'department': department,
         'status': status, 'gender': gender, 'total': total,
@@ -92,29 +75,28 @@ def employee_list(request):
     return render(request, 'employee/employee_list.html', context)
 
 
-# view single employee profile
+# single employee profile page
 @admin_required
 def employee_profile(request, id):
     emp = get_object_or_404(Employee, id=id)
     return render(request, 'employee/employee_profile.html', {'emp': emp})
 
 
-# add new employee form
+# add new employee - auto creates login account after saving
 @admin_required
 def add_employee(request):
     form = EmployeeForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
         emp = form.save()
-        # show the login credentials in success message so admin can share with employee
-        messages.success(request, f'{emp.name} added. Login: {emp.user.username} | Password: {emp._generate_password()}')
+        messages.success(request, f'{emp.name} added. Login: {emp.user.username} | Password: {emp._generate_password()}')  # show creds to admin
         return redirect('employee_list')
     return render(request, 'employee/add_employee.html', {'form': form})
 
 
-# edit existing employee details
+# edit employee details
 @admin_required
 def edit_employee(request, id):
-    emp = get_object_or_404(Employee, id=id)
+    emp  = get_object_or_404(Employee, id=id)
     form = EmployeeForm(request.POST or None, instance=emp)
     if request.method == 'POST' and form.is_valid():
         emp = form.save()
@@ -123,34 +105,28 @@ def edit_employee(request, id):
     return render(request, 'employee/edit_employee.html', {'form': form, 'emp': emp})
 
 
-# delete employee - this was tricky bcoz of the user relation
+# delete employee - had a bug here fixed it by deleting emp first then user
 @admin_required
 def delete_employee(request, id):
     emp = get_object_or_404(Employee, id=id)
     if request.method == 'POST':
         name = emp.name
-        # saving user ref before deleting emp
-        # if we delete user first then emp.user becomes null and emp stays in db
-        # so we delete emp first then user - this was a bug i fixed
-        user = emp.user
+        user = emp.user  # save ref before delete bcoz emp.user becomes null after emp.delete()
         emp.delete()
         if user:
             user.delete()
-
         messages.success(request, f'{name} has been deleted successfully.')
         return redirect('employee_list')
     return render(request, 'employee/delete_employee.html', {'emp': emp})
 
 
-# export all employees as csv file
+# export employee data as csv
 @admin_required
 def export_csv(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="employees.csv"'
     writer = csv.writer(response)
-    # header row
-    writer.writerow(['Employee ID', 'Name', 'Email', 'Phone', 'Gender',
-                     'Department', 'Designation', 'Salary', 'Date of Joining', 'Status'])
+    writer.writerow(['Employee ID', 'Name', 'Email', 'Phone', 'Gender', 'Department', 'Designation', 'Salary', 'Date of Joining', 'Status'])
     for emp in Employee.objects.all().order_by('employee_id'):
         writer.writerow([emp.employee_id, emp.name, emp.email, emp.phone or '',
                          emp.gender, emp.department or '', emp.designation or '',
@@ -158,22 +134,20 @@ def export_csv(request):
     return response
 
 
-# employee self dashboard - employee can see their own profile here
+# employee self dashboard - shows their own profile
 @login_required
 def employee_self_dashboard(request):
-        # if admin somehow lands here redirect to admin dashboard
     if request.user.is_staff or request.user.is_superuser:
-        return redirect('dashboard')
+        return redirect('dashboard')  # admin shouldnt land here
     try:
         emp = request.user.employee_profile
     except Employee.DoesNotExist:
-            # this shouldnt happen but just in case
         messages.error(request, 'No employee record linked to your account.')
         return redirect('logout')
     return render(request, 'employee/self_dashboard.html', {'emp': emp})
 
 
-# employee can update their own status like active or on leave
+# employee updates their own status eg active or on leave
 @login_required
 def employee_update_status(request):
     if request.user.is_staff or request.user.is_superuser:
@@ -191,75 +165,57 @@ def employee_update_status(request):
     return render(request, 'employee/self_update_status.html', {'form': form, 'emp': emp})
 
 
-# apply leave view - only employees can use this not admin
+# employee applies for leave - admin not allowed here
 @login_required
 def apply_leave(request):
-        # admin should not apply leave they only approve or reject
-        # so redirect them to leave list page
-    if request.user.is_staff or request.user.is_superuser:
+    if request.user.is_staff or request.user.is_superuser:  # admin cant apply leave
         messages.error(request, 'Admins cannot apply for leave. Use the Leave Requests panel to manage employee leaves.')
         return redirect('admin_leave_list')
-
-    # passing user to form so it can check for overlapping dates
-    form = LeaveForm(request.POST or None, user=request.user)
+    form = LeaveForm(request.POST or None, user=request.user)  # passing user for overlap check
     if request.method == 'POST' and form.is_valid():
-        leave = form.save(commit=False)
-        leave.employee = request.user  # link leave to current logged in user
-        leave.status   = 'Pending'     # always pending when first submitted
+        leave          = form.save(commit=False)
+        leave.employee = request.user
+        leave.status   = 'Pending'  # always starts as pending
         leave.save()
         messages.success(request, 'Leave application submitted successfully.')
         return redirect('my_leaves')
     return render(request, 'leave/apply_leave.html', {'form': form})
 
 
-# employee can see all their own leave requests here
+# employee sees their own leave history
 @login_required
 def my_leaves(request):
-        # if admin comes here send them to admin leave list
     if request.user.is_staff or request.user.is_superuser:
-        return redirect('admin_leave_list')
+        return redirect('admin_leave_list')  # admin goes to full list
     leaves = Leave.objects.filter(employee=request.user)
     return render(request, 'leave/my_leaves.html', {'leaves': leaves})
 
 
-# admin can see all leave requests from all employees
+# admin sees all leave requests with filter
 @admin_required
 def admin_leave_list(request):
-    status_filter = request.GET.get('status', '')
-    leaves = Leave.objects.select_related('employee').all()
-
-    # filter by status if selected
+    status_filter  = request.GET.get('status', '')
+    leaves         = Leave.objects.select_related('employee').all()
     if status_filter:
         leaves = leaves.filter(status=status_filter)
-
-    # counts for the 3 stat cards at top
     pending_count  = Leave.objects.filter(status='Pending').count()
     approved_count = Leave.objects.filter(status='Approved').count()
     rejected_count = Leave.objects.filter(status='Rejected').count()
-
     context = {
-        'leaves': leaves,
-        'status_filter': status_filter,
-        'pending_count': pending_count,
-        'approved_count': approved_count,
-        'rejected_count': rejected_count,
+        'leaves': leaves, 'status_filter': status_filter,
+        'pending_count': pending_count, 'approved_count': approved_count, 'rejected_count': rejected_count,
     }
     return render(request, 'leave/admin_leave_list.html', context)
 
 
-# admin approves a leave request
+# admin approves leave and updates employee status to on leave
 @admin_required
 def approve_leave(request, leave_id):
     leave = get_object_or_404(Leave, id=leave_id)
     if leave.status == 'Pending':
         leave.status = 'Approved'
         leave.save()
-
-        # update employee status to on leave
-        # using filter+update is better than instance.save() here
-        # bcoz reverse relation can sometimes throw errors
-        updated = Employee.objects.filter(user=leave.employee).update(status='On Leave')
-
+        updated = Employee.objects.filter(user=leave.employee).update(status='On Leave')  # filter+update safer than instance.save
         if updated:
             messages.success(request, f'Leave approved for {leave.employee.get_full_name() or leave.employee.username}. Status updated to On Leave.')
         else:
@@ -267,23 +223,15 @@ def approve_leave(request, leave_id):
     return redirect('admin_leave_list')
 
 
-# admin rejects a leave request
+# admin rejects leave and reverts employee status if no other approved leaves
 @admin_required
 def reject_leave(request, leave_id):
     leave = get_object_or_404(Leave, id=leave_id)
     if leave.status == 'Pending':
         leave.status = 'Rejected'
         leave.save()
-
-        # check if employee has any other approved leaves
-        # if yes dont change status back, if no then set back to active
-        has_other_approved = Leave.objects.filter(
-            employee=leave.employee,
-            status='Approved'
-        ).exclude(id=leave.id).exists()
-
+        has_other_approved = Leave.objects.filter(employee=leave.employee, status='Approved').exclude(id=leave.id).exists()
         if not has_other_approved:
-            Employee.objects.filter(user=leave.employee, status='On Leave').update(status='Active')
-
+            Employee.objects.filter(user=leave.employee, status='On Leave').update(status='Active')  # revert only if no other approved leaves
         messages.error(request, f'Leave rejected for {leave.employee.get_full_name() or leave.employee.username}.')
     return redirect('admin_leave_list')

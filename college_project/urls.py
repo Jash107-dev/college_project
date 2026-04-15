@@ -1,9 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
 
-# main url config - all apps are included here
 urlpatterns = [
-    path('admin/', admin.site.urls),       # django default admin panel
-    path('', include('accounts.urls')),    # login logout home
-    path('employee/', include('employee.urls')),  # all employee related urls
+    path('admin/', admin.site.urls),                      # django admin panel
+    path('', include('accounts.urls')),                   # login logout
+    path('employee/', include('employee.urls')),          # all employee and leave urls
 ]
