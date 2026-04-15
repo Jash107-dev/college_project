@@ -64,16 +64,12 @@
 
         /* brand logo + name on the left */
         .topbar-brand {
-            display: flex; align-items: center; gap: 10px;
+            display: flex; align-items: center; gap: 12px;
             text-decoration: none;
         }
         .topbar-brand .logo {
-            width: 34px; height: 34px;
-            background: var(--accent);
-            border-radius: 9px;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 700; font-size: 15px; color: white;
-            box-shadow: 0 2px 8px rgba(99,102,241,0.35);
+            height: 40px;
+            width: auto;
         }
         .topbar-brand span {
             font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.2px;
@@ -195,10 +191,12 @@
 
 <!-- top bar -->
 <div class="topbar">
-    <div class="topbar-brand">
-        <div class="logo">E</div>
-        <span>EMS</span>
-    </div>
+    <a href="{% url 'dashboard' %}" class="topbar-brand">
+        {% load static %}
+        <img src="{% static 'images/logo.png' %}" alt="Employee Management" class="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="logo-fallback" style="display:none; width: 34px; height: 34px; background: #7c2d2d; border-radius: 9px; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; color: white; box-shadow: 0 2px 8px rgba(124,45,45,0.35);">E</div>
+        <span style="font-size: 16px; font-weight: 600; color: var(--text);">Employee Management</span>
+    </a>
     <div class="topbar-right">
         <span id="live-clock">--:--:--</span>
         <div class="topbar-user">
