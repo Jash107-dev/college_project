@@ -173,27 +173,78 @@ def delete_employee(request, id):
 
 @admin_required
 def export_csv(request):
+    """Enhanced export with filters and column selection"""
+    
+    # Get filter parameters
+    department = request.GET.get('department', '')
+    status = request.GET.get('status', '')
+    salary_min = request.GET.get('salary_min', '')
+    salary_max = request.GET.get('salary_max', '')
+    date_from = request.GET.get('date_from', '')
+    date_to = request.GET.get('date_to', '')
+    
+    # Get selected columns (comma-separated)
+    selected_cols = request.GET.get('columns', '')
+    
+    # If no filters/columns selected, show the export config page
+    if request.method == 'GET' and not selected_cols:
+        context = {
+            'departments': Employee.DEPARTMENT_CHOICES,
+            'statuses': Employee.STATUS_CHOICES,
+        }
+        return render(request, 'employee/export_config.html', context)
+    
+    # Build queryset with filters
+    employees = Employee.objects.all()
+    
+    if department:
+        employees = employees.filter(department=department)
+    if status:
+        employees = employees.filter(status=status)
+    if salary_min:
+        employees = employees.filter(salary__gte=int(salary_min))
+    if salary_max:
+        employees = employees.filter(salary__lte=int(salary_max))
+    if date_from:
+        employees = employees.filter(date_of_joining__gte=date_from)
+    if date_to:
+        employees = employees.filter(date_of_joining__lte=date_to)
+    
+    employees = employees.order_by('employee_id')
+    
+    # Define all available columns
+    all_columns = {
+        'employee_id': ('Employee ID', lambda e: e.employee_id),
+        'name': ('Name', lambda e: e.name),
+        'email': ('Email', lambda e: e.email),
+        'phone': ('Phone', lambda e: e.phone or ''),
+        'gender': ('Gender', lambda e: e.gender),
+        'department': ('Department', lambda e: e.department or ''),
+        'designation': ('Designation', lambda e: e.designation or ''),
+        'salary': ('Salary', lambda e: e.salary),
+        'date_of_joining': ('Date of Joining', lambda e: e.date_of_joining or ''),
+        'status': ('Status', lambda e: e.status),
+    }
+    
+    # Parse selected columns
+    if selected_cols:
+        col_keys = [c.strip() for c in selected_cols.split(',') if c.strip() in all_columns]
+    else:
+        col_keys = list(all_columns.keys())  # default: all columns
+    
+    # Generate CSV
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="employees.csv"'
+    response['Content-Disposition'] = 'attachment; filename="employees_export.csv"'
     
     writer = csv.writer(response)
-    headers = ['Employee ID', 'Name', 'Email', 'Phone', 'Gender', 'Department', 'Designation', 'Salary', 'Date of Joining', 'Status']
+    
+    # Write headers
+    headers = [all_columns[key][0] for key in col_keys]
     writer.writerow(headers)
     
-    all_employees = Employee.objects.all().order_by('employee_id')
-    for emp in all_employees:
-        row = [
-            emp.employee_id,
-            emp.name,
-            emp.email,
-            emp.phone or '',
-            emp.gender,
-            emp.department or '',
-            emp.designation or '',
-            emp.salary,
-            emp.date_of_joining or '',
-            emp.status
-        ]
+    # Write data rows
+    for emp in employees:
+        row = [all_columns[key][1](emp) for key in col_keys]
         writer.writerow(row)
     
     return response
