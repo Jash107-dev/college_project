@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { padding: 20px; text-align: center; border-radius: 8px 8px 0 0; color: white; }
+        .header.approved { background: #10b981; }
+        .header.rejected { background: #ef4444; }
+        .content { background: #f9fafb; padding: 30px; border: 1px solid #e5e7eb; }
+        .leave-details { background: white; padding: 15px; margin: 20px 0; }
+        .leave-details.approved { border-left: 4px solid #10b981; }
+        .leave-details.rejected { border-left: 4px solid #ef4444; }
+        .footer { text-align: center; padding: 20px; color: #6b7280; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header {% if approved %}approved{% else %}rejected{% endif %}">
+            <h1>Leave Request {{ status }}</h1>
+        </div>
+        <div class="content">
+            <p>Dear <strong>{{ employee_name }}</strong>,</p>
+            
+            {% if approved %}
+            <p>Good news! Your leave request has been <strong style="color: #10b981;">APPROVED</strong>.</p>
+            {% else %}
+            <p>We regret to inform you that your leave request has been <strong style="color: #ef4444;">REJECTED</strong>.</p>
+            {% endif %}
+            
+            <div class="leave-details {% if approved %}approved{% else %}rejected{% endif %}">
+                <h3>Leave Details:</h3>
+                <p><strong>Leave Type:</strong> {{ leave_type }}</p>
+                <p><strong>Start Date:</strong> {{ start_date }}</p>
+                <p><strong>End Date:</strong> {{ end_date }}</p>
+                <p><strong>Total Days:</strong> {{ total_days }}</p>
+                <p><strong>Status:</strong> {{ status }}</p>
+            </div>
+            
+            {% if approved %}
+            <p>Your leave has been recorded in the system. Enjoy your time off!</p>
+            {% else %}
+            <p>If you have any questions about this decision, please contact your manager or HR department.</p>
+            {% endif %}
+            
+            <p>Best regards,<br>
+            <strong>HR Team</strong></p>
+        </div>
+        <div class="footer">
+            <p>This is an automated email. Please do not reply to this message.</p>
+        </div>
+    </div>
+</body>
+</html>

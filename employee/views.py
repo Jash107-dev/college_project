@@ -8,6 +8,12 @@ import csv
 
 from .models import Employee, Leave
 from .forms import EmployeeForm, EmployeeStatusForm, LeaveForm
+from .email_utils import (
+    send_welcome_email,
+    send_leave_application_email,
+    send_leave_status_email,
+    send_employee_update_notification
+)
 
 
 def admin_required(view_func):
@@ -117,6 +123,13 @@ def add_employee(request):
         password = emp._generate_password()
         success_msg = f'{emp.name} added. Login: {emp.user.username} | Password: {password}'
         messages.success(request, success_msg)
+        
+        # Send welcome email
+        if send_welcome_email(emp, password):
+            messages.info(request, f'Welcome email sent to {emp.email}')
+        else:
+            messages.warning(request, 'Employee added but email could not be sent.')
+        
         return redirect('employee_list')
     
     return render(request, 'employee/add_employee.html', {'form': form})
@@ -130,6 +143,11 @@ def edit_employee(request, id):
     if request.method == 'POST' and form.is_valid():
         emp = form.save()
         messages.success(request, f'{emp.name} has been updated successfully.')
+        
+        # Send update notification email
+        if send_employee_update_notification(emp, request.user):
+            messages.info(request, f'Update notification sent to {emp.email}')
+        
         return redirect('employee_list')
     
     return render(request, 'employee/edit_employee.html', {'form': form, 'emp': emp})
@@ -231,6 +249,11 @@ def apply_leave(request):
         leave.save()
         
         messages.success(request, 'Leave application submitted successfully.')
+        
+        # Send notification to admin
+        if send_leave_application_email(leave):
+            messages.info(request, 'Admin has been notified via email.')
+        
         return redirect('my_leaves')
     
     return render(request, 'leave/apply_leave.html', {'form': form})
@@ -282,6 +305,10 @@ def approve_leave(request, leave_id):
             messages.success(request, f'Leave approved for {employee_name}. Status updated to On Leave.')
         else:
             messages.success(request, f'Leave approved for {employee_name}.')
+        
+        # Send approval email to employee
+        if send_leave_status_email(leave, approved=True):
+            messages.info(request, f'Approval email sent to {employee_name}')
     
     return redirect('admin_leave_list')
 
@@ -307,5 +334,9 @@ def reject_leave(request, leave_id):
         
         employee_name = leave.employee.get_full_name() or leave.employee.username
         messages.error(request, f'Leave rejected for {employee_name}.')
+        
+        # Send rejection email to employee
+        if send_leave_status_email(leave, approved=False):
+            messages.info(request, f'Rejection email sent to {employee_name}')
     
     return redirect('admin_leave_list')
