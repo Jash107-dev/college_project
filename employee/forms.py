@@ -4,13 +4,13 @@ from django.utils import timezone
 from .models import Employee, Leave
 
 
-# form for adding or editing employee - employee_id and user excluded bcoz auto generated
+# form for adding or editing employee
 class EmployeeForm(forms.ModelForm):
 
     class Meta:
         model   = Employee
-        exclude = ['employee_id', 'user']
-        widgets = {  # form-input class so all fields get same css styling
+        exclude = ['employee_id', 'user']#these are auto generated 
+        widgets = {  # form input class so all fields get same styling and placeholdders also
             'name':            forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Enter full name'}),
             'email':           forms.EmailInput(attrs={'class': 'form-input', 'placeholder': 'Enter email address'}),
             'phone':           forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'e.g. 6301986139'}),
@@ -23,14 +23,14 @@ class EmployeeForm(forms.ModelForm):
         }
 
     def clean_name(self):
-        name = self.cleaned_data.get('name', '').strip()
+        name = self.cleaned_data.get('name', '').strip()# remove extra spaces
         if not name:
             raise forms.ValidationError("Name is required.")
         if len(name) < 2:
             raise forms.ValidationError("Name must be at least 2 characters long.")
         if len(name) > 100:
             raise forms.ValidationError("Name cannot exceed 100 characters.")
-        if not re.match(r"^[A-Za-z\s.\-']+$", name):  # only letters spaces dots hyphens
+        if not re.match(r"^[A-Za-z\s.\-']+$", name):  # allowed only letters spaces dots hyphens
             raise forms.ValidationError("Name can only contain letters, spaces, dots, hyphens, and apostrophes.")
         return name
 
@@ -66,9 +66,9 @@ class EmployeeForm(forms.ModelForm):
         salary = self.cleaned_data.get('salary')
         if salary is None:
             raise forms.ValidationError("Salary is required.")
-        if salary < 0:
-            raise forms.ValidationError("Salary cannot be negative.")
-        if salary > 10_000_000:  # max 1 crore
+        if salary <= 0:
+            raise forms.ValidationError("Salary cannot be zero or negative.")
+        if salary > 10_000_000:  # maximum is 1 crore
             raise forms.ValidationError("Salary seems too high. Please enter a realistic value (max ₹1,00,00,000).")
         return salary
 

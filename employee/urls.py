@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # admin - employee management
+    # admin - employee 
     path('', views.dashboard, name='dashboard'),
     path('list/', views.employee_list, name='employee_list'),
     path('add/', views.add_employee, name='add_employee'),
@@ -11,11 +11,11 @@ urlpatterns = [
     path('profile/<int:id>/', views.employee_profile, name='employee_profile'),
     path('export/', views.export_csv, name='export_csv'),
 
-    # employee self service
+    # employee self
     path('me/', views.employee_self_dashboard, name='employee_self_dashboard'),
     path('me/update-status/', views.employee_update_status, name='employee_update_status'),
 
-    # leave management
+    # leave
     path('leave/apply/', views.apply_leave, name='apply_leave'),
     path('leave/my/', views.my_leaves, name='my_leaves'),
     path('leave/all/', views.admin_leave_list, name='admin_leave_list'),

@@ -2,22 +2,22 @@
 from django.contrib.auth.models import User
 
 
-# stores all employee info - main model of the project
+# stores all employee info (main model)
 class Employee(models.Model):
 
-    GENDER_CHOICES = [  # gender options for the dropdown
+    GENDER_CHOICES = [  
         ('Male', 'Male'),
         ('Female', 'Female'),
         ('Other', 'Other'),
     ]
 
-    STATUS_CHOICES = [  # active=working, inactive=left, on leave=on break
+    STATUS_CHOICES = [  
         ('Active', 'Active'),
         ('Inactive', 'Inactive'),
         ('On Leave', 'On Leave'),
     ]
 
-    DEPARTMENT_CHOICES = [  # all departments in the company
+    DEPARTMENT_CHOICES = [  
         ('HR', 'HR'),
         ('IT', 'IT'),
         ('Finance', 'Finance'),
@@ -28,12 +28,14 @@ class Employee(models.Model):
         ('Admin', 'Admin'),
     ]
 
-    user            = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='employee_profile')  # set_null so emp stays if user deleted
+    user            = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='employee_profile')  # if the user is deleted also the employee stays
     employee_id     = models.CharField(max_length=20, unique=True, blank=True)
     name            = models.CharField(max_length=100)
+
     email           = models.EmailField(unique=True)
     phone           = models.CharField(max_length=15, unique=True, blank=True, null=True)
     gender          = models.CharField(max_length=10, choices=GENDER_CHOICES, default='Male')
+
     department      = models.CharField(max_length=100, choices=DEPARTMENT_CHOICES, blank=True, null=True)
     designation     = models.CharField(max_length=100, blank=True, null=True)
     salary          = models.IntegerField(default=0)
@@ -49,7 +51,7 @@ class Employee(models.Model):
         phone_part = (self.phone or '')[:3]  # first 3 digits of phone
         year_part  = str(self.date_of_joining.year) if self.date_of_joining else ''
         if phone_part and year_part:
-            return f'{phone_part}{year_part}'  # eg 9872023
+            return f'{phone_part}{year_part}' 
         return self.employee_id  # fallback if phone or year missing
 
     def create_user_account(self):
@@ -102,14 +104,14 @@ class Leave(models.Model):
     end_date   = models.DateField()
     reason     = models.TextField()
     status     = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
-    applied_on = models.DateTimeField(auto_now_add=True)  # auto set on create
+    applied_on = models.DateTimeField(auto_now_add=True)  # auto set on  create
 
     class Meta:
-        ordering = ['-applied_on']  # newest first
+        ordering = ['-applied_on']  # recent newest will come first in the list
 
     def __str__(self):
         return f'{self.employee.username} - {self.leave_type} ({self.status})'
 
     @property
     def total_days(self):
-        return (self.end_date - self.start_date).days + 1  # +1 bcoz both days are included
+        return (self.end_date - self.start_date).days + 1  #both current day and last day are included as a whole day so+1
