@@ -14,7 +14,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback-key-for-dev-only')
 # Set DEBUG = False in production
 DEBUG = True
 
-ALLOWED_HOSTS = ['3.17.72.126', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['3.144.238.164', '3.17.72.126', 'localhost', '127.0.0.1']
 
 # Installed apps - Django built-ins + our custom apps
 INSTALLED_APPS = [
@@ -93,8 +93,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/login/'
 
 # Email Configuration
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Prints emails to console
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # Uncomment for real emails
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # Prints emails to console
 EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
 EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
 EMAIL_USE_TLS = True
