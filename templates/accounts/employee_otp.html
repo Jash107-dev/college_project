@@ -1,0 +1,257 @@
+{% extends 'base.html' %}
+{% block title %}Enter OTP - EMS{% endblock %}
+
+{% block login_content %}
+
+<div class="login-wrapper">
+    <div class="login-card">
+
+        <div class="brand">
+            <div class="brand-logo">
+                <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+            </div>
+            <h1 class="brand-name">Check Your Email</h1>
+            {% if email_hint %}
+            <p class="brand-sub">We sent a 6-digit OTP to <strong>{{ email_hint }}</strong></p>
+            {% else %}
+            <p class="brand-sub">We sent a 6-digit OTP to your registered email</p>
+            {% endif %}
+        </div>
+
+        {% if expired %}
+        <!-- OTP expired — show resend button only -->
+        <div class="error-box" style="margin-bottom:16px;">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path stroke-linecap="round" d="M12 8v4m0 4h.01"/>
+            </svg>
+            OTP has expired. Please request a new one.
+        </div>
+        <a href="{% url 'employee_login' %}" class="btn-submit" style="text-align:center;text-decoration:none;display:block;">
+            Request New OTP
+        </a>
+        {% else %}
+
+        <form method="post" class="login-form" id="otp-form">
+            {% csrf_token %}
+
+            {% if error %}
+            <div class="error-box">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path stroke-linecap="round" d="M12 8v4m0 4h.01"/>
+                </svg>
+                {{ error }}
+            </div>
+            {% endif %}
+
+            <!-- 6 individual digit boxes -->
+            <div class="otp-boxes" id="otp-boxes">
+                <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+                <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+                <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+                <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+                <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+                <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+            </div>
+            <!-- hidden field that gets filled by JS before submit -->
+            <input type="hidden" name="otp" id="otp-hidden">
+
+            <!-- countdown timer -->
+            <p class="timer-text">OTP expires in <span id="countdown">10:00</span></p>
+
+            <button type="submit" class="btn-submit" id="verify-btn" disabled>Verify OTP</button>
+        </form>
+
+        <div class="divider"><span>didn't receive it?</span></div>
+        <a href="{% url 'employee_login' %}" class="btn-resend">Resend OTP</a>
+
+        {% endif %}
+
+    </div>
+</div>
+
+<style>
+.login-wrapper {
+    display: flex; align-items: center; justify-content: center;
+    width: 100vw; height: 100vh;
+    background: #eeefff;
+    font-family: 'Inter', sans-serif;
+    position: fixed; top: 0; left: 0;
+    padding: 20px; box-sizing: border-box;
+}
+.login-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 6px 20px rgba(0,0,0,0.08);
+    padding: 40px 44px;
+    width: 100%; max-width: 420px;
+    display: flex; flex-direction: column; align-items: center;
+}
+.brand {
+    display: flex; flex-direction: column; align-items: center;
+    margin-bottom: 28px; gap: 6px; text-align: center;
+}
+.brand-logo {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 14px rgba(16,185,129,0.4);
+}
+.brand-name { font-size: 20px; font-weight: 700; color: #1a1a2e; margin: 0; }
+.brand-sub  { font-size: 12px; color: #6b7280; margin: 0; }
+
+.login-form {
+    width: 100%; display: flex; flex-direction: column; align-items: center; gap: 16px;
+}
+.error-box {
+    width: 100%; background: #fee2e2; color: #991b1b;
+    border: 1px solid #fca5a5; border-radius: 10px;
+    padding: 10px 14px; font-size: 12px;
+    display: flex; align-items: center; gap: 8px;
+}
+
+/* 6 digit boxes */
+.otp-boxes {
+    display: flex; gap: 10px; justify-content: center;
+}
+.otp-digit {
+    width: 46px; height: 54px;
+    border: 2px solid #e5e7eb; border-radius: 10px;
+    text-align: center; font-size: 22px; font-weight: 700;
+    color: #1a1a2e; background: #f9fafb;
+    outline: none; transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+.otp-digit:focus {
+    border-color: #10b981; background: #fff;
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.12);
+}
+.otp-digit.filled {
+    border-color: #10b981; background: #ecfdf5;
+}
+
+.timer-text {
+    font-size: 12px; color: #9ca3af; margin: 0;
+}
+#countdown { font-weight: 600; color: #6366f1; }
+#countdown.urgent { color: #ef4444; }
+
+.btn-submit {
+    width: 100%; padding: 12px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white; border: none; border-radius: 10px;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 4px 14px rgba(16,185,129,0.4);
+    transition: opacity 0.2s, transform 0.2s;
+}
+.btn-submit:disabled {
+    opacity: 0.45; cursor: not-allowed; transform: none;
+    box-shadow: none;
+}
+.btn-submit:not(:disabled):hover { opacity: 0.92; transform: translateY(-1px); }
+.btn-submit:not(:disabled):active { transform: translateY(0); }
+
+.divider {
+    width: 100%; display: flex; align-items: center; gap: 12px;
+    margin: 20px 0 12px;
+}
+.divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #e5e7eb; }
+.divider span { font-size: 11px; color: #9ca3af; white-space: nowrap; }
+
+.btn-resend {
+    font-size: 13px; font-weight: 600; color: #6366f1;
+    text-decoration: none; transition: color 0.2s;
+}
+.btn-resend:hover { color: #4f46e5; text-decoration: underline; }
+</style>
+
+<script>
+(function () {
+    var digits  = document.querySelectorAll('.otp-digit');
+    var hidden  = document.getElementById('otp-hidden');
+    var btn     = document.getElementById('verify-btn');
+    var form    = document.getElementById('otp-form');
+
+    if (!digits.length) return;   // expired state — nothing to wire up
+
+    // Auto-focus first box
+    digits[0].focus();
+
+    function updateHidden() {
+        var val = Array.from(digits).map(function(d){ return d.value; }).join('');
+        hidden.value = val;
+        // Enable button only when all 6 filled
+        btn.disabled = val.length < 6;
+        // Style filled boxes
+        digits.forEach(function(d) {
+            d.classList.toggle('filled', d.value !== '');
+        });
+    }
+
+    digits.forEach(function(input, idx) {
+        input.addEventListener('input', function(e) {
+            // Allow only digits
+            input.value = input.value.replace(/\D/g, '').slice(-1);
+            updateHidden();
+            // Move to next box
+            if (input.value && idx < digits.length - 1) {
+                digits[idx + 1].focus();
+            }
+        });
+
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Backspace' && !input.value && idx > 0) {
+                digits[idx - 1].focus();
+                digits[idx - 1].value = '';
+                updateHidden();
+            }
+        });
+
+        // Handle paste on any box
+        input.addEventListener('paste', function(e) {
+            e.preventDefault();
+            var pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '');
+            pasted.split('').slice(0, 6).forEach(function(ch, i) {
+                if (digits[i]) digits[i].value = ch;
+            });
+            updateHidden();
+            var next = Math.min(pasted.length, digits.length - 1);
+            digits[next].focus();
+        });
+    });
+
+    // Countdown timer (10 min = 600 s)
+    var seconds = 600;
+    var countEl = document.getElementById('countdown');
+
+    function tick() {
+        if (seconds <= 0) {
+            countEl.textContent = '0:00';
+            countEl.classList.add('urgent');
+            btn.disabled = true;
+            btn.textContent = 'OTP Expired';
+            return;
+        }
+        seconds--;
+        var m = Math.floor(seconds / 60);
+        var s = seconds % 60;
+        countEl.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+        if (seconds <= 60) countEl.classList.add('urgent');
+        setTimeout(tick, 1000);
+    }
+    setTimeout(tick, 1000);
+
+    // Validate before submit
+    form.addEventListener('submit', function(e) {
+        if (hidden.value.length < 6) {
+            e.preventDefault();
+        }
+    });
+})();
+</script>
+
+{% endblock %}
