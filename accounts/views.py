@@ -45,20 +45,16 @@ def employee_login_view(request):
     error = None
 
     if request.method == 'POST':
-        employee_id = request.POST.get('employee_id', '').strip()
+        identifier = request.POST.get('employee_id', '').strip()
 
-        # Debug: print what we received (remove after confirming)
-        print(f"[OTP Login] Received employee_id: '{employee_id}' (len={len(employee_id)})")
-
+        # Accept either Employee ID (EMP001) or registered email address
         try:
-            emp = Employee.objects.get(employee_id__iexact=employee_id)
-            print(f"[OTP Login] Found employee: {emp.employee_id} - {emp.name}")
+            if '@' in identifier:
+                emp = Employee.objects.get(email__iexact=identifier)
+            else:
+                emp = Employee.objects.get(employee_id__iexact=identifier)
         except Employee.DoesNotExist:
-            print(f"[OTP Login] No employee found for '{employee_id}'")
-            # List all IDs to help debug
-            all_ids = list(Employee.objects.values_list('employee_id', flat=True))
-            print(f"[OTP Login] All employee IDs in DB: {all_ids}")
-            error = 'No employee found with that ID.'
+            error = 'No employee found. Please enter your Employee ID (e.g. EMP010) or registered email.'
             return render(request, 'accounts/employee_login.html', {'error': error})
 
         if emp.user is None:
