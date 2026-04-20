@@ -47,9 +47,17 @@ def employee_login_view(request):
     if request.method == 'POST':
         employee_id = request.POST.get('employee_id', '').strip()
 
+        # Debug: print what we received (remove after confirming)
+        print(f"[OTP Login] Received employee_id: '{employee_id}' (len={len(employee_id)})")
+
         try:
             emp = Employee.objects.get(employee_id__iexact=employee_id)
+            print(f"[OTP Login] Found employee: {emp.employee_id} - {emp.name}")
         except Employee.DoesNotExist:
+            print(f"[OTP Login] No employee found for '{employee_id}'")
+            # List all IDs to help debug
+            all_ids = list(Employee.objects.values_list('employee_id', flat=True))
+            print(f"[OTP Login] All employee IDs in DB: {all_ids}")
             error = 'No employee found with that ID.'
             return render(request, 'accounts/employee_login.html', {'error': error})
 
