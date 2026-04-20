@@ -45,10 +45,10 @@ def employee_login_view(request):
     error = None
 
     if request.method == 'POST':
-        employee_id = request.POST.get('employee_id', '').strip().upper()
+        employee_id = request.POST.get('employee_id', '').strip()
 
         try:
-            emp = Employee.objects.get(employee_id=employee_id)
+            emp = Employee.objects.get(employee_id__iexact=employee_id)
         except Employee.DoesNotExist:
             error = 'No employee found with that ID.'
             return render(request, 'accounts/employee_login.html', {'error': error})

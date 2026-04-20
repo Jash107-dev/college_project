@@ -1,124 +1,140 @@
 ﻿{% extends 'base.html' %}
-{% block title %}Admin Login - EMS{% endblock %}
+{% block title %}Sign In - EMS{% endblock %}
 
 {% block login_content %}
 
 <div class="login-wrapper">
-    <div class="login-card">
+    <div class="login-container" id="login-container">
 
-        <div class="brand">
-            <div class="brand-logo">E</div>
-            <h1 class="brand-name">EMS Admin</h1>
-            <p class="brand-sub">Employee Management System</p>
+        <!-- ===== LEFT PANEL: Admin Login Form ===== -->
+        <div class="form-panel left-panel">
+            <form method="post" action="{% url 'login' %}" class="login-form" id="admin-form">
+                {% csrf_token %}
+
+                <h2 class="form-title">Admin Login</h2>
+                <p class="form-subtitle">Sign in with your admin credentials</p>
+
+                {% if error %}
+                <div class="error-box">
+                    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path stroke-linecap="round" d="M12 8v4m0 4h.01"/>
+                    </svg>
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <div class="input-group">
+                    <svg class="input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                    <input type="text" name="username" placeholder="Username" required autocomplete="username">
+                </div>
+
+                <div class="input-group">
+                    <svg class="input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                    <input type="password" name="password" placeholder="Password" required autocomplete="current-password">
+                </div>
+
+                <button type="submit" class="btn-submit">Sign In</button>
+            </form>
         </div>
 
-        <form method="post" class="login-form">
-            {% csrf_token %}
+        <!-- ===== RIGHT PANEL: Employee Login (OTP) ===== -->
+        <div class="form-panel right-panel">
+            <form method="post" action="{% url 'employee_login' %}" class="login-form" id="employee-form">
+                {% csrf_token %}
 
-            <h2 class="form-title">Admin Sign In</h2>
-            <p class="form-subtitle">Enter your admin credentials to continue</p>
+                <h2 class="form-title">Employee Login</h2>
+                <p class="form-subtitle">Enter your Employee ID to receive an OTP</p>
 
-            {% if error %}
-            <div class="error-box">
-                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path stroke-linecap="round" d="M12 8v4m0 4h.01"/>
-                </svg>
-                {{ error }}
+                <div class="input-group">
+                    <svg class="input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2"/>
+                    </svg>
+                    <input type="text" name="employee_id" placeholder="Employee ID (e.g. EMP001)" required autocomplete="off">
+                </div>
+
+                <p class="hint-text">A 6-digit OTP will be sent to your registered email</p>
+
+                <button type="submit" class="btn-submit emp-btn">Send OTP</button>
+            </form>
+        </div>
+
+        <!-- ===== OVERLAY: sliding colored panel ===== -->
+        <div class="overlay-container">
+            <div class="overlay">
+
+                <div class="overlay-panel overlay-left">
+                    <div class="overlay-logo">E</div>
+                    <h2>Welcome Back!</h2>
+                    <p>Already have an admin account?</p>
+                    <button class="btn-ghost" onclick="switchToAdmin()">Admin Login</button>
+                </div>
+
+                <div class="overlay-panel overlay-right">
+                    <div class="overlay-logo">E</div>
+                    <h2>Hello, Employee!</h2>
+                    <p>Login securely with a one-time password</p>
+                    <button class="btn-ghost" onclick="switchToEmployee()">Employee Login</button>
+                </div>
+
             </div>
-            {% endif %}
-
-            <div class="input-group">
-                <svg class="input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                </svg>
-                <input type="text" name="username" placeholder="Username" required autofocus autocomplete="username">
-            </div>
-
-            <div class="input-group">
-                <svg class="input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                </svg>
-                <input type="password" name="password" placeholder="Password" required autocomplete="current-password">
-            </div>
-
-            <button type="submit" class="btn-submit">Sign In</button>
-        </form>
-
-        <div class="divider"><span>or</span></div>
-
-        <a href="{% url 'employee_login' %}" class="btn-employee-link">
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0"/>
-            </svg>
-            Employee? Login with OTP
-        </a>
+        </div>
 
     </div>
 </div>
 
 <style>
 .login-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
     width: 100vw; height: 100vh;
+    min-height: 100vh; min-width: 100vw;
+    margin: 0; padding: 20px;
     background: #eeefff;
     font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
     position: fixed; top: 0; left: 0;
-    padding: 20px;
+}
+
+.login-container {
+    position: relative;
+    width: 820px; max-width: 100%;
+    min-height: 480px;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25), 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.form-panel {
+    position: absolute; top: 0;
+    width: 50%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.6s ease-in-out;
+    padding: 40px 36px;
     box-sizing: border-box;
 }
 
-.login-card {
-    background: #fff;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 6px 20px rgba(0,0,0,0.08);
-    padding: 40px 44px;
-    width: 100%;
-    max-width: 420px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-}
+.left-panel  { left: 0; z-index: 2; }
+.right-panel { right: 0; z-index: 1; opacity: 0; }
 
-.brand {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 28px;
-    gap: 6px;
-}
-.brand-logo {
-    width: 56px; height: 56px;
-    border-radius: 14px;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 26px; font-weight: 700; color: white;
-    box-shadow: 0 4px 14px rgba(99,102,241,0.4);
-}
-.brand-name {
-    font-size: 20px; font-weight: 700; color: #1a1a2e; margin: 0;
-}
-.brand-sub {
-    font-size: 12px; color: #9ca3af; margin: 0;
-}
+.login-container.employee-active .left-panel  { opacity: 0; z-index: 1; }
+.login-container.employee-active .right-panel { opacity: 1; z-index: 2; }
 
 .login-form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
+    width: 100%; display: flex; flex-direction: column; align-items: center; gap: 14px;
 }
 
 .form-title {
-    font-size: 20px; font-weight: 700; color: #1a1a2e;
-    margin: 0 0 2px; text-align: center;
+    font-size: 22px; font-weight: 700; color: #1a1a2e;
+    margin-bottom: 2px; letter-spacing: -0.3px; text-align: center;
 }
 .form-subtitle {
-    font-size: 12px; color: #9ca3af; text-align: center; margin: 0 0 4px;
+    font-size: 12px; color: #9ca3af; text-align: center; margin-bottom: 4px;
 }
 
 .error-box {
@@ -128,9 +144,7 @@
     display: flex; align-items: center; gap: 8px;
 }
 
-.input-group {
-    position: relative; width: 100%;
-}
+.input-group { position: relative; width: 100%; }
 .input-group input {
     width: 100%; padding: 12px 14px 12px 42px;
     border: 2px solid #e5e7eb; border-radius: 10px;
@@ -147,6 +161,10 @@
     transform: translateY(-50%); color: #9ca3af; pointer-events: none;
 }
 
+.hint-text {
+    font-size: 11px; color: #9ca3af; text-align: center; margin-top: -6px;
+}
+
 .btn-submit {
     width: 100%; padding: 12px;
     background: linear-gradient(135deg, #6366f1, #8b5cf6);
@@ -160,26 +178,106 @@
 .btn-submit:hover { opacity: 0.92; transform: translateY(-1px); }
 .btn-submit:active { transform: translateY(0); }
 
-.divider {
-    width: 100%; display: flex; align-items: center; gap: 12px;
-    margin: 20px 0 16px; color: #d1d5db; font-size: 12px;
+.emp-btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    box-shadow: 0 4px 14px rgba(16,185,129,0.4);
 }
-.divider::before, .divider::after {
-    content: ''; flex: 1; height: 1px; background: #e5e7eb;
-}
-.divider span { color: #9ca3af; white-space: nowrap; }
 
-.btn-employee-link {
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    width: 100%; padding: 11px;
-    border: 2px solid #10b981; border-radius: 10px;
-    color: #059669; font-size: 13px; font-weight: 600;
-    text-decoration: none; font-family: 'Inter', sans-serif;
-    transition: all 0.2s;
+.overlay-container {
+    position: absolute; top: 0; left: 50%;
+    width: 50%; height: 100%;
+    overflow: hidden;
+    z-index: 100;
+    transition: transform 0.6s ease-in-out;
+    border-radius: 0 20px 20px 0;
 }
-.btn-employee-link:hover {
-    background: #ecfdf5; border-color: #059669;
+
+.login-container.employee-active .overlay-container {
+    transform: translateX(-100%);
+    border-radius: 20px 0 0 20px;
+}
+
+.overlay {
+    position: relative;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%);
+    color: white;
+    height: 100%; width: 200%;
+    left: -100%;
+    transition: transform 0.6s ease-in-out;
+}
+
+.login-container.employee-active .overlay {
+    transform: translateX(50%);
+}
+
+.overlay-panel {
+    position: absolute; top: 0;
+    width: 50%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 14px; padding: 40px 30px;
+    text-align: center; box-sizing: border-box;
+}
+.overlay-left  { left: 0; }
+.overlay-right { right: 0; }
+
+.overlay-logo {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: rgba(255,255,255,0.2);
+    border: 2px solid rgba(255,255,255,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; font-weight: 700; color: white;
+    margin-bottom: 4px;
+}
+
+.overlay-panel h2 {
+    font-size: 22px; font-weight: 700; color: white; margin: 0;
+    letter-spacing: -0.3px;
+}
+.overlay-panel p {
+    font-size: 13px; color: rgba(255,255,255,0.8); margin: 0;
+}
+
+.btn-ghost {
+    padding: 10px 28px;
+    background: transparent; color: white;
+    border: 2px solid rgba(255,255,255,0.7);
+    border-radius: 24px; font-size: 13px; font-weight: 600;
+    cursor: pointer; font-family: 'Inter', sans-serif;
+    transition: all 0.2s; margin-top: 4px;
+    letter-spacing: 0.3px;
+}
+.btn-ghost:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: white;
+}
+
+@media (max-width: 640px) {
+    .login-container { min-height: auto; }
+    .form-panel { position: relative; width: 100%; height: auto; opacity: 1 !important; z-index: 2 !important; }
+    .right-panel { display: none; }
+    .login-container.employee-active .left-panel  { display: none; }
+    .login-container.employee-active .right-panel { display: flex; }
+    .overlay-container { display: none; }
 }
 </style>
+
+<script>
+function switchToEmployee() {
+    document.getElementById('login-container').classList.add('employee-active');
+    setTimeout(function() {
+        var f = document.querySelector('input[name="employee_id"]');
+        if (f) f.focus();
+    }, 400);
+}
+
+function switchToAdmin() {
+    document.getElementById('login-container').classList.remove('employee-active');
+    setTimeout(function() {
+        var f = document.querySelector('input[name="username"]');
+        if (f) f.focus();
+    }, 400);
+}
+</script>
 
 {% endblock %}
